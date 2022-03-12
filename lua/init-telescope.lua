@@ -6,6 +6,7 @@ vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('telescope.builtin'
 vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>ft", "<cmd>lua require('telescope.builtin').treesitter()<cr>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>fx", "<cmd>lua require('telescope.builtin').commands()<cr>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<leader><leader>", "<cmd>lua require('telescope').extensions.frecency.frecency()<cr>",
                         {noremap = true, silent = true})
