@@ -42,7 +42,7 @@ require('packer').startup(function()
   use 'arthurxavierx/vim-caser'
 end)
 
-vim.g.mapleader = ";"
+vim.g.mapleader = " "
 
 require('nvim-autopairs').setup {}
 
