@@ -42,6 +42,9 @@ require('packer').startup(function()
   use 'arthurxavierx/vim-caser'
 end)
 
+-- don't add `set notimeout` when use which-key, set `timeoutlen` or use default.
+require("which-key").load()
+
 vim.g.mapleader = " "
 
 require('nvim-autopairs').setup {}
@@ -74,7 +77,6 @@ vim.g.edge_disable_italic_comment = 0
 vim.cmd([[
 set bg=light
 syntax on
-set notimeout
 colorscheme edge
 ]])
 
