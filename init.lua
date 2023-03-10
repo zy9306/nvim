@@ -81,9 +81,10 @@ colorscheme edge
 ]])
 
 vim.cmd([[
-noremap <leader>s :update<CR>
-noremap <leader>q :qa!<CR>
-noremap <leader>S :wa<CR>
+noremap <leader>w :update<CR>
+noremap <leader>Q :qa!<CR>
+noremap <leader>q :q<CR>
+noremap <leader>W :wa<CR>
 
 inoremap <C-B> <Left>
 inoremap <C-F> <Right>
