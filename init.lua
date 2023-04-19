@@ -21,7 +21,19 @@ require('packer').startup(function()
   use 'windwp/nvim-autopairs'
   use 'mg979/vim-visual-multi'
   use 'tpope/vim-surround'
-  use "folke/which-key.nvim"
+
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {
+        triggers = {"<leader>", "<space>"},
+        triggers_nowait = {"`", "'", "g`", "g'", '"', "<c-r>", "z="},
+        triggers_blacklist = {i = {"j", "k"}, v = {"j", "k"}}
+      }
+    end
+  }
 
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
@@ -42,7 +54,6 @@ require('packer').startup(function()
   use 'arthurxavierx/vim-caser'
 end)
 
--- don't add `set notimeout` when use which-key, set `timeoutlen` or use default.
 require("which-key").load()
 
 vim.g.mapleader = " "
