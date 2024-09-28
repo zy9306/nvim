@@ -1,0 +1,44 @@
+vim.o.updatetime = 500
+
+vim.o.background = "light"
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.opt.termguicolors = true
+
+vim.g.mapleader = " "
+vim.o.timeout = false
+
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.mouse = "a"
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.wrap = false
+vim.o.encoding = "utf-8"
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
+vim.opt.cursorline = true
+
+vim.opt.clipboard:prepend({ "unnamedplus" })
+
+vim.opt.autoread = true
+
+-- 弹出菜单最多可以显示多少行
+vim.o.pumheight = 15
+
+require("config.lazy")
+require("init-lsp")
+require("init-cmp")
+require("init-telescope")
+require("init-toggleterm")
+require("init-backup")
+require("init-utils")
+
+require("init-neovide")
+
+require("init-theme")
+
+require("init-keymap")
