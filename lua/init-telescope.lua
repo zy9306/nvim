@@ -12,24 +12,17 @@ telescope.setup({
 				["<esc>"] = actions.close,
 			},
 		},
+		layout_config = {
+			prompt_position = "top",
+		},
+		sorting_strategy = "ascending",
 	},
 	pickers = {
-		find_files = { theme = selected_theme },
-		live_grep = { theme = selected_theme },
-		marks = { theme = selected_theme },
 		buffers = {
-			theme = selected_theme,
 			ignore_current_buffer = true,
 			sort_mru = true,
 			sort_lastused = true,
 		},
-		help_tags = { theme = selected_theme },
-		commands = { theme = selected_theme },
-		current_buffer_fuzzy_find = { theme = selected_theme },
-		lsp_references = { theme = selected_theme },
-		lsp_definitions = { theme = selected_theme },
-		lsp_implementations = { theme = selected_theme },
-		lsp_document_symbols = { theme = selected_theme },
 		diagnostics = {
 			layout_config = {
 				prompt_position = "top",
@@ -113,12 +106,12 @@ end
 
 vim.api.nvim_set_keymap("n", "<leader>a", ":lua set_auto_global_mark()<CR>", { noremap = true, silent = true })
 
-vim.keymap.set({ "n", "v" }, "<leader>M", ":Telescope marks mark_type=all theme=dropdown<CR>", { desc = "Show All marks" })
+vim.keymap.set({ "n", "v" }, "<leader>M", ":Telescope marks mark_type=all<CR>", { desc = "Show All marks" })
 
 vim.keymap.set({ "n", "v" }, "<leader>m", ':lua require("telescope.builtin").marks({ cwd = vim.fn.getcwd() })<CR>', { desc = "Show project marks" })
 -- marks END
 
-vim.keymap.set("n", "<leader>fr", ":Telescope frecency theme=dropdown<cr>", { desc = "Frecency" })
+vim.keymap.set("n", "<leader>fr", ":Telescope frecency<cr>", { desc = "Frecency" })
 vim.keymap.set("n", "<leader>fp", ":Telescope file_browser path=%:p:h<cr>", { desc = "File Browser" })
 
 -- lsp integration
