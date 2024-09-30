@@ -133,6 +133,8 @@ return {
 		end,
 	},
 
+	{ "taybart/b64.nvim", event = "VeryLazy" },
+
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
