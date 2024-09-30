@@ -135,6 +135,16 @@ return {
 
 	{ "taybart/b64.nvim", event = "VeryLazy" },
 
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = true,
+	},
+
 	{ "sindrets/diffview.nvim" },
 
 	{
