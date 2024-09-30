@@ -135,6 +135,8 @@ return {
 
 	{ "taybart/b64.nvim", event = "VeryLazy" },
 
+	{ "sindrets/diffview.nvim" },
+
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
