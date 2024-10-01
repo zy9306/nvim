@@ -29,6 +29,9 @@ vim.opt.autoread = true
 -- 弹出菜单最多可以显示多少行
 vim.o.pumheight = 15
 
+-- vim.o.showtabline = 2
+-- vim.opt.sessionoptions = "curdir,folds,globals,help,buffers,tabpages,terminal,winsize"
+
 require("config.lazy")
 require("init-lsp")
 require("init-cmp")
@@ -36,6 +39,7 @@ require("init-telescope")
 require("init-toggleterm")
 require("init-backup")
 require("init-utils")
+require("init-session")
 
 require("init-neovide")
 

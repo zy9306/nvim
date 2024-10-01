@@ -15,13 +15,14 @@ return {
 
 				vim.keymap.set("n", "<C-t>", api.tree.change_root_to_parent, opts("Up"))
 				vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
-				vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<cr>", { desc = "nvim-tree: Toggle" })
 			end
 			require("nvim-tree").setup({
 				on_attach = my_on_attach,
 				diagnostics = {
 					enable = true,
 				},
+				sync_root_with_cwd = true,
+				respect_buf_cwd = true,
 				update_focused_file = {
 					enable = true,
 					update_cwd = true,
@@ -61,6 +62,7 @@ return {
 			end
 
 			vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = close_nvim_tree })
+			vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<cr>", { desc = "nvim-tree: Toggle" })
 		end,
 	},
 }
