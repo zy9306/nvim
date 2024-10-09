@@ -65,7 +65,7 @@ end
 
 vim.keymap.set({ "n", "v" }, "<leader>x", builtin.commands, { desc = "Commands" })
 
-vim.keymap.set({ "n", "v" }, "<leader>pp", ':lua require("telescope").extensions.projects.projects{}<cr>', { desc = "Project" })
+vim.keymap.set({ "n", "v" }, "<leader>fP", ':lua require("telescope").extensions.projects.projects{}<cr>', { desc = "Project" })
 vim.keymap.set({ "n", "v" }, "<leader>ff", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set({ "n", "v" }, "<leader>fG", global_search_current_word_or_selection, { desc = "Live Grep" })
 vim.keymap.set({ "n", "v" }, "<leader>G", global_search_current_word_or_selection, { desc = "Live Grep" })
