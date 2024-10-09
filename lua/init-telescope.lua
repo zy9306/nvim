@@ -1,46 +1,6 @@
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
-local actions = require("telescope.actions")
 local extensions = telescope.extensions
-
-local selected_theme = "dropdown"
-
-telescope.setup({
-	defaults = {
-		mappings = {
-			i = {
-				["<esc>"] = actions.close,
-			},
-		},
-		layout_config = {
-			prompt_position = "top",
-		},
-		sorting_strategy = "ascending",
-	},
-	pickers = {
-		buffers = {
-			ignore_current_buffer = true,
-			sort_mru = true,
-			sort_lastused = true,
-		},
-		diagnostics = {
-			layout_config = {
-				prompt_position = "top",
-			},
-			sorting_strategy = "ascending",
-		},
-	},
-	extensions = {
-		file_browser = {
-			layout_config = {
-				prompt_position = "top",
-			},
-			sorting_strategy = "ascending",
-			hidden = { file_browser = true, folder_browser = true },
-			no_ignore = true,
-		},
-	},
-})
 
 function get_current_word_or_selection()
 	local search_text = ""
@@ -77,46 +37,48 @@ vim.keymap.set({ "n", "v" }, "<leader>fg", buffer_search_current_word_or_selecti
 vim.keymap.set({ "n", "v" }, "<leader>g", buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
 vim.keymap.set({ "n", "v" }, "<leader>s", buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
 
--- marks START
-function set_auto_global_mark()
-	local marks = vim.fn.getmarklist()
-
-	local alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-
-	local used_marks = {}
-	for _, mark in ipairs(marks) do
-		local mark_name = mark.mark:sub(2)
-		if #mark_name == 1 and alphabet:find(mark_name) then
-			used_marks[mark_name] = true
-		end
-	end
-
-	for i = 1, #alphabet do
-		local mark_char = alphabet:sub(i, i)
-		if not used_marks[mark_char] then
-			vim.cmd("mark " .. mark_char)
-			print("Set mark: " .. mark_char)
-			return
-		end
-	end
-
-	local mark_char = alphabet:sub(1, 1)
-	vim.cmd("mark " .. mark_char)
-	print("All marks used. Overwriting mark: " .. mark_char)
-end
-
-vim.api.nvim_set_keymap("n", "<leader>a", ":lua set_auto_global_mark()<CR>", { noremap = true, silent = true })
-
-vim.keymap.set({ "n", "v" }, "<leader>M", ":Telescope marks mark_type=all<CR>", { desc = "Show All marks" })
-
-vim.keymap.set({ "n", "v" }, "<leader>m", ':lua require("telescope.builtin").marks({ cwd = vim.fn.getcwd() })<CR>', { desc = "Show project marks" })
--- marks END
-
-vim.keymap.set("n", "<leader>fr", ":Telescope frecency<cr>", { desc = "Frecency" })
-vim.keymap.set("n", "<leader>fp", ":Telescope file_browser path=%:p:h<cr>", { desc = "File Browser" })
-
 -- lsp integration
 vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { noremap = true, silent = true, desc = "LSP References" })
 vim.keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, silent = true, desc = "LSP Definitions" })
 vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<CR>", { noremap = true, silent = true, desc = "LSP Implementations" })
 vim.keymap.set("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true, silent = true, desc = "LSP Document Symbols" })
+
+do
+	function set_auto_global_mark()
+		local marks = vim.fn.getmarklist()
+
+		local alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+		local used_marks = {}
+		for _, mark in ipairs(marks) do
+			local mark_name = mark.mark:sub(2)
+			if #mark_name == 1 and alphabet:find(mark_name) then
+				used_marks[mark_name] = true
+			end
+		end
+
+		for i = 1, #alphabet do
+			local mark_char = alphabet:sub(i, i)
+			if not used_marks[mark_char] then
+				vim.cmd("mark " .. mark_char)
+				print("Set mark: " .. mark_char)
+				return
+			end
+		end
+
+		local mark_char = alphabet:sub(1, 1)
+		vim.cmd("mark " .. mark_char)
+		print("All marks used. Overwriting mark: " .. mark_char)
+	end
+
+	vim.api.nvim_set_keymap("n", "<leader>a", ":lua set_auto_global_mark()<CR>", { noremap = true, silent = true })
+
+	vim.keymap.set({ "n", "v" }, "<leader>M", ":Telescope marks mark_type=all<CR>", { desc = "Show All marks" })
+
+	vim.keymap.set(
+		{ "n", "v" },
+		"<leader>m",
+		':lua require("telescope.builtin").marks({ cwd = vim.fn.getcwd() })<CR>',
+		{ desc = "Show project marks" }
+	)
+end
