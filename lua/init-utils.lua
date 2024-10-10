@@ -103,23 +103,6 @@ do
 end
 
 do
-	function toggle_theme()
-		local current_background = vim.o.background
-		if current_background == "dark" then
-			vim.o.background = "light"
-			print("Switched to light theme")
-		else
-			vim.o.background = "dark"
-			print("Switched to dark theme")
-		end
-	end
-
-	vim.api.nvim_create_user_command("ToggleTheme", toggle_theme, { desc = "Toggle between light and dark theme" })
-
-	-- vim.keymap.set("n", "<leader>tt", ToggleTheme, { desc = "Toggle between light and dark theme" })
-end
-
-do
 	function delete_buffer()
 		local buffers = vim.fn.getbufinfo({ buflisted = 1 })
 		if #buffers == 1 then

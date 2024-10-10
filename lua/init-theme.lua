@@ -21,3 +21,45 @@ if vim.o.background == "light" then
 	vim.cmd("highlight NeotestTarget ctermfg=9 guifg=#b3003a")
 	vim.cmd("highlight NeotestWatching ctermfg=11 guifg=#b89f2c")
 end
+
+do
+	local start_time = os.clock()
+	local theme_file = vim.fn.stdpath("config") .. "/data/theme.txt"
+
+	local function load_theme()
+		local file = io.open(theme_file, "r")
+		if file then
+			local theme = file:read("*l")
+			file:close()
+			if theme == "light" or theme == "dark" then
+				vim.o.background = theme
+			end
+		end
+	end
+
+	local function save_theme(theme)
+		local file = io.open(theme_file, "w")
+		if file then
+			file:write(theme)
+			file:close()
+		end
+	end
+
+	function toggle_theme()
+		local current_background = vim.o.background
+		if current_background == "dark" then
+			vim.o.background = "light"
+		else
+			vim.o.background = "dark"
+		end
+		save_theme(vim.o.background)
+	end
+
+	vim.api.nvim_create_user_command("ToggleTheme", toggle_theme, { desc = "Toggle between light and dark theme" })
+
+	load_theme()
+	local end_time = os.clock()
+	local elapsed_time = end_time - start_time
+
+	-- print(string.format("load theme cost: %.6fs", elapsed_time))
+end
