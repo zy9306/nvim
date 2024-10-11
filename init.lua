@@ -39,7 +39,6 @@ require("init-telescope")
 require("init-toggleterm")
 require("init-backup")
 require("init-utils")
-require("init-session")
 
 require("init-neovide")
 
