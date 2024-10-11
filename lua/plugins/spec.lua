@@ -148,6 +148,26 @@ return {
 	{ "sindrets/diffview.nvim" },
 
 	{
+		"nvimdev/dashboard-nvim",
+		-- event = "VimEnter",
+		-- set `lazy = false` to fix stdin: https://github.com/nvimdev/dashboard-nvim/issues/443
+		lazy = false,
+		config = function()
+			require("dashboard").setup({
+				hide = {
+					statusline = false,
+				},
+				config = {
+					week_header = {
+						enable = true,
+					},
+				},
+			})
+		end,
+		dependencies = { { "nvim-tree/nvim-web-devicons" } },
+	},
+
+	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {},
