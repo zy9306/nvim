@@ -9,6 +9,8 @@ return {
 			local actions = require("telescope.actions")
 			telescope.setup({
 				defaults = {
+					-- 背景透明度
+					winblend = 15,
 					mappings = {
 						i = {
 							["<esc>"] = actions.close,
