@@ -14,7 +14,8 @@ return {
 		end)
 
 		-- Add a cursor and jump to the next word under cursor.
-		vim.keymap.set({ "n", "v" }, "<c-m>", function()
+		-- NOTE: 终端下 <enter> 会被映射为 <c-m>, 所以不在 normal 模式下配置
+		vim.keymap.set({ "v" }, "<c-m>", function()
 			mc.addCursor("*")
 		end)
 
