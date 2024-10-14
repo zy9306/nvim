@@ -23,6 +23,13 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
+lspconfig.pyright.setup({
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr)
+		client.handlers["textDocument/publishDiagnostics"] = function(...) end
+	end,
+})
+
 vim.diagnostic.config({ virtual_text = false, float = { border = "rounded" } })
 vim.keymap.set("n", "<leader>!!", ":lua vim.diagnostic.open_float()<CR>", { desc = "Open diagnostics" })
 vim.keymap.set("n", "<leader>!e", "<cmd>Telescope diagnostics severity=ERROR<CR>", { noremap = true, silent = true })
