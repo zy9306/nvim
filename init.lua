@@ -40,7 +40,7 @@ vim.o.winblend = 15
 
 require("config.lazy")
 require("init-lsp")
-require("init-cmp")
+-- require("init-cmp")
 require("init-telescope")
 require("init-toggleterm")
 require("init-backup")
