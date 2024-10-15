@@ -1,0 +1,249 @@
+{
+  "go_chunk_slice": {
+    "prefix": "go_chunk_slice",
+    "description": "go_chunk_slice",
+    "body": [
+      "",
+      "chunkSize := ${1:chunkSize}",
+      "start := 0",
+      "total := len(${2:slice})",
+      "",
+      "for start < total {",
+      "    end := start + chunkSize",
+      "    if end > total {",
+      "        end = total",
+      "    \\}",
+      "",
+      "    tmp := $2[start:end]",
+      "    // to something",
+      "",
+      "    start += chunkSize",
+      "\\}"
+    ]
+  },
+  "go_echo_bind_body": {
+    "prefix": "go_echo_bind_body",
+    "description": "go_echo_bind_body",
+    "body": [
+      "func echoBindBody(c echo.Context, i interface{\\}) error {",
+      "\tif c.Request().Body == nil {",
+      "\t\treturn nil",
+      "\t\\}",
+      "",
+      "\tbodyBytes, err := io.ReadAll(c.Request().Body)",
+      "\tif err != nil {",
+      "\t\treturn err",
+      "\t\\}",
+      "\tc.Request().Body = io.NopCloser(bytes.NewBuffer(bodyBytes))",
+      "\tif err := c.Bind(i); err != nil {",
+      "\t\treturn err",
+      "\t\\}",
+      "\tc.Request().Body = io.NopCloser(bytes.NewBuffer(bodyBytes))",
+      "\treturn nil",
+      "\\}"
+    ]
+  },
+  "go_http_get_csv": {
+    "prefix": "go_http_get_csv",
+    "description": "go_http_get_csv",
+    "body": [
+      "resp, err := ${1:HTTPGeterFunc}(${2:url})",
+      "if err != nil {",
+      "    return err",
+      "\\}",
+      "defer resp.Body.Close()",
+      "csvReader := csv.NewReader(resp.Body)",
+      "for {",
+      "    record, err := csvReader.Read()",
+      "    if err == io.EOF {",
+      "        break",
+      "    \\}",
+      "    if err != nil {",
+      "        return err",
+      "    \\}",
+      "    // do something",
+      "\\}"
+    ]
+  },
+  "go_iter_table": {
+    "prefix": "go_iter_table",
+    "description": "go_iter_table",
+    "body": [
+      "db := app.EntExt.DB()",
+      "cursor, err := db.QueryContext(ctx, \"SELECT MIN(id) as min_id, MAX(id) as max_id from ${1:tableName}\")",
+      "if err != nil {",
+      "    return err",
+      "\\}",
+      "idRange := struct {",
+      "    MinID uint64 `json:\"min_id\"`",
+      "    MaxID uint64 `json:\"max_id\"`",
+      "\\}{\\}",
+      "cursor.Next()",
+      "if err := cursor.Scan(&idRange.MinID, &idRange.MaxID); err != nil {",
+      "    return err",
+      "\\}",
+      "",
+      "chunkSize := uint64(1000)",
+      "minID := idRange.MinID",
+      "maxID := idRange.MaxID",
+      "startID := minID",
+      "",
+      "for startID <= maxID {",
+      "    endID := startID + chunkSize",
+      "    if endID >= maxID {",
+      "       endID = maxID + 1",
+      "    \\}",
+      "    objs, err := app.EntClient.${2:model}.Query().Where($1.IDGTE(startID), $1.IDLT(endID)).All(ctx)",
+      "    if err != nil {",
+      "        return err",
+      "    \\}",
+      "",
+      "    for _, obj := range objs {",
+      "        // do something",
+      "    \\}",
+      "    startID += chunkSize",
+      "\\}"
+    ]
+  },
+  "go_iter_table_2": {
+    "prefix": "go_iter_table_2",
+    "description": "go_iter_table_2",
+    "body": [
+      "limit := 5000",
+      "startID := uint64(0)",
+      "for {",
+      "    objs, err := app.EntClient.${1:ModelName}.Query().",
+      "        Where(${2:ReplaceMe}.IDGTE(startID), $2.UserID(userID)).",
+      "        Order(entschema.Asc($2.FieldID)).",
+      "        Limit(limit).",
+      "        All(ctx)",
+      "    if err != nil {",
+      "        return nil, err",
+      "    \\}",
+      "",
+      "    l := len(objs)",
+      "    if l == 0 {",
+      "        break",
+      "    \\} else {",
+      "        startID = objs[l-1].ID + 1",
+      "    \\}",
+      "",
+      "    for _, obj := range objs {",
+      "        // Do something",
+      "    \\}",
+      "\\}"
+    ]
+  },
+  "go_json_unmarshal": {
+    "prefix": "go_json_unmarshal",
+    "description": "go_json_unmarshal",
+    "body": [
+      "${1:variableName} := ${2:dataStruct}{\\}",
+      "err := json.Unmarshal([]byte(*${3:stringValue}), &$1)"
+    ]
+  },
+  "go_mock_http_get_csv": {
+    "prefix": "go_mock_http_get_csv",
+    "description": "go_mock_http_get_csv",
+    "body": [
+      "mockStr := \"${1:str}\"",
+      "mockBody := io.NopCloser(bytes.NewReader([]byte(mockStr)))",
+      "${2:Func} = func(url string) (*http.Response, error) {",
+      "    res := &http.Response{Body: mockBody\\}",
+      "    return res, nil",
+      "\\}"
+    ]
+  },
+  "go_parse_int": {
+    "prefix": "go_parse_int",
+    "description": "go_parse_int",
+    "body": [
+      "v, err := strconv.ParseInt(s, 10, 64)",
+      "if err != nil {",
+      "    return err",
+      "\\}"
+    ]
+  },
+  "go_readcloser_to_string": {
+    "prefix": "go_readcloser_to_string",
+    "description": "go_readcloser_to_string",
+    "body": [
+      "b, err := io.ReadAll(r)",
+      "// check errors",
+      "// string(b)",
+      "",
+      "// or",
+      "// buf := new(strings.Builder)",
+      "// n, err := io.Copy(buf, r)",
+      "// // check errors",
+      "// // buf.String()"
+    ]
+  },
+  "go_sort_slice": {
+    "prefix": "go_sort_slice",
+    "description": "go_sort_slice",
+    "body": [
+      "sort.Slice(${1:slice}, func(i, j int) bool {",
+      "    return $1[i] < $1[j]",
+      "\\})"
+    ]
+  },
+  "go_write_csv": {
+    "prefix": "go_write_csv",
+    "description": "go_write_csv",
+    "body": [
+      "func WriteCSV(fields [][]string) (string, error) {",
+      "\tpattern := \"*.csv\"",
+      "\ttmpFile, err := os.CreateTemp(os.TempDir(), pattern)",
+      "\tif err != nil {",
+      "\t\treturn \"\", err",
+      "\t\\}",
+      "\tdefer tmpFile.Close()",
+      "\tcsvw := csv.NewWriter(tmpFile)",
+      "\terr = csvw.WriteAll(fields)",
+      "\treturn tmpFile.Name(), err",
+      "\\}"
+    ]
+  },
+  "bay_go_cmd": {
+    "prefix": "bay_go_cmd",
+    "body": [
+      "func CommandFunc(cmd *cobra.Command, args []string) error {",
+      "\tenv, err := cmd.Flags().GetString(\"env\")",
+      "\tif err != nil {",
+      "\t\treturn err",
+      "\t}",
+      "\troot, err := cmd.Flags().GetString(\"root\")",
+      "\tif err != nil {",
+      "\t\treturn err",
+      "\t}",
+      "",
+      "\tparam, err := cmd.Flags().GetString(\"param\")",
+      "\tif err != nil {",
+      "\t\treturn err",
+      "\t}",
+      "",
+      "\tbapp, err := gobay.CreateApp(root, env, app.Extensions())",
+      "\tif err != nil {",
+      "\t\treturn err",
+      "\t}",
+      "\tif env != \"testing\" {",
+      "\t\tdefer bapp.Close()",
+      "\t\tapp.InitExts(bapp)",
+      "\t\tmodels.InitCaches()",
+      "\t}",
+      "",
+      "\treturn nil",
+      "}",
+      "",
+      "func init() {",
+      "\tcmd := &cobra.Command{",
+      "\t\tUse:  \"command\",",
+      "\t\tRunE: CommandFunc,",
+      "\t}",
+      "\tcmd.Flags().String(\"param\", \"\", \"\")",
+      "\trootCmd.AddCommand(cmd)",
+      "}"
+    ]
+  }
+}

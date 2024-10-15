@@ -1,0 +1,59 @@
+{
+  "openapi_parameters": {
+    "prefix": "openapi_parameters",
+    "description": "openapi_parameters",
+    "body": [
+      "parameters:",
+      "  - name: ${1:name}",
+      "    in: ${2:query}",
+      "    required: ${3:false}",
+      "    description: ${4:TODO}",
+      "    schema:",
+      "      type: ${5:T}"
+    ]
+  },
+  "openapi_path": {
+    "prefix": "openapi_path",
+    "description": "openapi_path",
+    "body": [
+      "${1:path}:",
+      "  ${2:get}:",
+      "    tags:",
+      "      - ${3:tagName}",
+      "    summary: ${4:summary}",
+      "    operationId: ${5:operationId}",
+      "    parameters:",
+      "    responses:"
+    ]
+  },
+  "openapi_requestbody": {
+    "prefix": "openapi_requestbody",
+    "description": "openapi_requestbody",
+    "body": [
+      "requestBody:",
+      "  content:",
+      "    application/json:",
+      "      schema:",
+      "        type: object",
+      "        properties:",
+      "          ${1:TODO}:",
+      "            type: ${2:T}"
+    ]
+  },
+  "openapi_responses": {
+    "prefix": "openapi_responses",
+    "description": "openapi_responses",
+    "body": [
+      "responses:",
+      "  200:",
+      "    description: OK",
+      "    content:",
+      "      application/json:",
+      "        schema:",
+      "          type: object",
+      "          properties:",
+      "            ${1:TODO}:",
+      "              type: ${2:T}"
+    ]
+  }
+}

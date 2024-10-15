@@ -6,7 +6,19 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/nvim-cmp",
 		"saadparwaiz1/cmp_luasnip",
+	},
+	{
 		"L3MON4D3/LuaSnip",
+		version = "v2.*",
+		config = function()
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+		end,
+	},
+	{
+		"chrisgrieser/nvim-scissors",
+		opts = {
+			snippetDir = vim.fn.stdpath("config") .. "/snippets",
+		},
 	},
 	{
 		"zbirenbaum/copilot.lua",
