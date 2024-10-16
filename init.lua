@@ -39,8 +39,6 @@ vim.o.winblend = 15
 -- vim.opt.sessionoptions = "curdir,folds,globals,help,buffers,tabpages,terminal,winsize"
 
 require("config.lazy")
-require("init-lsp")
--- require("init-cmp")
 require("init-telescope")
 require("init-toggleterm")
 require("init-backup")

@@ -34,11 +34,7 @@ return {
 			vim.g.rooter_patterns = { ".git", ".git/", ".gitignore", ".gitmodules", ".project" }
 		end,
 	},
-	{
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
-	},
+
 	{
 		"nvim-neotest/neotest",
 		dependencies = {

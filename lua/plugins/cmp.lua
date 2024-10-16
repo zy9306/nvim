@@ -3,18 +3,25 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"saadparwaiz1/cmp_luasnip",
 			{
-				"L3MON4D3/LuaSnip",
-				version = "v2.*",
+				"hrsh7th/cmp-nvim-lsp",
 				event = "InsertEnter",
-				config = function()
-					require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
-				end,
+			},
+			{
+				"hrsh7th/cmp-buffer",
+				event = "InsertEnter",
+			},
+			{
+				"hrsh7th/cmp-path",
+				event = "InsertEnter",
+			},
+			{
+				"hrsh7th/cmp-cmdline",
+				event = "InsertEnter",
+			},
+			{
+				"saadparwaiz1/cmp_luasnip",
+				event = "InsertEnter",
 			},
 		},
 		config = function()
@@ -32,8 +39,8 @@ return {
 					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
-					["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
+					["<C-u>"] = cmp.mapping.scroll_docs(-4),
+					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-p>"] = cmp.mapping.select_prev_item(),
 					["<C-n>"] = cmp.mapping.select_next_item(),
 					["<C-Space>"] = cmp.mapping.complete(),
@@ -70,7 +77,14 @@ return {
 			})
 		end,
 	},
-
+	{
+		"L3MON4D3/LuaSnip",
+		version = "v2.*",
+		event = "InsertEnter",
+		config = function()
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+		end,
+	},
 	{
 		"chrisgrieser/nvim-scissors",
 		event = "VeryLazy",
