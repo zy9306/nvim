@@ -37,10 +37,29 @@ return {
 			end
 
 			lspconfig.pyright.setup({
-				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
-					client.handlers["textDocument/publishDiagnostics"] = function(...) end
-				end,
+				-- on_attach = function(client, bufnr)
+				-- 	on_attach(client, bufnr)
+				-- 	client.handlers["textDocument/publishDiagnostics"] = function(...) end
+				-- end,
+				settings = {
+					pyright = {
+						disableOrganizeImports = true,
+					},
+					python = {
+						analysis = {
+							ignore = { "*" },
+						},
+					},
+				},
+			})
+
+			lspconfig.ruff.setup({
+				trace = "messages",
+				init_options = {
+					settings = {
+						logLevel = "debug",
+					},
+				},
 			})
 
 			vim.diagnostic.config({ virtual_text = false, float = { border = "rounded" } })
