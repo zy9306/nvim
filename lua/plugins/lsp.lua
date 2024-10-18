@@ -1,19 +1,17 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup()
-		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
+		event = "BufEnter",
 		config = function()
+			require("mason").setup()
+			require("mason-lspconfig").setup()
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 
@@ -22,7 +20,7 @@ return {
 					vim.api.nvim_buf_set_keymap(bufnr, ...)
 				end
 				local opts = { noremap = true, silent = true }
-				buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+				buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 				buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 				buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 				buf_set_keymap("n", "gR", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
@@ -37,10 +35,10 @@ return {
 			end
 
 			lspconfig.pyright.setup({
-				-- on_attach = function(client, bufnr)
-				-- 	on_attach(client, bufnr)
-				-- 	client.handlers["textDocument/publishDiagnostics"] = function(...) end
-				-- end,
+				on_attach = function(client, bufnr)
+					on_attach(client, bufnr)
+					client.handlers["textDocument/publishDiagnostics"] = function(...) end
+				end,
 				settings = {
 					pyright = {
 						disableOrganizeImports = true,
