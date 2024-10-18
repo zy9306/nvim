@@ -50,6 +50,13 @@ return {
 	},
 
 	{
+		"akinsho/git-conflict.nvim",
+		event = "VeryLazy",
+		version = "*",
+		config = true,
+	},
+
+	{
 		"johmsalas/text-case.nvim",
 		config = function()
 			require("textcase").setup({
