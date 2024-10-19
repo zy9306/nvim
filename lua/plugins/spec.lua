@@ -36,13 +36,6 @@ return {
 	},
 
 	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-neotest/nvim-nio",
-			"antoinemadec/FixCursorHold.nvim",
-		},
-	},
-	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup()
