@@ -11,10 +11,10 @@ vim.keymap.set("n", "<leader>r", ":e<CR>", { noremap = true, silent = true, desc
 
 vim.keymap.set({ "i" }, "<C-B>", "<Left>", opts)
 vim.keymap.set({ "i" }, "<C-F>", "<Right>", opts)
-vim.keymap.set({ "i" }, "<C-A>", "<Home>", opts)
-vim.keymap.set({ "i" }, "<C-E>", "<End>", opts)
-vim.keymap.set({ "i" }, "<C-N>", "<Down>", opts)
-vim.keymap.set({ "i" }, "<C-P>", "<Up>", opts)
+-- vim.keymap.set({ "i" }, "<C-A>", "<Home>", opts)
+-- vim.keymap.set({ "i" }, "<C-E>", "<End>", opts)
+-- vim.keymap.set({ "i" }, "<C-N>", "<Down>", opts)
+-- vim.keymap.set({ "i" }, "<C-P>", "<Up>", opts)
 
 vim.keymap.set("i", "<C-_>", "<C-o>u", opts)
 
