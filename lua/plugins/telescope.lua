@@ -39,7 +39,16 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-frecency.nvim",
-		config = function()
+		opts = {
+			extensions = {
+				frecency = {
+					-- TODO: https://github.com/nvim-telescope/telescope-frecency.nvim/issues/270
+					db_safe_mode = false,
+				},
+			},
+		},
+		config = function(_, opts)
+			require("telescope").setup(opts)
 			require("telescope").load_extension("frecency")
 			vim.keymap.set("n", "<leader>fr", ":Telescope frecency<cr>", { desc = "Frecency" })
 		end,
