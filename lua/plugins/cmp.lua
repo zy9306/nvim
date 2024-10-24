@@ -90,6 +90,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			snippetDir = vim.fn.stdpath("config") .. "/snippets",
+			jsonFormatter = { "prettier", "-w", "--parser", "json" },
 		},
 	},
 	{
