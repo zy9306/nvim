@@ -84,6 +84,10 @@ return {
 	-- outline(imenu)
 	{
 		"stevearc/aerial.nvim",
+		cmd = "AerialToggle",
+		keys = {
+			{ "<leader>I", "<cmd>AerialToggle!<CR>", desc = "outline toggle" },
+		},
 		opts = {},
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -95,7 +99,6 @@ return {
 					resize_to_content = false,
 				},
 			})
-			vim.keymap.set("n", "<leader>I", "<cmd>AerialToggle!<CR>")
 		end,
 	},
 

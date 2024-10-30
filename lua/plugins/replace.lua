@@ -14,6 +14,7 @@ return {
 	-- 文档中说一定要用 ESC 退出插入模式
 	{
 		"nvim-pack/nvim-spectre",
+		event = "VeryLazy",
 		config = function()
 			require("spectre").setup()
 			vim.keymap.set("n", "<leader>%s", '<cmd>lua require("spectre").toggle()<CR>', {

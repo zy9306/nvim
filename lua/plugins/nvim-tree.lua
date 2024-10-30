@@ -2,7 +2,10 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		version = "*",
-		lazy = false,
+		cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose" },
+		keys = {
+			{ "<leader>ft", ":NvimTreeToggle<cr>", desc = "nvim-tree: Toggle" },
+		},
 		config = function()
 			local function my_on_attach(bufnr)
 				local api = require("nvim-tree.api")
@@ -48,22 +51,21 @@ return {
 				},
 			})
 
-			-- NOTE: Lazy Install 时会报错, 但不影响使用
-			local function close_nvim_tree(data)
-				local status, nvim_tree = pcall(require, "nvim-tree.api")
-				if not status then
-					print("Failed to load nvim-tree")
-					return
-				end
-				if nvim_tree and nvim_tree.tree and nvim_tree.tree.close then
-					nvim_tree.tree.close()
-				else
-					print("nvim-tree API is not available")
-				end
-			end
-
-			vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = close_nvim_tree })
-			vim.keymap.set("n", "<leader>ft", ":NvimTreeToggle<cr>", { desc = "nvim-tree: Toggle" })
+			-- NOTE: 使用 lazy load 后不需要了
+			-- local function close_nvim_tree(data)
+			-- 	local status, nvim_tree = pcall(require, "nvim-tree.api")
+			-- 	if not status then
+			-- 		print("Failed to load nvim-tree")
+			-- 		return
+			-- 	end
+			-- 	if nvim_tree and nvim_tree.tree and nvim_tree.tree.close then
+			-- 		nvim_tree.tree.close()
+			-- 	else
+			-- 		print("nvim-tree API is not available")
+			-- 	end
+			-- end
+			--
+			-- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = close_nvim_tree })
 		end,
 	},
 }
