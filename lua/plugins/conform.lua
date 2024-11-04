@@ -14,9 +14,18 @@ return {
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					json = { "prettierd", "prettier", stop_after_first = true },
 				},
-				format_after_save = {
-					lsp_format = "fallback",
-				},
+				-- format_after_save = {
+				-- 	lsp_format = "fallback",
+				-- },
+
+				format_after_save = function(bufnr)
+					local bufname = vim.api.nvim_buf_get_name(bufnr)
+					if bufname:match("/C_ASTHost/") then
+						return
+					end
+					return { lsp_format = "fallback" }
+				end,
+
 				-- format_on_save = function(bufnr)
 				-- 	-- Disable autoformat on certain filetypes
 				-- 	local ignore_filetypes = { "sql", "java", "py" }
