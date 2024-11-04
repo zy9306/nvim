@@ -99,4 +99,11 @@ return {
 			vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 		end,
 	},
+
+	{
+		"jonarrien/telescope-cmdline.nvim",
+		keys = {
+			{ "<leader>x", "<cmd>Telescope cmdline<CR>", desc = "Cmdline" },
+		},
+	},
 }

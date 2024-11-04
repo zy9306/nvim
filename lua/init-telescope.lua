@@ -23,7 +23,7 @@ function buffer_search_current_word_or_selection()
 	builtin.current_buffer_fuzzy_find({ default_text = search_text })
 end
 
-vim.keymap.set({ "n", "v" }, "<leader>x", builtin.commands, { desc = "Commands" })
+-- vim.keymap.set({ "n", "v" }, "<leader>x", builtin.commands, { desc = "Commands" })
 
 vim.keymap.set({ "n", "v" }, "<leader>fP", ':lua require("telescope").extensions.projects.projects{}<cr>', { desc = "Project" })
 vim.keymap.set({ "n", "v" }, "<leader>ff", builtin.find_files, { desc = "Find Files" })
