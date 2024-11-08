@@ -115,3 +115,15 @@ do
 
 	vim.api.nvim_create_user_command("Bdelete", delete_buffer, {})
 end
+
+do
+	vim.api.nvim_create_user_command("ToggleReadonly", function()
+		if vim.bo.readonly then
+			vim.bo.readonly = false
+			print("Readonly disabled")
+		else
+			vim.bo.readonly = true
+			print("Readonly enabled")
+		end
+	end, {})
+end
