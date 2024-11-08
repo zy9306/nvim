@@ -37,3 +37,6 @@ vim.keymap.set("n", "<C-k>", ":resize -2<CR>", opts)
 vim.keymap.set("n", "<C-j>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-h>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-l>", ":vertical resize +2<CR>", opts)
+
+vim.keymap.set("n", "<C-n>", ":bnext<CR>", opts)
+vim.keymap.set("n", "<C-p>", ":bprevious<CR>", opts)
