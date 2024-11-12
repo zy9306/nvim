@@ -75,7 +75,15 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		config = function()
+		opts = {
+			extensions = {
+				fzf = {
+					fuzzy = false,
+				},
+			},
+		},
+		config = function(_, opts)
+			require("telescope").setup(opts)
 			require("telescope").load_extension("fzf")
 		end,
 	},
