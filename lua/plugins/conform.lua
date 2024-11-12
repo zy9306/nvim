@@ -20,8 +20,12 @@ return {
 
 				format_after_save = function(bufnr)
 					local bufname = vim.api.nvim_buf_get_name(bufnr)
-					if bufname:match("/C_ASTHost/") then
-						return
+					local patterns = { "/C_ASTHost/", "/C_ASTHost_test/" }
+
+					for _, pattern in ipairs(patterns) do
+						if bufname:match(pattern) then
+							return
+						end
 					end
 					return { lsp_format = "fallback" }
 				end,
