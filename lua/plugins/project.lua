@@ -1,11 +1,20 @@
 return {
+	-- {
+	-- 	"ahmedkhalf/project.nvim",
+	-- 	config = function()
+	-- 		require("project_nvim").setup({
+	-- 			show_hidden = false,
+	-- 			scope_chdir = "tab",
+	-- 			silent_chdir = false,
+	-- 		})
+	-- 		require("telescope").load_extension("projects")
+	-- 	end,
+	-- },
 	{
-		"ahmedkhalf/project.nvim",
+		"notjedi/nvim-rooter.lua",
+		event = "BufEnter",
 		config = function()
-			require("project_nvim").setup({
-				show_hidden = false,
-			})
-			require("telescope").load_extension("projects")
+			require("nvim-rooter").setup({})
 		end,
 	},
 }

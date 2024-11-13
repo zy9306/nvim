@@ -27,13 +27,6 @@ return {
 			require("Comment").setup()
 		end,
 	},
-	{
-		"airblade/vim-rooter",
-		config = function()
-			vim.g.rooter_silent_chdir = 1
-			vim.g.rooter_patterns = { ".git", ".git/", ".gitignore", ".gitmodules", ".project" }
-		end,
-	},
 
 	{
 		"lewis6991/gitsigns.nvim",
@@ -157,8 +150,9 @@ return {
 					statusline = false,
 				},
 				config = {
+					header = {},
 					week_header = {
-						enable = true,
+						enable = false,
 					},
 				},
 			})

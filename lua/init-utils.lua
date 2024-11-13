@@ -127,3 +127,30 @@ do
 		end
 	end, {})
 end
+
+do
+	local function find_project_root(patterns)
+		local path = vim.fn.expand("%:p:h")
+		while path and path ~= "/" do
+			for _, pattern in ipairs(patterns) do
+				if vim.fn.glob(path .. "/" .. pattern) ~= "" then
+					return path
+				end
+			end
+			path = vim.fn.fnamemodify(path, ":h")
+		end
+		return nil
+	end
+
+	local function set_tab_name()
+		local root = find_project_root({ ".git" })
+		if root then
+			local project_name = vim.fn.fnamemodify(root, ":t")
+			vim.cmd("Tabby rename_tab " .. project_name)
+		end
+	end
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		callback = set_tab_name,
+	})
+end
