@@ -129,6 +129,7 @@ return {
 
 	{
 		"NeogitOrg/neogit",
+		event = "BufReadPre",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",

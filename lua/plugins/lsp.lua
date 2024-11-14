@@ -7,7 +7,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		event = "BufEnter",
+		event = "BufReadPre",
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup()
@@ -69,7 +69,7 @@ return {
 	},
 	{
 		"rmagatti/goto-preview",
-		event = "BufEnter",
+		event = "BufReadPre",
 		config = function()
 			require("goto-preview").setup({
 				default_mappings = true,
@@ -81,7 +81,7 @@ return {
 	},
 	{
 		"ray-x/lsp_signature.nvim",
-		event = "VeryLazy",
+		event = "BufReadPre",
 		opts = {},
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
@@ -90,6 +90,7 @@ return {
 
 	{
 		"soulis-1256/eagle.nvim",
+		event = "BufReadPre",
 		config = function()
 			vim.o.mousemoveevent = true
 			require("eagle").setup()

@@ -4,7 +4,7 @@ return {
 		event = "FileType qf",
 		opts = {},
 		config = function()
-			vim.keymap.set("n", "<leader>q", function()
+			vim.keymap.set("n", "<leader>Q", function()
 				require("quicker").toggle()
 			end, {
 				desc = "Toggle quickfix",
