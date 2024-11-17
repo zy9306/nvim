@@ -116,6 +116,7 @@ return {
 	},
 	{
 		"LukasPietzschmann/telescope-tabs",
+		event = "BufEnter",
 		config = function()
 			require("telescope").load_extension("telescope-tabs")
 			require("telescope-tabs").setup({
@@ -128,6 +129,22 @@ return {
 					return require("tabby.feature.tab_name").get(tab_id)
 				end,
 			})
+		end,
+	},
+
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		event = "BufEnter",
+		opts = {
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown({}),
+				},
+			},
+		},
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			require("telescope").load_extension("ui-select")
 		end,
 	},
 }

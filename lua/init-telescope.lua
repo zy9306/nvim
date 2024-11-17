@@ -57,6 +57,7 @@ vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { noremap
 vim.keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, silent = true, desc = "LSP Definitions" })
 vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<CR>", { noremap = true, silent = true, desc = "LSP Implementations" })
 vim.keymap.set("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>", { noremap = true, silent = true, desc = "LSP Document Symbols" })
+vim.keymap.set("n", "<leader>la", ":lua vim.lsp.buf.code_action()<CR>", { noremap = true, silent = true, desc = "LSP Code Action" })
 
 do
 	function set_auto_global_mark()
