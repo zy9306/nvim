@@ -50,6 +50,8 @@ vim.keymap.set({ "n", "v" }, "<leader>fg", buffer_search_current_word_or_selecti
 vim.keymap.set({ "n", "v" }, "<leader>g", fzf_buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
 vim.keymap.set({ "n", "v" }, "<leader>s", fzf_buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
 
+vim.keymap.set({ "n", "v" }, "<leader>fT", ':lua require("telescope-tabs").list_tabs()<cr>', { desc = "List Tabs" })
+
 -- lsp integration
 vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { noremap = true, silent = true, desc = "LSP References" })
 vim.keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, silent = true, desc = "LSP Definitions" })
