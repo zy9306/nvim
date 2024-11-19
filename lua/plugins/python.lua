@@ -1,6 +1,7 @@
 return {
 	{
 		"AckslD/swenv.nvim",
+		ft = "python",
 		config = function()
 			require("swenv").setup({
 				venvs_path = vim.fn.expand("~/Envs"),
