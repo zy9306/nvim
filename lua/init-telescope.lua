@@ -23,16 +23,6 @@ function buffer_search_current_word_or_selection()
 	builtin.current_buffer_fuzzy_find({ default_text = search_text })
 end
 
-function fzf_project_search_current_word_or_selection()
-	search_text = get_current_word_or_selection()
-	require("fzf-lua").grep_project({ search = search_text })
-end
-
-function fzf_buffer_search_current_word_or_selection()
-	search_text = get_current_word_or_selection()
-	require("fzf-lua").grep_curbuf({ search = search_text })
-end
-
 -- vim.keymap.set({ "n", "v" }, "<leader>x", builtin.commands, { desc = "Commands" })
 
 vim.keymap.set({ "n", "v" }, "<leader>fP", ':lua require("telescope").extensions.projects.projects{}<cr>', { desc = "Project" })
@@ -45,10 +35,8 @@ vim.keymap.set({ "n", "v" }, "<leader>b", builtin.buffers, { desc = "Buffers" })
 vim.keymap.set({ "n", "v" }, "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
 vim.keymap.set({ "n", "v" }, "<leader>fg", buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
 
--- vim.keymap.set({ "n", "v" }, "<leader>g", buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
--- vim.keymap.set({ "n", "v" }, "<leader>s", buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
-vim.keymap.set({ "n", "v" }, "<leader>g", fzf_buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
-vim.keymap.set({ "n", "v" }, "<leader>s", fzf_buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
+vim.keymap.set({ "n", "v" }, "<leader>g", buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
+vim.keymap.set({ "n", "v" }, "<leader>s", buffer_search_current_word_or_selection, { desc = "Current Buffer Fuzzy Find" })
 
 vim.keymap.set({ "n", "v" }, "<leader>fT", ':lua require("telescope-tabs").list_tabs()<cr>', { desc = "List Tabs" })
 
