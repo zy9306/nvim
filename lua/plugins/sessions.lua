@@ -23,6 +23,9 @@ return {
 			vim.keymap.set("n", "<leader>qd", function()
 				require("persistence").stop()
 			end, { desc = "Stop Persistence" })
+			vim.keymap.set("n", "<leader>qw", function()
+				require("persistence").save()
+			end, { desc = "Save session" })
 		end,
 	},
 }
