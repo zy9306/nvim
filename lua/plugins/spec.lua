@@ -125,6 +125,22 @@ return {
 		end,
 	},
 
+	-- NOTE: 如果要启用,将以下两个都改成 true
+	{
+		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("hlchunk").setup({
+				chunk = {
+					enable = false,
+				},
+				indent = {
+					enable = false,
+				},
+			})
+		end,
+	},
+
 	{ "taybart/b64.nvim", event = "VeryLazy" },
 
 	{
