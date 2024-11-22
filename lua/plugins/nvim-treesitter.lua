@@ -3,7 +3,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				parser_install_dir = "~/.local/share/nvim/lazy/nvim-treesitter/parser",
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = false,
