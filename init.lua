@@ -38,6 +38,8 @@ vim.o.winblend = 15
 vim.o.showtabline = 2
 vim.opt.sessionoptions = "globals,buffers,tabpages,terminal"
 
+vim.opt.conceallevel = 0
+
 require("config.lazy")
 require("init-telescope")
 require("init-toggleterm")
