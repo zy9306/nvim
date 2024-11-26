@@ -93,7 +93,11 @@ return {
 		event = "BufReadPre",
 		config = function()
 			vim.o.mousemoveevent = true
-			require("eagle").setup()
+			require("eagle").setup({
+				mouse_mode = false,
+				keyboard_mode = true,
+			})
+			vim.keymap.set("n", "<Tab>", ":EagleWin<CR>", { noremap = true, silent = true })
 		end,
 	},
 }
