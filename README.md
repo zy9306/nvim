@@ -33,3 +33,11 @@ mv ./dist/libtree-sitter-<language>.dylib ~/.local/share/nvim/lazy/nvim-treesitt
 正常安装
 
 `:TSInstall <language>`
+
+## build avante.nvim
+
+mac m1
+```
+cd ~/.local/share/nvim/lazy/avante.nvim
+arch -arm64 make
+```
