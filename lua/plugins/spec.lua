@@ -132,10 +132,15 @@ return {
 		config = function()
 			require("hlchunk").setup({
 				chunk = {
-					enable = false,
+					enable = true,
+					-- 禁用动画
+					delay = 0,
+					chars = {
+						right_arrow = "─",
+					},
 				},
 				indent = {
-					enable = false,
+					enable = true,
 				},
 			})
 		end,
