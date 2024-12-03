@@ -5,6 +5,8 @@ local opts = {
 
 vim.keymap.set("x", "p", '"_dP', opts)
 
+vim.keymap.set({ "n", "v" }, "<leader><Space>", "zz", { noremap = true, silent = true })
+
 vim.keymap.set("n", "<leader>w", ":w<cr>", { desc = "Save" })
 vim.keymap.set("n", "<leader>W", ":q<cr>", { desc = "Save and Quit" })
 vim.keymap.set("n", "<leader>r", ":e<CR>", { noremap = true, silent = true, desc = "Reload" })
