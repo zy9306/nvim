@@ -42,17 +42,36 @@ do
 end
 
 do
-	function delete_buffer()
-		local buffers = vim.fn.getbufinfo({ buflisted = 1 })
-		if #buffers == 1 then
-			vim.cmd("enew")
-			vim.cmd("bdelete #")
-		else
-			vim.cmd("b#|bd#")
+	local function switch_to_previous_buffer()
+		local prev_buf = vim.fn.bufnr("#")
+		if prev_buf ~= -1 then
+			vim.cmd("buffer " .. prev_buf)
 		end
 	end
 
-	vim.api.nvim_create_user_command("Bdelete", delete_buffer, {})
+	local function delete_buffer(force)
+		local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+		local cmd = force and "bdelete!" or "bdelete"
+
+		if #buffers == 1 then
+			vim.cmd("enew")
+			local ok, err = pcall(vim.cmd, cmd .. " #")
+			if not ok then
+				switch_to_previous_buffer()
+				vim.notify("Error deleting buffer: " .. err, vim.log.levels.ERROR)
+			end
+		else
+			local ok, err = pcall(vim.cmd, "b#|" .. cmd .. " #")
+			if not ok then
+				switch_to_previous_buffer()
+				vim.notify("Error deleting buffer: " .. err, vim.log.levels.ERROR)
+			end
+		end
+	end
+
+	vim.api.nvim_create_user_command("Bdelete", function(opts)
+		delete_buffer(opts.bang)
+	end, { bang = true })
 end
 
 do
