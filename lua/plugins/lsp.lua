@@ -26,7 +26,7 @@ return {
 				buf_set_keymap("n", "gR", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 			end
 
-			local servers = { "clangd", "rust_analyzer", "gopls", "pyright", "dartls" }
+			local servers = require("mason-lspconfig").get_installed_servers()
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup({
 					on_attach = on_attach,
