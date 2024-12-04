@@ -9,9 +9,9 @@ return {
 				},
 				indent = {
 					enable = true,
-					disable = { "python" },
+					disable = {},
 				},
-				disable = { "yaml" },
+				disable = {},
 				incremental_selection = {
 					enable = true,
 					keymaps = {
