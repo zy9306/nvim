@@ -73,6 +73,17 @@ return {
 		"leoluz/nvim-dap-go",
 		config = function()
 			require("dap-go").setup({
+				-- config `substitute-path` in `~/.dlv/config.yml`
+				dap_configurations = {
+					{
+						type = "go",
+						name = "Attach remote",
+						mode = "remote",
+						request = "attach",
+						host = "127.0.0.1",
+						port = 40000,
+					},
+				},
 				delve = {
 					initialize_timeout_sec = 60,
 				},
