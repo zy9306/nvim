@@ -20,7 +20,7 @@ return {
 
 				format_after_save = function(bufnr)
 					local bufname = vim.api.nvim_buf_get_name(bufnr)
-					local patterns = { "/C_ASTHost/", "/C_ASTHost_test/" }
+					local patterns = {}
 
 					for _, pattern in ipairs(patterns) do
 						if bufname:match(pattern) then
