@@ -1,3 +1,5 @@
+local start_time = vim.loop.hrtime()
+
 vim.o.updatetime = 500
 
 vim.o.background = "light"
@@ -51,3 +53,7 @@ require("init-neovide")
 require("init-theme")
 
 require("init-keymap")
+
+local end_time = vim.loop.hrtime()
+local elapsed_time = (end_time - start_time) / 1e6
+print(string.format("startup time: %.2f ms", elapsed_time))
