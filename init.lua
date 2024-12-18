@@ -42,17 +42,21 @@ vim.opt.sessionoptions = "globals,buffers,tabpages,terminal"
 
 vim.opt.conceallevel = 0
 
-require("config.lazy")
-require("init-telescope")
-require("init-toggleterm")
-require("init-backup")
-require("init-utils")
+if vim.g.vscode then
+	require("init-vscode")
+else
+	require("config.lazy")
+	require("init-telescope")
+	require("init-toggleterm")
+	require("init-backup")
+	require("init-utils")
 
-require("init-neovide")
+	require("init-neovide")
 
-require("init-theme")
+	require("init-theme")
 
-require("init-keymap")
+	require("init-keymap")
+end
 
 local end_time = vim.loop.hrtime()
 local elapsed_time = (end_time - start_time) / 1e6
