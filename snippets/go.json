@@ -1,65 +1,42 @@
 {
-  "go_json_file_read": {
+  "go_read_csv": {
     "body": [
-      "jsonFile, err := os.Open(file)",
+      "file, err := os.Open(\"filename\")",
       "if err != nil {",
       "\treturn err",
       "}",
-      "defer jsonFile.Close()",
-      "",
-      "byteValue, err := io.ReadAll(jsonFile)",
-      "if err != nil {",
-      "\treturn err",
-      "}",
-      "",
-      "var data map[string]any",
-      "if err := json.Unmarshal(byteValue, &data); err != nil {",
-      "\treturn err",
+      "csvReader := csv.NewReader(file)",
+      "for {",
+      "\trecord, err := csvReader.Read()",
+      "\tif err == io.EOF {",
+      "\t\tbreak",
+      "\t}",
+      "\tif err != nil {",
+      "\t\treturn err",
+      "\t}",
+      "\t// do something",
       "}"
     ],
-    "prefix": "go_json_file_read"
+    "prefix": "go_read_csv"
   },
-  "go_write_csv": {
-    "description": "go_write_csv",
+  "redis lock": {
     "body": [
-      "func WriteCSV(fields [][]string) (string, error) {",
-      "\tpattern := \"*.csv\"",
-      "\ttmpFile, err := os.CreateTemp(os.TempDir(), pattern)",
-      "\tif err != nil {",
-      "\t\treturn \"\", err",
-      "\t\\}",
-      "\tdefer tmpFile.Close()",
-      "\tcsvw := csv.NewWriter(tmpFile)",
-      "\terr = csvw.WriteAll(fields)",
-      "\treturn tmpFile.Name(), err",
-      "\\}"
+      "redisClient := app.Redis.Client(ctx)",
+      "locker := redislock.New(redisClient)",
+      "retry := redislock.Options{RetryStrategy: redislock.NoRetry()}",
+      "if lock, err := locker.Obtain(\"LOCK_KEY\", 5*time.Second, &retry); err != nil {",
+      "\treturn nil, err",
+      "} else {",
+      "\tdefer func() {",
+      "\t\tif err := lock.Release(); err != nil {",
+      "\t\t\tpanic(err)",
+      "\t\t}",
+      "\t}()",
+      "}"
     ],
-    "prefix": "go_write_csv"
-  },
-  "go_echo_bind_body": {
-    "description": "go_echo_bind_body",
-    "body": [
-      "func echoBindBody(c echo.Context, i interface{\\}) error {",
-      "\tif c.Request().Body == nil {",
-      "\t\treturn nil",
-      "\t\\}",
-      "",
-      "\tbodyBytes, err := io.ReadAll(c.Request().Body)",
-      "\tif err != nil {",
-      "\t\treturn err",
-      "\t\\}",
-      "\tc.Request().Body = io.NopCloser(bytes.NewBuffer(bodyBytes))",
-      "\tif err := c.Bind(i); err != nil {",
-      "\t\treturn err",
-      "\t\\}",
-      "\tc.Request().Body = io.NopCloser(bytes.NewBuffer(bodyBytes))",
-      "\treturn nil",
-      "\\}"
-    ],
-    "prefix": "go_echo_bind_body"
+    "prefix": "redis lock"
   },
   "go_iter_table": {
-    "description": "go_iter_table",
     "body": [
       "db := app.EntExt.DB()",
       "cursor, err := db.QueryContext(ctx, \"SELECT MIN(id) as min_id, MAX(id) as max_id from ${1:tableName}\")",
@@ -96,28 +73,62 @@
       "    startID += chunkSize",
       "\\}"
     ],
+    "description": "go_iter_table",
     "prefix": "go_iter_table"
   },
-  "go_sort_slice": {
-    "description": "go_sort_slice",
+  "go_http_get_csv": {
     "body": [
-      "sort.Slice(${1:slice}, func(i, j int) bool {",
-      "    return $1[i] < $1[j]",
-      "\\})"
-    ],
-    "prefix": "go_sort_slice"
-  },
-  "go_mock_http_get_csv": {
-    "description": "go_mock_http_get_csv",
-    "body": [
-      "mockStr := \"${1:str}\"",
-      "mockBody := io.NopCloser(bytes.NewReader([]byte(mockStr)))",
-      "${2:Func} = func(url string) (*http.Response, error) {",
-      "    res := &http.Response{Body: mockBody\\}",
-      "    return res, nil",
+      "resp, err := ${1:HTTPGeterFunc}(${2:url})",
+      "if err != nil {",
+      "    return err",
+      "\\}",
+      "defer resp.Body.Close()",
+      "csvReader := csv.NewReader(resp.Body)",
+      "for {",
+      "    record, err := csvReader.Read()",
+      "    if err == io.EOF {",
+      "        break",
+      "    \\}",
+      "    if err != nil {",
+      "        return err",
+      "    \\}",
+      "    // do something",
       "\\}"
     ],
-    "prefix": "go_mock_http_get_csv"
+    "description": "go_http_get_csv",
+    "prefix": "go_http_get_csv"
+  },
+  "go_readcloser_to_string": {
+    "body": [
+      "b, err := io.ReadAll(r)",
+      "// check errors",
+      "// string(b)",
+      "",
+      "// or",
+      "// buf := new(strings.Builder)",
+      "// n, err := io.Copy(buf, r)",
+      "// // check errors",
+      "// // buf.String()"
+    ],
+    "description": "go_readcloser_to_string",
+    "prefix": "go_readcloser_to_string"
+  },
+  "go_write_csv": {
+    "body": [
+      "func WriteCSV(fields [][]string) (string, error) {",
+      "\tpattern := \"*.csv\"",
+      "\ttmpFile, err := os.CreateTemp(os.TempDir(), pattern)",
+      "\tif err != nil {",
+      "\t\treturn \"\", err",
+      "\t\\}",
+      "\tdefer tmpFile.Close()",
+      "\tcsvw := csv.NewWriter(tmpFile)",
+      "\terr = csvw.WriteAll(fields)",
+      "\treturn tmpFile.Name(), err",
+      "\\}"
+    ],
+    "description": "go_write_csv",
+    "prefix": "go_write_csv"
   },
   "bay_go_cmd": {
     "body": [
@@ -160,46 +171,49 @@
     ],
     "prefix": "bay_go_cmd"
   },
-  "go_parse_int": {
-    "description": "go_parse_int",
+  "go_mock_http_get_csv": {
     "body": [
-      "v, err := strconv.ParseInt(s, 10, 64)",
-      "if err != nil {",
-      "    return err",
+      "mockStr := \"${1:str}\"",
+      "mockBody := io.NopCloser(bytes.NewReader([]byte(mockStr)))",
+      "${2:Func} = func(url string) (*http.Response, error) {",
+      "    res := &http.Response{Body: mockBody\\}",
+      "    return res, nil",
       "\\}"
     ],
-    "prefix": "go_parse_int"
-  },
-  "go_read_csv": {
-    "prefix": "go_read_csv",
-    "body": [
-      "file, err := os.Open(\"filename\")",
-      "if err != nil {",
-      "\treturn err",
-      "}",
-      "csvReader := csv.NewReader(file)",
-      "for {",
-      "\trecord, err := csvReader.Read()",
-      "\tif err == io.EOF {",
-      "\t\tbreak",
-      "\t}",
-      "\tif err != nil {",
-      "\t\treturn err",
-      "\t}",
-      "\t// do something",
-      "}"
-    ]
+    "description": "go_mock_http_get_csv",
+    "prefix": "go_mock_http_get_csv"
   },
   "go_json_unmarshal": {
-    "description": "go_json_unmarshal",
     "body": [
       "${1:variableName} := ${2:dataStruct}{\\}",
       "err := json.Unmarshal([]byte(*${3:stringValue}), &$1)"
     ],
+    "description": "go_json_unmarshal",
     "prefix": "go_json_unmarshal"
   },
+  "go_chunk_slice": {
+    "body": [
+      "",
+      "chunkSize := ${1:chunkSize}",
+      "start := 0",
+      "total := len(${2:slice})",
+      "",
+      "for start < total {",
+      "    end := start + chunkSize",
+      "    if end > total {",
+      "        end = total",
+      "    \\}",
+      "",
+      "    tmp := $2[start:end]",
+      "    // to something",
+      "",
+      "    start += chunkSize",
+      "\\}"
+    ],
+    "description": "go_chunk_slice",
+    "prefix": "go_chunk_slice"
+  },
   "go_iter_table_2": {
-    "description": "go_iter_table_2",
     "body": [
       "limit := 5000",
       "startID := uint64(0)",
@@ -225,65 +239,68 @@
       "    \\}",
       "\\}"
     ],
+    "description": "go_iter_table_2",
     "prefix": "go_iter_table_2"
   },
-  "go_chunk_slice": {
-    "description": "go_chunk_slice",
+  "go_sort_slice": {
     "body": [
+      "sort.Slice(${1:slice}, func(i, j int) bool {",
+      "    return $1[i] < $1[j]",
+      "\\})"
+    ],
+    "description": "go_sort_slice",
+    "prefix": "go_sort_slice"
+  },
+  "go_echo_bind_body": {
+    "body": [
+      "func echoBindBody(c echo.Context, i interface{\\}) error {",
+      "\tif c.Request().Body == nil {",
+      "\t\treturn nil",
+      "\t\\}",
       "",
-      "chunkSize := ${1:chunkSize}",
-      "start := 0",
-      "total := len(${2:slice})",
-      "",
-      "for start < total {",
-      "    end := start + chunkSize",
-      "    if end > total {",
-      "        end = total",
-      "    \\}",
-      "",
-      "    tmp := $2[start:end]",
-      "    // to something",
-      "",
-      "    start += chunkSize",
+      "\tbodyBytes, err := io.ReadAll(c.Request().Body)",
+      "\tif err != nil {",
+      "\t\treturn err",
+      "\t\\}",
+      "\tc.Request().Body = io.NopCloser(bytes.NewBuffer(bodyBytes))",
+      "\tif err := c.Bind(i); err != nil {",
+      "\t\treturn err",
+      "\t\\}",
+      "\tc.Request().Body = io.NopCloser(bytes.NewBuffer(bodyBytes))",
+      "\treturn nil",
       "\\}"
     ],
-    "prefix": "go_chunk_slice"
+    "description": "go_echo_bind_body",
+    "prefix": "go_echo_bind_body"
   },
-  "go_readcloser_to_string": {
-    "description": "go_readcloser_to_string",
+  "go_parse_int": {
     "body": [
-      "b, err := io.ReadAll(r)",
-      "// check errors",
-      "// string(b)",
-      "",
-      "// or",
-      "// buf := new(strings.Builder)",
-      "// n, err := io.Copy(buf, r)",
-      "// // check errors",
-      "// // buf.String()"
-    ],
-    "prefix": "go_readcloser_to_string"
-  },
-  "go_http_get_csv": {
-    "description": "go_http_get_csv",
-    "body": [
-      "resp, err := ${1:HTTPGeterFunc}(${2:url})",
+      "v, err := strconv.ParseInt(s, 10, 64)",
       "if err != nil {",
       "    return err",
-      "\\}",
-      "defer resp.Body.Close()",
-      "csvReader := csv.NewReader(resp.Body)",
-      "for {",
-      "    record, err := csvReader.Read()",
-      "    if err == io.EOF {",
-      "        break",
-      "    \\}",
-      "    if err != nil {",
-      "        return err",
-      "    \\}",
-      "    // do something",
       "\\}"
     ],
-    "prefix": "go_http_get_csv"
+    "description": "go_parse_int",
+    "prefix": "go_parse_int"
+  },
+  "go_json_file_read": {
+    "body": [
+      "jsonFile, err := os.Open(file)",
+      "if err != nil {",
+      "\treturn err",
+      "}",
+      "defer jsonFile.Close()",
+      "",
+      "byteValue, err := io.ReadAll(jsonFile)",
+      "if err != nil {",
+      "\treturn err",
+      "}",
+      "",
+      "var data map[string]any",
+      "if err := json.Unmarshal(byteValue, &data); err != nil {",
+      "\treturn err",
+      "}"
+    ],
+    "prefix": "go_json_file_read"
   }
 }
