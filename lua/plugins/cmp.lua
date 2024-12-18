@@ -100,7 +100,7 @@ return {
 		config = function()
 			require("copilot").setup({
 				filetypes = {
-					yaml = true,
+					["*"] = true,
 				},
 			})
 		end,

@@ -83,14 +83,15 @@ return {
 			})
 		end,
 	},
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "BufReadPre",
-		opts = {},
-		config = function(_, opts)
-			require("lsp_signature").setup(opts)
-		end,
-	},
+	-- 有点干扰视线, 暂时不用了, 用 tab 查看函数签名
+	-- {
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	event = "BufReadPre",
+	-- 	opts = {},
+	-- 	config = function(_, opts)
+	-- 		require("lsp_signature").setup(opts)
+	-- 	end,
+	-- },
 
 	{
 		"soulis-1256/eagle.nvim",
@@ -102,6 +103,21 @@ return {
 				keyboard_mode = true,
 			})
 			vim.keymap.set("n", "<Tab>", ":EagleWin<CR>", { noremap = true, silent = true })
+		end,
+	},
+
+	{
+		"mfussenegger/nvim-lint",
+		event = "BufReadPost",
+		config = function()
+			require("lint").linters_by_ft = {
+				go = { "golangcilint" },
+			}
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
 		end,
 	},
 }
