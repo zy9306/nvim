@@ -37,7 +37,7 @@ vim.o.pumblend = 15
 -- 设置浮动窗口的透明度
 vim.o.winblend = 15
 
-vim.o.showtabline = 2
+vim.o.showtabline = 1
 vim.opt.sessionoptions = "globals,buffers,tabpages,terminal"
 
 vim.opt.conceallevel = 0
