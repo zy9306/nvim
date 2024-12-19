@@ -55,14 +55,15 @@ return {
 				},
 			})
 
-			lspconfig.ruff.setup({
-				trace = "messages",
-				init_options = {
-					settings = {
-						logLevel = "debug",
-					},
-				},
-			})
+			-- use nvim-lint instead
+			-- lspconfig.ruff.setup({
+			-- 	trace = "messages",
+			-- 	init_options = {
+			-- 		settings = {
+			-- 			logLevel = "debug",
+			-- 		},
+			-- 	},
+			-- })
 
 			vim.diagnostic.config({ virtual_text = false, float = { border = "rounded" } })
 
@@ -112,6 +113,7 @@ return {
 		config = function()
 			require("lint").linters_by_ft = {
 				go = { "golangcilint" },
+				python = { "ruff" },
 			}
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
