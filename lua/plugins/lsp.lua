@@ -84,15 +84,25 @@ return {
 			})
 		end,
 	},
-	-- 有点干扰视线, 暂时不用了, 用 tab 查看函数签名
-	-- {
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	event = "BufReadPre",
-	-- 	opts = {},
-	-- 	config = function(_, opts)
-	-- 		require("lsp_signature").setup(opts)
-	-- 	end,
-	-- },
+
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "BufReadPost",
+		opts = {
+			floating_window = false,
+		},
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+
+			vim.keymap.set({ "n", "i" }, "<C-k>", function()
+				require("lsp_signature").toggle_float_win()
+			end, { silent = true, noremap = true, desc = "toggle signature" })
+
+			vim.keymap.set({ "n" }, "<Leader>k", function()
+				vim.lsp.buf.signature_help()
+			end, { silent = true, noremap = true, desc = "toggle signature" })
+		end,
+	},
 
 	{
 		"soulis-1256/eagle.nvim",
