@@ -15,12 +15,14 @@ end
 
 function global_search_current_word_or_selection()
 	search_text = get_current_word_or_selection()
-	builtin.live_grep({ default_text = search_text })
+	-- builtin.live_grep({ default_text = search_text })
+	extensions.live_grep_args.live_grep_args({ default_text = search_text })
 end
 
 function buffer_search_current_word_or_selection()
 	search_text = get_current_word_or_selection()
-	builtin.current_buffer_fuzzy_find({ default_text = search_text })
+	-- builtin.current_buffer_fuzzy_find({ default_text = search_text })
+	extensions.live_grep_args.live_grep_args({ default_text = search_text, search_dirs = { vim.fn.expand("%:p") } })
 end
 
 -- vim.keymap.set({ "n", "v" }, "<leader>x", builtin.commands, { desc = "Commands" })
