@@ -40,6 +40,19 @@ return {
 	{
 		"nvim-telescope/telescope-live-grep-args.nvim",
 		config = function()
+			lga_actions = require("telescope-live-grep-args.actions")
+			require("telescope").setup({
+				extensions = {
+					live_grep_args = {
+						mappings = {
+							i = {
+								["<C-k>"] = lga_actions.quote_prompt(),
+								["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+							},
+						},
+					},
+				},
+			})
 			require("telescope").load_extension("live_grep_args")
 		end,
 	},
