@@ -3,7 +3,16 @@ return {
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		opts = {
-			provider = "openai",
+			-- provider = "openai",
+			provider = "litellm",
+			vendors = {
+				litellm = {
+					__inherited_from = "openai",
+					api_key_name = "LITELLM_API_KEY",
+					endpoint = os.getenv("LITELLM_API_ENDPOINT"),
+					model = "claude3.5-sonnet",
+				},
+			},
 		},
 		build = "make",
 		dependencies = {
