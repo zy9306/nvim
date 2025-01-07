@@ -3,8 +3,8 @@ return {
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		opts = {
-			-- provider = "openai",
-			provider = "litellm",
+			provider = "openai",
+			-- provider = "litellm",
 			vendors = {
 				litellm = {
 					__inherited_from = "openai",
