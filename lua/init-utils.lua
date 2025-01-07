@@ -100,15 +100,36 @@ do
 		return nil
 	end
 
-	local function set_tab_name()
+	-- local function set_tab_name()
+	-- 	local root = find_project_root({ ".git" })
+	-- 	if root then
+	-- 		local project_name = vim.fn.fnamemodify(root, ":t")
+	-- 		vim.cmd("Tabby rename_tab " .. project_name)
+	-- 	end
+	-- end
+
+	-- vim.api.nvim_create_autocmd("BufEnter", {
+	-- 	callback = set_tab_name,
+	-- })
+
+	local function set_wezterm_tab_name()
 		local root = find_project_root({ ".git" })
 		if root then
 			local project_name = vim.fn.fnamemodify(root, ":t")
-			vim.cmd("Tabby rename_tab " .. project_name)
+			local tab_title = "nvim: " .. project_name
+			vim.loop.spawn("wezterm", {
+				args = { "cli", "set-tab-title", tab_title },
+			}, function(code, signal)
+				if code ~= 0 then
+					vim.schedule(function()
+						vim.notify("Failed to set WezTerm tab title", vim.log.levels.WARN)
+					end)
+				end
+			end)
 		end
 	end
 
 	vim.api.nvim_create_autocmd("BufEnter", {
-		callback = set_tab_name,
+		callback = set_wezterm_tab_name,
 	})
 end
