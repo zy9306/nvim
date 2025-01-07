@@ -47,7 +47,6 @@ if vim.g.vscode then
 else
 	require("config.lazy")
 	require("init-telescope")
-	require("init-toggleterm")
 	require("init-backup")
 	require("init-utils")
 
@@ -56,6 +55,8 @@ else
 	require("init-theme")
 
 	require("init-keymap")
+
+	require("init-wezterm")
 end
 
 local end_time = vim.loop.hrtime()
