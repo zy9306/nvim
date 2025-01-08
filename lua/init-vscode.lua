@@ -1,6 +1,6 @@
 local opts = {
-	noremap = true,
-	silent = true,
+    noremap = true,
+    silent = true,
 }
 
 vim.keymap.set({ "n" }, "<leader>ff", ":lua require('vscode').action('workbench.action.quickOpen')<cr>", opts)

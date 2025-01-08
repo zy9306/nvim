@@ -11,20 +11,20 @@ augroup END
 ]])
 
 function MaybeBackup(file)
-	local filesize = vim.fn.getfsize(file)
-	if filesize > 5 * 1024 * 1024 then
-		vim.o.writebackup = false
-	else
-		vim.o.writebackup = true
-		DeleteOldBackups(file)
-	end
+    local filesize = vim.fn.getfsize(file)
+    if filesize > 5 * 1024 * 1024 then
+        vim.o.writebackup = false
+    else
+        vim.o.writebackup = true
+        DeleteOldBackups(file)
+    end
 end
 
 function DeleteOldBackups(file)
-	local backupdir = vim.fn.expand(vim.o.backupdir)
-	local filename = vim.fn.fnamemodify(file, ":t")
-	local backups = vim.fn.split(vim.fn.glob(backupdir .. filename .. "-*"), "\n")
-	if #backups > 20 then
-		vim.fn.delete(backups[1])
-	end
+    local backupdir = vim.fn.expand(vim.o.backupdir)
+    local filename = vim.fn.fnamemodify(file, ":t")
+    local backups = vim.fn.split(vim.fn.glob(backupdir .. filename .. "-*"), "\n")
+    if #backups > 20 then
+        vim.fn.delete(backups[1])
+    end
 end

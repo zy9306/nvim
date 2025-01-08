@@ -1,6 +1,6 @@
 local opts = {
-	noremap = true,
-	silent = true,
+    noremap = true,
+    silent = true,
 }
 
 vim.keymap.set("x", "p", '"_dP', opts)
