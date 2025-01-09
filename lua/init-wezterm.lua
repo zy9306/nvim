@@ -2,7 +2,7 @@ local function set_wezterm_tab_name()
     local root = find_project_root({ ".git" })
     if root then
         local project_name = vim.fn.fnamemodify(root, ":t")
-        local tab_title = "🍰 " .. project_name
+        local tab_title = "📝 " .. project_name
         vim.loop.spawn("wezterm", {
             args = { "cli", "set-tab-title", tab_title },
         }, function(code, signal)
@@ -19,7 +19,7 @@ local function create_wezterm_tab()
     local root = find_project_root({ ".git" })
     if root then
         local project_name = vim.fn.fnamemodify(root, ":t")
-        local tab_title = "🍬 " .. project_name
+        local tab_title = "💲 " .. project_name
         local stdout = vim.loop.new_pipe(false)
         local stderr = vim.loop.new_pipe(false)
 
