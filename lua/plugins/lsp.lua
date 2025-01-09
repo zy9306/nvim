@@ -82,11 +82,37 @@ return {
         event = "BufReadPre",
         config = function()
             require("goto-preview").setup({
-                default_mappings = true,
-                opacity = 40,
+                default_mappings = false,
+                opacity = 0,
                 focus_on_open = false,
                 dismiss_on_move = false,
+                post_open_hook = function(buffer, win)
+                    vim.keymap.set("n", "q", function()
+                        if vim.api.nvim_win_get_config(0).relative ~= "" then
+                            vim.cmd("q")
+                        else
+                            return
+                        end
+                    end, { buffer = buffer })
+
+                    vim.keymap.set("n", "<Esc>", function()
+                        if vim.api.nvim_win_is_valid(win) then
+                            vim.api.nvim_win_close(win, true)
+                        else
+                            return
+                        end
+                    end, { buffer = true })
+                end,
             })
+            vim.keymap.set("n", "gD", function()
+                require("goto-preview").goto_preview_definition()
+            end, { desc = "goto preview definition" })
+            vim.keymap.set("n", "gT", function()
+                require("goto-preview").goto_preview_type_definition()
+            end, { desc = "goto preview type definition" })
+            vim.keymap.set("n", "gI", function()
+                require("goto-preview").goto_preview_implementation()
+            end, { desc = "goto preview implementation" })
         end,
     },
 
