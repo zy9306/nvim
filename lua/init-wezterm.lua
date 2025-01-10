@@ -1,6 +1,6 @@
 local function set_wezterm_tab_name()
     local root = find_project_root({ ".git" })
-    if root then
+    if root and root ~= "." then
         local project_name = vim.fn.fnamemodify(root, ":t")
         local tab_title = "📝 " .. project_name
         vim.loop.spawn("wezterm", {
