@@ -5,19 +5,6 @@ return {
         event = "InsertEnter",
         config = true,
     },
-    -- use wezterm to handle terminal
-    -- {
-    -- 	"akinsho/toggleterm.nvim",
-    -- 	version = "*",
-    -- 	config = true,
-    -- 	config = function()
-    -- 		require("toggleterm").setup({
-    -- 			start_in_insert = true,
-    -- 		})
-    -- 		vim.keymap.set("n", "<C-t>", ":ToggleTerm direction=float<CR>", { noremap = true, silent = true })
-    -- 		vim.keymap.set("t", "<C-t>", "<C-\\><C-n>:ToggleTerm direction=float<CR>", { noremap = true, silent = true })
-    -- 	end,
-    -- },
     {
         "max397574/better-escape.nvim",
         config = function()

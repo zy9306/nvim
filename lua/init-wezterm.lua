@@ -102,4 +102,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
     callback = set_wezterm_tab_name,
 })
 
-vim.keymap.set("n", "<C-t>", ":CreateWeztermTab<cr>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-t>", ":CreateWeztermTab<cr>", { noremap = true, silent = true })
