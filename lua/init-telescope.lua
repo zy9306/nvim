@@ -34,33 +34,18 @@ vim.keymap.set(
     { desc = "Project" }
 )
 vim.keymap.set({ "n", "v" }, "<leader>ff", builtin.find_files, { desc = "Find Files" })
-vim.keymap.set({ "n", "v" }, "<leader>fG", global_search_current_word_or_selection, { desc = "Live Grep" })
-vim.keymap.set({ "n", "v" }, "<leader>G", global_search_current_word_or_selection, { desc = "Live Grep" })
 vim.keymap.set({ "n", "v" }, "<leader>S", global_search_current_word_or_selection, { desc = "Live Grep" })
-vim.keymap.set({ "n", "v" }, "<leader>fb", builtin.buffers, { desc = "Buffers" })
 vim.keymap.set({ "n", "v" }, "<leader>b", builtin.buffers, { desc = "Buffers" })
-vim.keymap.set({ "n", "v" }, "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
-vim.keymap.set(
-    { "n", "v" },
-    "<leader>fg",
-    buffer_search_current_word_or_selection,
-    { desc = "Current Buffer Fuzzy Find" }
-)
-
-vim.keymap.set(
-    { "n", "v" },
-    "<leader>g",
-    buffer_search_current_word_or_selection,
-    { desc = "Current Buffer Fuzzy Find" }
-)
-vim.keymap.set(
-    { "n", "v" },
-    "<leader>s",
-    buffer_search_current_word_or_selection,
-    { desc = "Current Buffer Fuzzy Find" }
-)
+vim.keymap.set({ "n", "v" }, "<leader>s", buffer_search_current_word_or_selection, { desc = "Current Buffer Find" })
 
 vim.keymap.set({ "n", "v" }, "<leader>fT", ':lua require("telescope-tabs").list_tabs()<cr>', { desc = "List Tabs" })
+
+vim.keymap.set(
+    { "n" },
+    "<leader>g",
+    ':lua require("telescope").extensions.aerial.aerial()<cr>',
+    { desc = "Aerial(Outline)" }
+)
 
 -- lsp integration
 vim.keymap.set(
