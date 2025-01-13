@@ -127,3 +127,16 @@ do
     -- 	callback = set_tab_name,
     -- })
 end
+
+do
+    vim.api.nvim_create_user_command("ToggleWrap", function()
+        vim.wo.wrap = not vim.wo.wrap
+        if vim.wo.wrap then
+            print("Wrap enabled")
+        else
+            print("Wrap disabled")
+        end
+    end, {})
+
+    vim.keymap.set("n", "<leader>$", ":ToggleWrap<CR>", { noremap = true, silent = true, desc = "toggle wrap" })
+end
