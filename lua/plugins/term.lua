@@ -26,7 +26,6 @@ return {
                 pattern = "term://*",
                 callback = function()
                     if vim.fn.mode() ~= "t" then
-                        print("Entering terminal mode")
                         local _, term = terms.identify()
                         if term then
                             term:set_mode(terms.mode.INSERT)
