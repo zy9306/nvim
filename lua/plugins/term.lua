@@ -8,7 +8,7 @@ return {
             require("toggleterm").setup({
                 size = function(term)
                     if term.direction == "horizontal" then
-                        return math.floor(vim.o.lines * 0.3)
+                        return math.floor(vim.o.lines * 0.4)
                     elseif term.direction == "vertical" then
                         return 50
                     end
