@@ -2,7 +2,7 @@ local start_time = vim.loop.hrtime()
 
 vim.o.updatetime = 500
 
-vim.o.background = "light"
+vim.o.background = "dark"
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
