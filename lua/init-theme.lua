@@ -112,3 +112,20 @@ do
 
     -- print(string.format("load theme cost: %.6fs", elapsed_time))
 end
+
+do
+    local function set_local_highlight()
+        if vim.o.background == "light" then
+            vim.cmd("highlight LocalHighlight guifg=#333333 guibg=#cccccc")
+        else
+            vim.cmd("highlight LocalHighlight guifg=#dcd7ba guibg=#2d4f67")
+        end
+    end
+
+    set_local_highlight()
+
+    vim.api.nvim_create_autocmd("OptionSet", {
+        pattern = "background",
+        callback = set_local_highlight,
+    })
+end

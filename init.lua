@@ -52,7 +52,7 @@ else
 
     require("init-neovide")
 
-    require("init-theme")
+    -- require("init-theme")
 
     require("init-keymap")
 
