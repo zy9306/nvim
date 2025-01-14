@@ -29,7 +29,12 @@ return {
             local installed_servers = require("mason-lspconfig").get_installed_servers()
             local required_servers = { "clangd", "rust_analyzer", "gopls", "pyright", "dartls" }
 
-            local servers = vim.tbl_extend("force", installed_servers, required_servers)
+            local servers = vim.deepcopy(installed_servers)
+            for _, server in ipairs(required_servers) do
+                if not vim.tbl_contains(installed_servers, server) then
+                    table.insert(servers, server)
+                end
+            end
 
             for _, lsp in ipairs(servers) do
                 lspconfig[lsp].setup({
