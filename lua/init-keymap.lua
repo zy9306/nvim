@@ -42,6 +42,11 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
+vim.keymap.set("t", "<C-Up>", "<C-\\><C-n>:resize -2<CR>", opts)
+vim.keymap.set("t", "<C-Down>", "<C-\\><C-n>:resize +2<CR>", opts)
+vim.keymap.set("t", "<C-Left>", "<C-\\><C-n>:vertical resize -2<CR>", opts)
+vim.keymap.set("t", "<C-Right>", "<C-\\><C-n>:vertical resize +2<CR>", opts)
+
 -- vim.keymap.set("n", "<C-k>", ":resize -2<CR>", opts)
 -- vim.keymap.set("n", "<C-j>", ":resize +2<CR>", opts)
 -- vim.keymap.set("n", "<C-h>", ":vertical resize -2<CR>", opts)
