@@ -41,6 +41,10 @@ return {
                 filters = {
                     dotfiles = false,
                     git_ignored = false,
+                    custom = {
+                        "__pycache__",
+                        ".DS_Store",
+                    },
                 },
                 actions = {
                     open_file = {

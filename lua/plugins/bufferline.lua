@@ -22,4 +22,27 @@ return {
             })
         end,
     },
+    -- {
+    --     "willothy/nvim-cokeline",
+    --     event = "BufReadPre",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-tree/nvim-web-devicons",
+    --     },
+    --     config = function()
+    --         require("cokeline").setup({
+    --             buffers = {
+    --                 new_buffers_position = "next",
+    --             },
+    --             default_hl = {
+    --                 bold = function(buffer)
+    --                     return buffer.is_focused
+    --                 end,
+    --                 italic = function(buffer)
+    --                     return buffer.is_focused
+    --                 end,
+    --             },
+    --         })
+    --     end,
+    -- },
 }
