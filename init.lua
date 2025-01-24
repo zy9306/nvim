@@ -4,6 +4,8 @@ vim.o.updatetime = 500
 
 vim.o.background = "dark"
 
+vim.o.laststatus = 3
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true

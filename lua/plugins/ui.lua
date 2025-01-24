@@ -8,4 +8,11 @@ return {
             require("dressing").setup({})
         end,
     },
+    {
+        "nvim-zh/colorful-winsep.nvim",
+        event = { "WinLeave" },
+        config = function()
+            require("colorful-winsep").setup({})
+        end,
+    },
 }
