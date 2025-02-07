@@ -12,9 +12,9 @@ return {
                     -- 背景透明度
                     winblend = 15,
                     mappings = {
-                        i = {
-                            ["<esc>"] = actions.close,
-                        },
+                        -- i = {
+                        --     ["<esc>"] = actions.close,
+                        -- },
                     },
                     layout_config = {
                         prompt_position = "top",
@@ -26,6 +26,11 @@ return {
                         ignore_current_buffer = true,
                         sort_mru = true,
                         sort_lastused = true,
+                        mappings = {
+                            i = {
+                                ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+                            },
+                        },
                     },
                     diagnostics = {
                         layout_config = {
