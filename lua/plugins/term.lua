@@ -10,7 +10,7 @@ return {
                     if term.direction == "horizontal" then
                         return math.floor(vim.o.lines * 0.4)
                     elseif term.direction == "vertical" then
-                        return 50
+                        return math.floor(vim.o.columns * 0.4)
                     end
                 end,
                 start_in_insert = true,
@@ -18,14 +18,21 @@ return {
             })
             local opts = { noremap = true, silent = true }
             -- vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-            vim.keymap.set("n", "<C-t>", ":ToggleTerm direction=horizontal<CR>", opts)
+            vim.keymap.set("n", "<C-t>", ":ToggleTerm<CR>", opts)
             vim.keymap.set(
                 "n",
                 "<leader><C-t>",
-                ":lua require('toggleterm.terminal').Terminal:new():toggle()<CR>",
+                ":lua require('toggleterm.terminal').Terminal:new({ direction = 'horizontal' }):toggle()<CR>",
                 opts
             )
-            vim.keymap.set("t", "<C-t>", "<C-\\><C-n>:ToggleTerm direction=horizontal<CR>", opts)
+            vim.keymap.set(
+                "n",
+                "<leader>v<C-t>",
+                ":lua require('toggleterm.terminal').Terminal:new({ direction = 'vertical' }):toggle()<CR>",
+                opts
+            )
+
+            vim.keymap.set("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
             vim.keymap.set("t", "<C-Up>", "<C-\\><C-n>:resize -2<CR>", opts)
             vim.keymap.set("t", "<C-Down>", "<C-\\><C-n>:resize +2<CR>", opts)
