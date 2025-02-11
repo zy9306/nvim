@@ -1,7 +1,7 @@
 return {
     {
         "yetone/avante.nvim",
-        event = "VeryLazy",
+        event = "BufReadPost",
         opts = {
             provider = "openai",
             -- provider = "litellm",
@@ -48,9 +48,27 @@ return {
         },
         config = function(_, opts)
             require("avante").setup(opts)
-            vim.keymap.set("n", "<leader>A", function()
-                require("avante").toggle()
-            end, { noremap = true, silent = true, desc = "toggle Avante" })
+            vim.keymap.set(
+                "n",
+                "<leader>A",
+                ":AvanteToggle<CR>",
+                { noremap = true, silent = true, desc = "toggle Avante" }
+            )
+        end,
+    },
+
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        event = "BufReadPost",
+        build = "make tiktoken",
+        config = function()
+            require("CopilotChat").setup()
+            vim.keymap.set(
+                "n",
+                "<leader>C",
+                ":CopilotChatToggle<CR>",
+                { noremap = true, silent = true, desc = "toggle CopilotChat" }
+            )
         end,
     },
 }
