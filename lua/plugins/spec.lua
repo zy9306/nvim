@@ -175,6 +175,13 @@ return {
             )
         end,
     },
+    {
+        "okuuva/auto-save.nvim",
+        event = "BufReadPost",
+        config = function()
+            require("auto-save").setup({})
+        end,
+    },
 
     {
         "folke/which-key.nvim",
