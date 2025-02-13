@@ -14,7 +14,7 @@ return {
                     end
                 end,
                 start_in_insert = true,
-                direction = "horizontal",
+                direction = "vertical",
             })
             local opts = { noremap = true, silent = true }
             -- vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
