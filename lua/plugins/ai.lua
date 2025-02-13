@@ -57,17 +57,78 @@ return {
         end,
     },
 
+    -- {
+    --     "CopilotC-Nvim/CopilotChat.nvim",
+    --     event = "BufReadPost",
+    --     build = "make tiktoken",
+    --     config = function()
+    --         require("CopilotChat").setup()
+    --         vim.keymap.set(
+    --             "n",
+    --             "<leader>C",
+    --             ":CopilotChatToggle<CR>",
+    --             { noremap = true, silent = true, desc = "toggle CopilotChat" }
+    --         )
+    --     end,
+    -- },
+
     {
-        "CopilotC-Nvim/CopilotChat.nvim",
-        event = "BufReadPost",
-        build = "make tiktoken",
+        "olimorris/codecompanion.nvim",
+        event = "BufEnter",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
         config = function()
-            require("CopilotChat").setup()
+            require("codecompanion").setup({
+                opts = {
+                    language = "Chinese",
+                },
+                adapters = {
+                    openai = function()
+                        return require("codecompanion.adapters").extend("openai", {
+                            schema = {
+                                model = {
+                                    default = "gpt-4o",
+                                },
+                            },
+                        })
+                    end,
+                },
+                strategies = {
+                    chat = {
+                        adapter = "openai",
+                        slash_commands = {
+                            ["buffer"] = {
+                                opts = {
+                                    provider = "telescope",
+                                },
+                            },
+                        },
+                    },
+                    inline = {
+                        adapter = "openai",
+                    },
+                },
+            })
             vim.keymap.set(
-                "n",
-                "<leader>C",
-                ":CopilotChatToggle<CR>",
-                { noremap = true, silent = true, desc = "toggle CopilotChat" }
+                { "n", "v" },
+                "<leader>cc",
+                ":CodeCompanionChat Toggle<CR>",
+                { noremap = true, silent = true, desc = "Open CodeCompanionChat" }
+            )
+
+            vim.keymap.set(
+                { "n", "v" },
+                "<leader>cC",
+                ":CodeCompanionChat<CR>",
+                { noremap = true, silent = true, desc = "Open CodeCompanionChat" }
+            )
+            vim.keymap.set(
+                { "n", "v" },
+                "<leader>ca",
+                ":CodeCompanionActions<CR>",
+                { noremap = true, silent = true, desc = "Open CodeCompanionActions" }
             )
         end,
     },
