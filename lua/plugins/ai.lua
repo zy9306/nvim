@@ -79,6 +79,9 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
         },
+        init = function()
+            require("plugins.codecompanion.fidget-spinner"):init()
+        end,
         config = function()
             require("codecompanion").setup({
                 opts = {
