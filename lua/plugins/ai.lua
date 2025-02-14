@@ -115,7 +115,7 @@ return {
                 { "n", "v" },
                 "<leader>cc",
                 ":CodeCompanionChat Toggle<CR>",
-                { noremap = true, silent = true, desc = "Open CodeCompanionChat" }
+                { noremap = true, silent = true, desc = "Toggle CodeCompanionChat" }
             )
 
             vim.keymap.set(
