@@ -15,4 +15,12 @@ return {
             require("colorful-winsep").setup({})
         end,
     },
+
+    {
+        "j-hui/fidget.nvim",
+        event = "BufEnter",
+        config = function()
+            require("fidget").setup({})
+        end,
+    },
 }
