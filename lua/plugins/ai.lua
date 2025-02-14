@@ -108,6 +108,11 @@ return {
                                 },
                             },
                         },
+                        keymaps = {
+                            close = {
+                                modes = { n = "<Esc>", i = "<Esc>" },
+                            },
+                        },
                     },
                     inline = {
                         adapter = "openai",
