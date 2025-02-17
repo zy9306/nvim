@@ -10,7 +10,7 @@ return {
                     if term.direction == "horizontal" then
                         return math.floor(vim.o.lines * 0.4)
                     elseif term.direction == "vertical" then
-                        return math.floor(vim.o.columns * 0.4)
+                        return math.floor(vim.o.columns * 0.3)
                     end
                 end,
                 start_in_insert = true,
@@ -74,6 +74,19 @@ return {
                 callback = function()
                     vim.keymap.set("n", "q", "<Cmd>startinsert<CR>", { buffer = true, noremap = true, silent = true })
                 end,
+            })
+        end,
+    },
+
+    {
+        "willothy/flatten.nvim",
+        lazy = false,
+        priority = 1001,
+        config = function()
+            require("flatten").setup({
+                window = {
+                    open = "alternate",
+                },
             })
         end,
     },
