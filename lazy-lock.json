@@ -43,6 +43,7 @@
   "mason.nvim": { "branch": "main", "commit": "fc98833b6da5de5a9c5b1446ac541577059555be" },
   "move.nvim": { "branch": "main", "commit": "cccbd4ea9049ca5f99f025ffaddb7392359c7d6a" },
   "multicursor.nvim": { "branch": "main", "commit": "17942364aec9c2caeec5fe29ee5f229b2f00c4b1" },
+  "neo-tree.nvim": { "branch": "main", "commit": "0ead8aaa301347b3555a1453ba3d36231cfff749" },
   "neogit": { "branch": "master", "commit": "63124cf520ff24d09deb3b850e053908ab0fc66a" },
   "neotest": { "branch": "master", "commit": "d66cf4e05a116957f0d3a7755a24291c7d1e1f72" },
   "neotest-golang": { "branch": "main", "commit": "44863be3ba2d2397dfcfc0b649afb266532583f4" },
