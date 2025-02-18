@@ -8,9 +8,16 @@ return {
             "MunifTanjim/nui.nvim",
         },
         config = function()
-            vim.keymap.set("n", "<leader>fn", ":Neotree toggle=true<cr>", { desc = "NvimTreeToggle" })
+            vim.keymap.set(
+                "n",
+                "<leader>fb",
+                ":Neotree source=buffers toggle=true<cr>",
+                { desc = "Toggle Neotree buffers" }
+            )
+            vim.keymap.set("n", "<leader>fn", ":Neotree toggle=true<cr>", { desc = "Toggle Neotree filesystem" })
             require("neo-tree").setup({
                 window = {
+                    width = 35,
                     mappings = {
                         ["e"] = function()
                             vim.api.nvim_exec("Neotree focus filesystem left", true)
