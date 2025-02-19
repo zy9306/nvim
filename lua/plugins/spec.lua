@@ -193,6 +193,14 @@ return {
     },
 
     {
+        "mbbill/undotree",
+        event = "BufEnter",
+        config = function()
+            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle undotree" })
+        end,
+    },
+
+    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = {},

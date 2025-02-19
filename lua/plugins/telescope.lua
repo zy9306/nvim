@@ -111,26 +111,26 @@ return {
             require("telescope").load_extension("fzf")
         end,
     },
-    {
-        "debugloop/telescope-undo.nvim",
-        opts = {
-            extensions = {
-                undo = {
-                    use_delta = true,
-                    use_custom_command = nil,
-                    side_by_side = false,
-                    vim_diff_opts = {
-                        ctxlen = vim.o.scrolloff,
-                    },
-                },
-            },
-        },
-        config = function(_, opts)
-            require("telescope").setup(opts)
-            require("telescope").load_extension("undo")
-            vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
-        end,
-    },
+    -- {
+    --     "debugloop/telescope-undo.nvim",
+    --     opts = {
+    --         extensions = {
+    --             undo = {
+    --                 use_delta = true,
+    --                 use_custom_command = nil,
+    --                 side_by_side = false,
+    --                 vim_diff_opts = {
+    --                     ctxlen = vim.o.scrolloff,
+    --                 },
+    --             },
+    --         },
+    --     },
+    --     config = function(_, opts)
+    --         require("telescope").setup(opts)
+    --         require("telescope").load_extension("undo")
+    --         vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+    --     end,
+    -- },
 
     {
         "jonarrien/telescope-cmdline.nvim",
