@@ -124,14 +124,6 @@ do
     vim.keymap.set("n", "<leader>$", ":ToggleWrap<CR>", { noremap = true, silent = true, desc = "toggle wrap" })
 end
 
--- vim.api.nvim_create_autocmd("BufEnter", {
---     callback = function()
---         if vim.bo.buftype == "" then
---             vim.cmd("normal! zz")
---         end
---     end,
--- })
-
 function get_pytest_path()
     local ts_utils = require("nvim-treesitter.ts_utils")
     local parser = vim.treesitter.get_parser(0, "python")
