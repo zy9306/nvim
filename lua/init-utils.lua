@@ -131,3 +131,78 @@ end
 --         end
 --     end,
 -- })
+
+function get_pytest_path()
+    local ts_utils = require("nvim-treesitter.ts_utils")
+    local parser = vim.treesitter.get_parser(0, "python")
+    local tree = parser:parse()[1]
+    local root = tree:root()
+
+    local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
+
+    local node_at_point = ts_utils.get_node_at_cursor()
+    while node_at_point ~= nil and node_at_point:type() ~= "function_definition" do
+        node_at_point = node_at_point:parent()
+    end
+
+    if node_at_point then
+        local function_name_node = node_at_point:field("name")[1]
+        local function_name = vim.treesitter.get_node_text(function_name_node, 0)
+
+        local filepath = vim.api.nvim_buf_get_name(0)
+        local project_root = vim.loop.cwd()
+        local relative_path = vim.fn.fnamemodify(filepath, ":." .. project_root .. ":.")
+
+        if function_name:match("^test_") then
+            local pytest_path = string.format("%s::%s", relative_path, function_name)
+            print(pytest_path)
+            vim.fn.setreg("+", pytest_path)
+            return pytest_path
+        else
+            print("No test function found under the cursor.")
+            return nil
+        end
+    else
+        print("No function found at the current cursor position.")
+        return nil
+    end
+end
+
+vim.api.nvim_create_user_command("PytestPath", get_pytest_path, {})
+
+-- golang unit test
+function get_go_test_path()
+    local parser = vim.treesitter.get_parser(0, "go")
+    local tree = parser:parse()[1]
+    local root = tree:root()
+
+    local node_at_point = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+    while node_at_point ~= nil and node_at_point:type() ~= "function_declaration" do
+        node_at_point = node_at_point:parent()
+    end
+
+    if node_at_point then
+        local function_name_node = node_at_point:child(1)
+        local function_name = vim.treesitter.get_node_text(function_name_node, 0)
+
+        if function_name:match("^Test") then
+            local filepath = vim.fn.expand("%:p")
+            local project_root = vim.loop.cwd()
+            local relative_path = filepath:sub(#project_root + 2)
+            local relative_dir = vim.fn.fnamemodify(relative_path, ":h")
+
+            local go_test_cmd = string.format("go test -v ./%s -test.run='^\\Q%s\\E$'", relative_dir, function_name)
+            print(go_test_cmd)
+            vim.fn.setreg("+", go_test_cmd)
+            return go_test_cmd
+        else
+            print("No test function found under the cursor.")
+            return nil
+        end
+    else
+        print("No function found at the current cursor position.")
+        return nil
+    end
+end
+
+vim.api.nvim_create_user_command("GoTestPath", get_go_test_path, {})
