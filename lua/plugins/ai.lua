@@ -97,10 +97,19 @@ return {
                             },
                         })
                     end,
+                    copilot = function()
+                        return require("codecompanion.adapters").extend("copilot", {
+                            schema = {
+                                model = {
+                                    default = "o1-2024-12-17",
+                                },
+                            },
+                        })
+                    end,
                 },
                 strategies = {
                     chat = {
-                        adapter = "openai",
+                        adapter = "copilot",
                         slash_commands = {
                             ["buffer"] = {
                                 opts = {
