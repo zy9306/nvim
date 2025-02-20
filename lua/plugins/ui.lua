@@ -23,4 +23,6 @@ return {
             require("fidget").setup({})
         end,
     },
+
+    { "danilamihailov/beacon.nvim" },
 }
