@@ -28,14 +28,20 @@ return {
                         ["G"] = function()
                             vim.api.nvim_exec("Neotree focus git_status left", true)
                         end,
-                        ["bd"] = "noop",
-                        ["d"] = "buffer_delete",
-                        ["D"] = "delete",
+                    },
+                },
+                filesystem = {
+                    window = {
+                        mappings = {
+                            ["bd"] = "noop",
+                            ["D"] = "delete",
+                        },
                     },
                 },
                 buffers = {
                     mappings = {
                         ["bd"] = "noop",
+                        ["d"] = "buffer_delete",
                     },
                 },
             })
