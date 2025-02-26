@@ -92,7 +92,7 @@ return {
                         return require("codecompanion.adapters").extend("openai", {
                             schema = {
                                 model = {
-                                    default = "gpt-4o",
+                                    default = "o1-2024-12-17",
                                 },
                             },
                         })
@@ -109,7 +109,7 @@ return {
                 },
                 strategies = {
                     chat = {
-                        adapter = "copilot",
+                        adapter = "openai",
                         slash_commands = {
                             ["buffer"] = {
                                 opts = {
