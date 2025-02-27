@@ -9,7 +9,9 @@ return {
                 drag_and_drop = {
                     insert_mode = true,
                 },
-                use_absolute_path = true,
+                use_absolute_path = false,
+				relative_to_current_file = true,
+				copy_images= true,
             },
         },
     },
