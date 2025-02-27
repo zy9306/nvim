@@ -7,11 +7,18 @@ return {
     --             enabled = false,
     --         },
     --     },
-    --     ft = { "Avante" },
+    --     ft = { "markdown", "Avante" },
     -- },
     {
         "OXY2DEV/markview.nvim",
         lazy = false,
         ft = { "markdown", "Avante" },
+        config = function()
+            require("markview").setup({
+                preview = {
+                    enable = false,
+                },
+            })
+        end,
     },
 }
