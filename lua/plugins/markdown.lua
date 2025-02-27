@@ -1,12 +1,17 @@
 return {
+    -- {
+    --     "MeanderingProgrammer/render-markdown.nvim",
+    --     opts = {
+    --         file_types = { "markdown", "Avante" },
+    --         heading = {
+    --             enabled = false,
+    --         },
+    --     },
+    --     ft = { "Avante" },
+    -- },
     {
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-            file_types = { "markdown", "Avante" },
-            heading = {
-                enabled = false,
-            },
-        },
+        "OXY2DEV/markview.nvim",
+        lazy = false,
         ft = { "markdown", "Avante" },
     },
 }
