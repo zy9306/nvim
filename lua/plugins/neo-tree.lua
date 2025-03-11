@@ -1,3 +1,15 @@
+function ensure_normal_mode_for_neo_tree()
+    local buftype = vim.api.nvim_buf_get_option(0, "filetype")
+    if buftype == "neo-tree" then
+        vim.cmd("stopinsert")
+    end
+end
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*",
+    callback = ensure_normal_mode_for_neo_tree,
+})
+
 return {
     {
         "nvim-neo-tree/neo-tree.nvim",
