@@ -1,7 +1,7 @@
 return {
     {
         "yetone/avante.nvim",
-        event = "BufReadPost",
+        event = "BufEnter",
         opts = {
             provider = "openai",
             -- provider = "litellm",
