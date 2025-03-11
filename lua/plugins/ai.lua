@@ -68,7 +68,7 @@ return {
                         return require("codecompanion.adapters").extend("openai", {
                             schema = {
                                 model = {
-                                    default = "o1-2024-12-17",
+                                    default = "gpt-4o",
                                 },
                             },
                         })
