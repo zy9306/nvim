@@ -198,3 +198,15 @@ function get_go_test_path()
 end
 
 vim.api.nvim_create_user_command("GoTestPath", get_go_test_path, {})
+
+-- Exit insert mode when entering a window
+function exit_insert_mode()
+    if vim.fn.mode() == "i" then
+        vim.cmd("stopinsert")
+    end
+end
+
+vim.api.nvim_create_autocmd("WinEnter", {
+    callback = exit_insert_mode,
+    desc = "Exit insert mode when entering a window if it's in insert mode",
+})
