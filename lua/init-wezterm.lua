@@ -94,12 +94,10 @@ local function create_wezterm_tab()
     end
 end
 
-vim.api.nvim_create_user_command("CreateWeztermTab", function()
-    create_wezterm_tab()
-end, {})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = set_wezterm_tab_name,
-})
-
--- vim.keymap.set("n", "<C-t>", ":CreateWeztermTab<cr>", { noremap = true, silent = true })
+-- vim.api.nvim_create_user_command("CreateWeztermTab", function()
+--     create_wezterm_tab()
+-- end, {})
+--
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     callback = set_wezterm_tab_name,
+-- })
