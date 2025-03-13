@@ -17,22 +17,31 @@ return {
                 direction = "vertical",
             })
             local opts = { noremap = true, silent = true }
-            -- vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+
+            -- command start
+            vim.api.nvim_create_user_command("CreateTermHorizontal", function()
+                require("toggleterm.terminal").Terminal:new({ direction = "horizontal" }):toggle()
+            end, {})
+
+            vim.api.nvim_create_user_command("CreateTermVertical", function()
+                require("toggleterm.terminal").Terminal:new({ direction = "vertical" }):toggle()
+            end, {})
+
+            vim.api.nvim_create_user_command("ToggleTermHorizontal", function()
+                vim.cmd("ToggleTerm direction=horizontal")
+            end, {})
+
+            vim.api.nvim_create_user_command("ToggleTermVertical", function()
+                vim.cmd("ToggleTerm direction=vertical")
+            end, {})
+            -- command end
+
             vim.keymap.set("n", "<C-t>", ":ToggleTerm<CR>", opts)
-            vim.keymap.set(
-                "n",
-                "<leader><C-t>",
-                ":lua require('toggleterm.terminal').Terminal:new({ direction = 'horizontal' }):toggle()<CR>",
-                opts
-            )
-            vim.keymap.set(
-                "n",
-                "<leader>v<C-t>",
-                ":lua require('toggleterm.terminal').Terminal:new({ direction = 'vertical' }):toggle()<CR>",
-                opts
-            )
+
+            vim.keymap.set("n", "<F5>", ":ToggleTerm direction=float<CR>", opts)
 
             vim.keymap.set("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
+            vim.keymap.set("t", "<F5>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
             vim.keymap.set("t", "<C-Up>", "<C-\\><C-n>:resize -2<CR>", opts)
             vim.keymap.set("t", "<C-Down>", "<C-\\><C-n>:resize +2<CR>", opts)
@@ -43,6 +52,7 @@ return {
             -- vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
             -- vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
             -- vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
+
             vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 
             local terms = require("toggleterm.terminal")
