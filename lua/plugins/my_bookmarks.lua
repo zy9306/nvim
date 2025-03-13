@@ -22,6 +22,8 @@ local function load_bookmarks_from_file()
     end
 end
 
+load_bookmarks_from_file()
+
 local function get_project_name()
     local handle = io.popen("git rev-parse --show-toplevel 2>/dev/null")
     local result = handle:read("*a")
@@ -70,15 +72,16 @@ function _G.show_bookmarks()
                 table.insert(all_bookmarks, {
                     display = i
                         .. ": "
-                        .. " Project: "
+                        .. "["
                         .. mark.project_name
+                        .. "]"
                         .. " - "
-                        .. mark.relative_path
+                        .. mark.description
                         .. " - "
                         .. " Line: "
                         .. mark.line
                         .. " - "
-                        .. mark.description,
+                        .. mark.relative_path,
                     mark = mark,
                 })
             end
@@ -123,5 +126,14 @@ vim.api.nvim_create_user_command("ShowBookmarks", _G.show_bookmarks, {})
 vim.api.nvim_create_user_command("OpenBookmarksFile", function()
     vim.cmd("edit " .. bookmarks_file)
 end, {})
+
+vim.keymap.set({ "n" }, "<leader>ma", ":AddBookmark<CR>", { noremap = true, silent = true, desc = "Add bookmark" })
+vim.keymap.set({ "n" }, "<leader>mm", ":ShowBookmarks<CR>", { noremap = true, silent = true, desc = "Show bookmarks" })
+vim.keymap.set(
+    "n",
+    "<leader>me",
+    ":OpenBookmarksFile<CR>",
+    { noremap = true, silent = true, desc = "open bookmarks file" }
+)
 
 return {}

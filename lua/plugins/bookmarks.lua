@@ -20,22 +20,22 @@ return {
     --         })
     --     end,
     -- },
-    {
-        "EvWilson/spelunk.nvim",
-        event = "BufReadPost",
-        config = function()
-            require("spelunk").setup({
-                base_mappings = {
-                    toggle = "<leader>mt",
-                    add = "<leader>ma",
-                    next_bookmark = "<leader>mn",
-                    prev_bookmark = "<leader>mp",
-                    search_bookmarks = "<leader>mf",
-                    search_current_bookmarks = "<leader>mc",
-                    search_stacks = "<leader>ms",
-                },
-                enable_persist = true,
-            })
-        end,
-    },
+    -- {
+    --     "EvWilson/spelunk.nvim",
+    --     event = "BufReadPost",
+    --     config = function()
+    --         require("spelunk").setup({
+    --             base_mappings = {
+    --                 toggle = "<leader>mt",
+    --                 add = "<leader>ma",
+    --                 next_bookmark = "<leader>mn",
+    --                 prev_bookmark = "<leader>mp",
+    --                 search_bookmarks = "<leader>mf",
+    --                 search_current_bookmarks = "<leader>mc",
+    --                 search_stacks = "<leader>ms",
+    --             },
+    --             enable_persist = true,
+    --         })
+    --     end,
+    -- },
 }
