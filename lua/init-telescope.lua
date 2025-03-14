@@ -25,14 +25,6 @@ function buffer_search_current_word_or_selection()
     extensions.live_grep_args.live_grep_args({ default_text = search_text, search_dirs = { vim.fn.expand("%:p") } })
 end
 
--- vim.keymap.set({ "n", "v" }, "<leader>x", builtin.commands, { desc = "Commands" })
-
-vim.keymap.set(
-    { "n", "v" },
-    "<leader>fP",
-    ':lua require("telescope").extensions.projects.projects{}<cr>',
-    { desc = "Project" }
-)
 -- use snack
 -- vim.keymap.set({ "n", "v" }, "<leader>ff", builtin.find_files, { desc = "Find Files" })
 -- use snack

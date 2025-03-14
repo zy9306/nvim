@@ -8,8 +8,14 @@ return {
             input = { enabled = true },
             picker = { enabled = true },
         },
-        config = function()
+        config = function(_, opts)
+            require("snacks").setup(opts)
+
             vim.keymap.set({ "n" }, "<leader><leader>", function()
+                Snacks.picker.resume()
+            end, { desc = "snacks resume" })
+
+            vim.keymap.set({ "n" }, "<leader>r", function()
                 Snacks.picker.smart()
             end, { desc = "snacks smart find files" })
 
@@ -39,8 +45,17 @@ return {
             end, { desc = "snacks grep" })
 
             vim.keymap.set({ "n", "v" }, "<leader>s", function()
-                Snacks.picker.grep_buffers()
-            end, { desc = "snacks grep buffers" })
+                Snacks.picker.lines({
+                    layout = {
+                        preview = false,
+                        preset = "select",
+                    },
+                })
+            end, { desc = "snacks grep buffer" })
+
+            vim.keymap.set({ "n" }, "<leader>fP", function()
+                Snacks.picker.projects()
+            end, { desc = "snacks projects" })
         end,
     },
 }
