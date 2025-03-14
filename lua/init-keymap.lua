@@ -7,7 +7,7 @@ vim.keymap.set("n", "<C-I>", "<C-I>", opts)
 
 vim.keymap.set("x", "p", '"_dP', opts)
 
-vim.keymap.set({ "n", "v" }, "<leader><Space>", "zz", { noremap = true, silent = true })
+-- vim.keymap.set({ "n", "v" }, "<leader><Space>", "zz", { noremap = true, silent = true })
 
 vim.keymap.set({ "i" }, "<C-B>", "<Left>", opts)
 vim.keymap.set({ "i" }, "<C-F>", "<Right>", opts)

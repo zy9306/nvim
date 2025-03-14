@@ -33,10 +33,14 @@ vim.keymap.set(
     ':lua require("telescope").extensions.projects.projects{}<cr>',
     { desc = "Project" }
 )
-vim.keymap.set({ "n", "v" }, "<leader>ff", builtin.find_files, { desc = "Find Files" })
-vim.keymap.set({ "n", "v" }, "<leader>S", global_search_current_word_or_selection, { desc = "Live Grep" })
-vim.keymap.set({ "n", "v" }, "<leader>b", builtin.buffers, { desc = "Buffers" })
-vim.keymap.set({ "n", "v" }, "<leader>s", buffer_search_current_word_or_selection, { desc = "Current Buffer Find" })
+-- use snack
+-- vim.keymap.set({ "n", "v" }, "<leader>ff", builtin.find_files, { desc = "Find Files" })
+-- use snack
+-- vim.keymap.set({ "n", "v" }, "<leader>S", global_search_current_word_or_selection, { desc = "Live Grep" })
+-- use snack
+-- vim.keymap.set({ "n", "v" }, "<leader>b", builtin.buffers, { desc = "Buffers" })
+-- use snack
+-- vim.keymap.set({ "n", "v" }, "<leader>s", buffer_search_current_word_or_selection, { desc = "Current Buffer Find" })
 
 vim.keymap.set({ "n", "v" }, "<leader>fT", ':lua require("telescope-tabs").list_tabs()<cr>', { desc = "List Tabs" })
 
