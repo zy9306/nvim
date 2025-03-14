@@ -62,22 +62,6 @@ return {
         end,
     },
     {
-        "nvim-telescope/telescope-frecency.nvim",
-        opts = {
-            extensions = {
-                frecency = {
-                    -- TODO: https://github.com/nvim-telescope/telescope-frecency.nvim/issues/270
-                    db_safe_mode = false,
-                },
-            },
-        },
-        config = function(_, opts)
-            require("telescope").setup(opts)
-            require("telescope").load_extension("frecency")
-            vim.keymap.set("n", "<leader>fr", ":Telescope frecency<cr>", { desc = "Frecency" })
-        end,
-    },
-    {
         "nvim-telescope/telescope-file-browser.nvim",
         opts = {
             extensions = {
@@ -111,26 +95,6 @@ return {
             require("telescope").load_extension("fzf")
         end,
     },
-    -- {
-    --     "debugloop/telescope-undo.nvim",
-    --     opts = {
-    --         extensions = {
-    --             undo = {
-    --                 use_delta = true,
-    --                 use_custom_command = nil,
-    --                 side_by_side = false,
-    --                 vim_diff_opts = {
-    --                     ctxlen = vim.o.scrolloff,
-    --                 },
-    --             },
-    --         },
-    --     },
-    --     config = function(_, opts)
-    --         require("telescope").setup(opts)
-    --         require("telescope").load_extension("undo")
-    --         vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
-    --     end,
-    -- },
 
     {
         "jonarrien/telescope-cmdline.nvim",
@@ -155,20 +119,4 @@ return {
             })
         end,
     },
-
-    -- {
-    -- 	"nvim-telescope/telescope-ui-select.nvim",
-    -- 	event = "BufEnter",
-    -- 	opts = {
-    -- 		extensions = {
-    -- 			["ui-select"] = {
-    -- 				require("telescope.themes").get_dropdown({}),
-    -- 			},
-    -- 		},
-    -- 	},
-    -- 	config = function(_, opts)
-    -- 		require("telescope").setup(opts)
-    -- 		require("telescope").load_extension("ui-select")
-    -- 	end,
-    -- },
 }

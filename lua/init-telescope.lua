@@ -25,14 +25,6 @@ function buffer_search_current_word_or_selection()
     extensions.live_grep_args.live_grep_args({ default_text = search_text, search_dirs = { vim.fn.expand("%:p") } })
 end
 
--- vim.keymap.set({ "n", "v" }, "<leader>x", builtin.commands, { desc = "Commands" })
-
-vim.keymap.set(
-    { "n", "v" },
-    "<leader>fP",
-    ':lua require("telescope").extensions.projects.projects{}<cr>',
-    { desc = "Project" }
-)
 -- use snack
 -- vim.keymap.set({ "n", "v" }, "<leader>ff", builtin.find_files, { desc = "Find Files" })
 -- use snack
@@ -51,34 +43,29 @@ vim.keymap.set(
     { desc = "Aerial(Outline)" }
 )
 
+-- use snack
 -- lsp integration
-vim.keymap.set(
-    "n",
-    "<leader>lr",
-    "<cmd>Telescope lsp_references<CR>",
-    { noremap = true, silent = true, desc = "LSP References" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>ld",
-    "<cmd>Telescope lsp_definitions<CR>",
-    { noremap = true, silent = true, desc = "LSP Definitions" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>li",
-    "<cmd>Telescope lsp_implementations<CR>",
-    { noremap = true, silent = true, desc = "LSP Implementations" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>ls",
-    "<cmd>Telescope lsp_document_symbols<CR>",
-    { noremap = true, silent = true, desc = "LSP Document Symbols" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>la",
-    ":lua vim.lsp.buf.code_action()<CR>",
-    { noremap = true, silent = true, desc = "LSP Code Action" }
-)
+-- vim.keymap.set(
+--     "n",
+--     "<leader>lr",
+--     "<cmd>Telescope lsp_references<CR>",
+--     { noremap = true, silent = true, desc = "LSP References" }
+-- )
+-- vim.keymap.set(
+--     "n",
+--     "<leader>ld",
+--     "<cmd>Telescope lsp_definitions<CR>",
+--     { noremap = true, silent = true, desc = "LSP Definitions" }
+-- )
+-- vim.keymap.set(
+--     "n",
+--     "<leader>li",
+--     "<cmd>Telescope lsp_implementations<CR>",
+--     { noremap = true, silent = true, desc = "LSP Implementations" }
+-- )
+-- vim.keymap.set(
+--     "n",
+--     "<leader>ls",
+--     "<cmd>Telescope lsp_document_symbols<CR>",
+--     { noremap = true, silent = true, desc = "LSP Document Symbols" }
+-- )

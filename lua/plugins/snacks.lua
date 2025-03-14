@@ -8,8 +8,14 @@ return {
             input = { enabled = true },
             picker = { enabled = true },
         },
-        config = function()
+        config = function(_, opts)
+            require("snacks").setup(opts)
+
             vim.keymap.set({ "n" }, "<leader><leader>", function()
+                Snacks.picker.resume()
+            end, { desc = "snacks resume" })
+
+            vim.keymap.set({ "n" }, "<leader>r", function()
                 Snacks.picker.smart()
             end, { desc = "snacks smart find files" })
 
@@ -39,8 +45,41 @@ return {
             end, { desc = "snacks grep" })
 
             vim.keymap.set({ "n", "v" }, "<leader>s", function()
-                Snacks.picker.grep_buffers()
-            end, { desc = "snacks grep buffers" })
+                Snacks.picker.lines({
+                    layout = {
+                        -- preview = false,
+                        preset = "select",
+                    },
+                })
+            end, { desc = "snacks grep buffer" })
+
+            vim.keymap.set({ "n" }, "<leader>fP", function()
+                Snacks.picker.projects()
+            end, { desc = "snacks projects" })
+
+            -- lsp start
+            vim.keymap.set({ "n" }, "<leader>ld", function()
+                Snacks.picker.lsp_definitions()
+            end, { desc = "Goto Definition" })
+            vim.keymap.set({ "n" }, "<leader>lD", function()
+                Snacks.picker.lsp_declarations()
+            end, { desc = "Goto Declaration" })
+            vim.keymap.set({ "n" }, "<leader>lr", function()
+                Snacks.picker.lsp_references()
+            end, { desc = "References" })
+            vim.keymap.set({ "n" }, "<leader>li", function()
+                Snacks.picker.lsp_implementations()
+            end, { desc = "Goto Implementation" })
+            vim.keymap.set({ "n" }, "<leader>lt", function()
+                Snacks.picker.lsp_type_definitions()
+            end, { desc = "Goto Type Definition" })
+            vim.keymap.set(
+                "n",
+                "<leader>la",
+                ":lua vim.lsp.buf.code_action()<CR>",
+                { noremap = true, silent = true, desc = "LSP Code Action" }
+            )
+            -- lsp end
         end,
     },
 }
