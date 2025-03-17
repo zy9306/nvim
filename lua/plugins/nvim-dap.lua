@@ -6,25 +6,75 @@ return {
             local dap = require("dap")
             local dap_widgets = require("dap.ui.widgets")
 
-            vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "toggle [d]ebug [b]reakpoint" })
-            vim.keymap.set("n", "<leader>dB", function()
+            -- create user command start
+            vim.api.nvim_create_user_command("Daptogglebreakpoint", function()
+                dap.toggle_breakpoint()
+            end, { desc = "Toggle debug breakpoint" })
+
+            vim.api.nvim_create_user_command("Dapsetbreakpoint", function()
                 dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-            end, { desc = "[d]ebug [B]reakpoint" })
-            vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "[d]ebug [c]ontinue (start here)" })
-            vim.keymap.set("n", "<leader>dC", dap.run_to_cursor, { desc = "[d]ebug [C]ursor" })
-            vim.keymap.set("n", "<leader>dg", dap.goto_, { desc = "[d]ebug [g]o to line" })
-            vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "[d]ebug step [o]ver" })
-            vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "[d]ebug step [O]ut" })
-            vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "[d]ebug [i]nto" })
-            vim.keymap.set("n", "<leader>dj", dap.down, { desc = "[d]ebug [j]ump down" })
-            vim.keymap.set("n", "<leader>dk", dap.up, { desc = "[d]ebug [k]ump up" })
-            vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "[d]ebug [l]ast" })
-            vim.keymap.set("n", "<leader>dp", dap.pause, { desc = "[d]ebug [p]ause" })
-            vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "[d]ebug [r]epl" })
-            vim.keymap.set("n", "<leader>dR", dap.clear_breakpoints, { desc = "[d]ebug [R]emove breakpoints" })
-            vim.keymap.set("n", "<leader>ds", dap.session, { desc = "[d]ebug [s]ession" })
-            vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "[d]ebug [t]erminate" })
-            vim.keymap.set("n", "<leader>dw", dap_widgets.hover, { desc = "[d]ebug [w]idgets" })
+            end, { desc = "Set debug breakpoint with condition" })
+
+            vim.api.nvim_create_user_command("Dapcontinue", function()
+                dap.continue()
+            end, { desc = "Continue debugging" })
+
+            vim.api.nvim_create_user_command("Dapruntocursor", function()
+                dap.run_to_cursor()
+            end, { desc = "Run to cursor" })
+
+            vim.api.nvim_create_user_command("Dapgoto", function()
+                dap.goto_()
+            end, { desc = "Go to line" })
+
+            vim.api.nvim_create_user_command("Dapstepover", function()
+                dap.step_over()
+            end, { desc = "Step over" })
+
+            vim.api.nvim_create_user_command("Dapstepout", function()
+                dap.step_out()
+            end, { desc = "Step out" })
+
+            vim.api.nvim_create_user_command("Dapstepinto", function()
+                dap.step_into()
+            end, { desc = "Step into" })
+
+            vim.api.nvim_create_user_command("Dapdown", function()
+                dap.down()
+            end, { desc = "Jump down" })
+
+            vim.api.nvim_create_user_command("Dapup", function()
+                dap.up()
+            end, { desc = "Jump up" })
+
+            vim.api.nvim_create_user_command("Daprunlast", function()
+                dap.run_last()
+            end, { desc = "Run last" })
+
+            vim.api.nvim_create_user_command("Dappause", function()
+                dap.pause()
+            end, { desc = "Pause debugging" })
+
+            vim.api.nvim_create_user_command("Daprepltoggle", function()
+                dap.repl.toggle()
+            end, { desc = "Toggle REPL" })
+
+            vim.api.nvim_create_user_command("Dapclearbreakpoints", function()
+                dap.clear_breakpoints()
+            end, { desc = "Clear all breakpoints" })
+
+            vim.api.nvim_create_user_command("Dapsession", function()
+                dap.session()
+            end, { desc = "Show session" })
+
+            vim.api.nvim_create_user_command("Dapterminate", function()
+                dap.terminate()
+            end, { desc = "Terminate debugging" })
+
+            vim.api.nvim_create_user_command("Dapwidgetshover", function()
+                dap_widgets.hover()
+            end, { desc = "Show widgets" })
+            -- create user command end
         end,
     },
 
@@ -51,24 +101,18 @@ return {
             dap.listeners.before.event_exited["dapui_config"] = function()
                 dapui.close({})
             end
+
+            -- create user command start
+            vim.api.nvim_create_user_command("Dapuitoggle", function()
+                require("dapui").toggle({})
+            end, { desc = "Toggle dap ui" })
+            vim.api.nvim_create_user_command("Dapuieval", function()
+                require("dapui").eval()
+            end, { desc = "Dap ui eval" })
+            -- create user command end
         end,
-        keys = {
-            {
-                "<leader>du",
-                function()
-                    require("dapui").toggle({})
-                end,
-                desc = "[d]ap [u]i",
-            },
-            {
-                "<leader>de",
-                function()
-                    require("dapui").eval()
-                end,
-                desc = "[d]ap [e]val",
-            },
-        },
     },
+
     {
         "leoluz/nvim-dap-go",
         config = function()
