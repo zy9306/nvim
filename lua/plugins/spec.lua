@@ -184,13 +184,6 @@ return {
             )
         end,
     },
-    {
-        "okuuva/auto-save.nvim",
-        event = "BufReadPost",
-        config = function()
-            require("auto-save").setup({})
-        end,
-    },
 
     {
         "mbbill/undotree",
