@@ -5,7 +5,7 @@ function auto_save.save()
     local buf_name = vim.api.nvim_buf_get_name(buf)
     if buf_name ~= "" and vim.bo[buf].modified then
         vim.cmd("write")
-        require("conform").format({})
+        require("conform").format({ async = true })
     end
 end
 
