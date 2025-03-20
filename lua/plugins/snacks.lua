@@ -6,7 +6,14 @@ return {
         opts = {
             image = { enabled = true },
             input = { enabled = true },
-            picker = { enabled = true },
+            picker = {
+                enabled = true,
+                previewers = {
+                    file = {
+                        max_size = 5 * 1024 * 1024,
+                    },
+                },
+            },
         },
         config = function(_, opts)
             require("snacks").setup(opts)
@@ -34,6 +41,14 @@ return {
                 })
             end, { desc = "snacks files" })
 
+            vim.keymap.set({ "n" }, "<leader>fj", function()
+                Snacks.picker.jumps()
+            end, { desc = "Jumps" })
+
+            vim.keymap.set({ "n" }, "<leader>fB", function()
+                Snacks.picker.git_branches()
+            end, { desc = "Git Branches" })
+
             vim.keymap.set({ "n" }, "<leader>b", function()
                 Snacks.picker.buffers({
                     current = false,
@@ -41,8 +56,9 @@ return {
             end, { desc = "snacks buffers" })
 
             vim.keymap.set({ "n", "v" }, "<leader>S", function()
-                Snacks.picker.grep()
-            end, { desc = "snacks grep" })
+                -- Snacks.picker.grep()
+                Snacks.picker.grep_word({ regex = true, live = true })
+            end, { desc = "snacks grep word" })
 
             vim.keymap.set({ "n", "v" }, "<leader>s", function()
                 Snacks.picker.lines({
