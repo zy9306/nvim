@@ -3,6 +3,9 @@ return {
         "folke/flash.nvim",
         event = "VeryLazy",
         opts = {},
+        config = function()
+            vim.keymap.set("n", "f", "<nop>", {})
+        end,
         keys = {
             {
                 "s",
