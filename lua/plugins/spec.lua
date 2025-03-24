@@ -35,6 +35,10 @@ return {
     },
 
     {
+        "tpope/vim-fugitive",
+    },
+
+    {
         "akinsho/git-conflict.nvim",
         event = "VeryLazy",
         version = "*",
