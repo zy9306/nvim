@@ -6,6 +6,11 @@ local opts = {
 vim.keymap.set("n", ";", "<nop>", opts)
 vim.keymap.set("n", "f", "<nop>", opts)
 
+vim.keymap.set("n", "<MiddleMouse>", "<nop>", opts)
+vim.keymap.set("n", "<2-MiddleMouse>", "<nop>", opts)
+vim.keymap.set("n", "<3-MiddleMouse>", "<nop>", opts)
+vim.keymap.set("n", "<4-MiddleMouse>", "<nop>", opts)
+
 vim.keymap.set("n", "<C-I>", "<C-I>", opts)
 
 vim.keymap.set("x", "p", '"_dP', opts)
