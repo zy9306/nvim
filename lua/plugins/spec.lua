@@ -77,27 +77,6 @@ return {
 
     { "terryma/vim-expand-region" },
 
-    -- outline(imenu)
-    {
-        "stevearc/aerial.nvim",
-        cmd = "AerialToggle",
-        keys = {
-            { "<leader>I", "<cmd>AerialToggle!<CR>", desc = "outline toggle" },
-        },
-        opts = {},
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("aerial").setup({
-                layout = {
-                    resize_to_content = false,
-                },
-            })
-        end,
-    },
-
     {
         "fedepujol/move.nvim",
         opts = {},

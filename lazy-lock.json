@@ -72,6 +72,7 @@
   "scope.nvim": { "branch": "main", "commit": "3fc963e75f88990a9467ff72b8eea667a69c30a2" },
   "snacks.nvim": { "branch": "main", "commit": "1239fb84bc426d4fcd1c8dc9dde8503c17501842" },
   "swenv.nvim": { "branch": "main", "commit": "4157de2619ec2e5c61c103fb6517845a0e04e558" },
+  "symbols.nvim": { "branch": "main", "commit": "acabf95ae206274644f90c57f38107f5ad1d6468" },
   "tabby.nvim": { "branch": "main", "commit": "d5bcb49109634720e05dd1aeff1c95578c8aa5b2" },
   "telescope-cmdline.nvim": { "branch": "main", "commit": "8b05928ac1b9f2b772cedde891faa6669b0ec59a" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "626998e5c1b71c130d8bc6cf7abb6709b98287bb" },
