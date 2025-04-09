@@ -3,7 +3,7 @@ local auto_save = {}
 function auto_save.save()
     local buf = vim.api.nvim_get_current_buf()
     local buf_name = vim.api.nvim_buf_get_name(buf)
-    if buf_name ~= "" and vim.bo[buf].modified then
+    if buf_name ~= "" and not string.find(buf_name, "quickfix") and vim.bo[buf].modified then
         vim.cmd("write")
         require("conform").format({ async = true })
     end
