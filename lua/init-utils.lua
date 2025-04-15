@@ -160,7 +160,7 @@ function get_pytest_path()
     end
 end
 
-vim.api.nvim_create_user_command("PytestPath", get_pytest_path, {})
+vim.api.nvim_create_user_command("Pytestpath", get_pytest_path, {})
 
 -- golang unit test
 function get_go_test_path()
@@ -197,7 +197,7 @@ function get_go_test_path()
     end
 end
 
-vim.api.nvim_create_user_command("GoTestPath", get_go_test_path, {})
+vim.api.nvim_create_user_command("Gotestpath", get_go_test_path, {})
 
 -- Exit insert mode when entering a window
 function exit_insert_mode()
