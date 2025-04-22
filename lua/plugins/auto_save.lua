@@ -9,16 +9,23 @@ function auto_save.save()
     end
 end
 
+function auto_save.safe_save()
+    local status, err = pcall(auto_save.save)
+    if not status then
+        vim.api.nvim_err_writeln("AutoSave Error: " .. err)
+    end
+end
+
 function auto_save.setup()
     vim.api.nvim_create_autocmd({ "InsertLeave", "BufLeave" }, {
-        callback = auto_save.save,
+        callback = auto_save.safe_save,
     })
     vim.api.nvim_create_autocmd("ModeChanged", {
         pattern = "i:*",
-        callback = auto_save.save,
+        callback = auto_save.safe_save,
     })
     vim.api.nvim_create_autocmd("TextChanged", {
-        callback = auto_save.save,
+        callback = auto_save.safe_save,
     })
 end
 
