@@ -75,6 +75,12 @@ return {
                     require("conform").format({ async = true, lsp_format = "fallback", range = range })
                 end, { range = true })
             end
+
+            do
+                vim.api.nvim_create_user_command("TrimWhitespace", function()
+                    require("conform").format({ formatters = { "trim_whitespace" } })
+                end)
+            end
         end,
     },
 }
