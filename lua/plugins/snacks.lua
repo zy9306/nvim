@@ -60,14 +60,15 @@ return {
                 Snacks.picker.grep_word({ regex = true, live = true })
             end, { desc = "snacks grep word" })
 
-            vim.keymap.set({ "n", "v" }, "<leader>s", function()
-                Snacks.picker.lines({
-                    layout = {
-                        -- preview = false,
-                        preset = "select",
-                    },
-                })
-            end, { desc = "snacks grep buffer" })
+            -- use telescope
+            -- vim.keymap.set({ "n", "v" }, "<leader>s", function()
+            --     Snacks.picker.lines({
+            --         layout = {
+            --             -- preview = false,
+            --             preset = "select",
+            --         },
+            --     })
+            -- end, { desc = "snacks grep buffer" })
 
             vim.keymap.set({ "n" }, "<leader>fP", function()
                 Snacks.picker.projects()
