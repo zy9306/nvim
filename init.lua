@@ -15,7 +15,8 @@ vim.o.timeout = false
 
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.mouse = "a"
+-- vim.o.mouse = "a"
+vim.o.mouse = ""
 vim.o.hlsearch = true
 vim.o.incsearch = true
 vim.o.wrap = false
