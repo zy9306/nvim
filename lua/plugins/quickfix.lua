@@ -27,6 +27,13 @@ return {
                     },
                 },
             })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "qf",
+                callback = function()
+                    vim.api.nvim_buf_set_keymap(0, "n", "<Tab>", "<CR><C-W><C-P>", { noremap = true, silent = true })
+                end,
+            })
         end,
     },
 }

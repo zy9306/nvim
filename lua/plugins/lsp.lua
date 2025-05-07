@@ -144,7 +144,7 @@ return {
         "soulis-1256/eagle.nvim",
         event = "BufReadPre",
         config = function()
-            vim.o.mousemoveevent = true
+            -- vim.o.mousemoveevent = true
             require("eagle").setup({
                 mouse_mode = false,
                 keyboard_mode = true,

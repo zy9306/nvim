@@ -55,10 +55,10 @@ return {
                 })
             end, { desc = "snacks buffers" })
 
-            vim.keymap.set({ "n", "v" }, "<leader>S", function()
-                -- Snacks.picker.grep()
-                Snacks.picker.grep_word({ regex = true, live = true })
-            end, { desc = "snacks grep word" })
+            -- vim.keymap.set({ "n", "v" }, "<leader>S", function()
+            --     -- Snacks.picker.grep()
+            --     Snacks.picker.grep_word({ regex = true, live = true })
+            -- end, { desc = "snacks grep word" })
 
             -- use telescope
             -- vim.keymap.set({ "n", "v" }, "<leader>s", function()
