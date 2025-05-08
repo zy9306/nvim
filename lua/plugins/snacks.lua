@@ -74,9 +74,9 @@ return {
                 Snacks.picker.projects()
             end, { desc = "snacks projects" })
 
-            vim.keymap.set({ "n" }, "<F8>", function()
-                Snacks.explorer.open()
-            end, { desc = "snacks projects" })
+            -- vim.keymap.set({ "n" }, "<F8>", function()
+            --     Snacks.explorer.open()
+            -- end, { desc = "snacks projects" })
 
             -- lsp start
             vim.keymap.set({ "n" }, "<leader>ld", function()
