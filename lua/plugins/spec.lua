@@ -10,12 +10,12 @@ return {
         config = function()
             require("better_escape").setup({
                 mappings = {
-                    t = {
-                        j = {
-                            k = "<C-\\><C-n>",
-                            j = "<C-\\><C-n>",
-                        },
-                    },
+                    -- t = {
+                    --     j = {
+                    --         k = "<C-\\><C-n>",
+                    --         j = "<C-\\><C-n>",
+                    --     },
+                    -- },
                 },
             })
         end,

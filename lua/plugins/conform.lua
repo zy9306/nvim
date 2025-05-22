@@ -29,6 +29,8 @@ return {
                     go = { "goimports" },
                     rust = { "rustfmt", lsp_format = "fallback" },
                     javascript = { "prettierd", "prettier", stop_after_first = true },
+                    typescript = { "prettierd", "prettier", stop_after_first = true },
+                    typescriptreact = { "prettierd", "prettier", stop_after_first = true },
                     svelte = { "prettierd", "prettier", stop_after_first = true },
                     html = { "prettierd", "prettier", stop_after_first = true },
                     json = { "prettierd", "prettier", stop_after_first = true },
