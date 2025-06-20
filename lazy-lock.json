@@ -29,7 +29,6 @@
   "goto-preview": { "branch": "main", "commit": "4751e70a6ebce4fb78327b097cb8fdff55f38f3a" },
   "grug-far.nvim": { "branch": "main", "commit": "309ecac6e6240d37c0be3c567d9f7cc95f63d255" },
   "hlchunk.nvim": { "branch": "main", "commit": "5465dd33ade8676d63f6e8493252283060cd72ca" },
-  "img-clip.nvim": { "branch": "main", "commit": "11f068e3deea5643330146bdda2e852779dcd19c" },
   "indent-blankline.nvim": { "branch": "master", "commit": "e10626f7fcd51ccd56d7ffc00883ba7e0aa28f78" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "local-highlight.nvim": { "branch": "master", "commit": "272f36f412c0a82c785c01256abf4eda4c1cb11d" },
