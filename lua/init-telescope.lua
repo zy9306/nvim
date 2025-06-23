@@ -44,6 +44,8 @@ vim.keymap.set(
     { desc = "Aerial(Outline)" }
 )
 
+vim.keymap.set({ "n" }, "<leader>`", builtin.quickfixhistory, { desc = "quickfix history" })
+
 -- use snack
 -- lsp integration
 -- vim.keymap.set(
