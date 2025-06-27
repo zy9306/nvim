@@ -176,6 +176,8 @@ return {
         end,
     },
 
+    { "shortcuts/no-neck-pain.nvim", event = "BufEnter" },
+
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
