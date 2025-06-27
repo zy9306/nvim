@@ -22,10 +22,16 @@ return {
         config = function()
             vim.keymap.set("n", "<F9>", ":Neotree source=buffers toggle=true<cr>", { desc = "Toggle Neotree buffers" })
 
-            vim.keymap.set("n", "<F8>", ":Neotree toggle=true<cr>", { desc = "Toggle Neotree filesystem" })
+            vim.keymap.set(
+                "n",
+                "<F8>",
+                ":Neotree toggle=true position=float<cr>",
+                { desc = "Toggle Neotree filesystem" }
+            )
             require("neo-tree").setup({
                 window = {
                     width = 35,
+                    position = "float",
                     mappings = {
                         ["E"] = function()
                             vim.api.nvim_exec("Neotree focus filesystem left", true)
