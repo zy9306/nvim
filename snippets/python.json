@@ -1,69 +1,21 @@
 {
-  "py_csv_io": {
-    "body": [
-      "def get_fake_csv_data(column_name, ${1:rows}):",
-      "    string_io = io.StringIO()",
-      "    csv_writer = csv.writer(string_io)",
-      "    csv_writer.writerow(column_name)",
-      "    for row in $1:",
-      "        csv_writer.writerow(row)",
-      "    return string_io.getvalue()"
-    ],
-    "prefix": "py_csv_io",
-    "description": "py_csv_io"
-  },
-  "py_mock.patch.object": {
-    "body": ["", "mock.patch.object(obj, attr, **kwargs)"],
-    "prefix": "py_mock.patch.object",
-    "description": "py_mock.patch.object"
-  },
-  "py_mock_property": {
-    "body": "mock.patch(\"${1:path.to.property}\", new_callable=mock.PropertyMock, return_value=${2:new_value})",
-    "prefix": "py_mock_property",
-    "description": "py_mock_property"
-  },
-  "py_grpc_mock_err": {
-    "body": [
-      "mock_err = grpc.RpcError",
-      "",
-      "def mock_not_found_code(self):",
-      "    return grpc.StatusCode.NOT_FOUND",
-      "",
-      "mock_err.code = mock_not_found_code",
-      "${1:mock_func}.side_effect = mock_err"
-    ],
-    "prefix": "py_grpc_mock_err",
-    "description": "py_grpc_mock_err"
-  },
-  "py_mock_requests_get": {
-    "body": [
-      "fake_response = type(\"Response\", tuple(), dict(text=\"\", encoding=None))",
-      "mock_requests_get.return_value = fake_response"
-    ],
-    "prefix": "py_mock_requests_get",
-    "description": "py_mock_requests_get"
-  },
-  "py_assert_call_args": {
-    "body": "${1:mock_func}.call_args.args",
-    "prefix": "py_assert_call_args",
-    "description": "py_assert_call_args"
-  },
   "py_mock_variable": {
+    "description": "py_mock_variable",
     "body": "mock.patch(\"${1:path.to.variable}\", ${2:new_value})",
-    "prefix": "py_mock_variable",
-    "description": "py_mock_variable"
+    "prefix": "py_mock_variable"
   },
   "py_assert_call_args_list": {
+    "description": "py_assert_call_args_list",
     "body": [
       "calls = [",
       "    mock.call(${1:args}),",
       "]",
       "assert ${2:mock_func}.call_args_list == calls"
     ],
-    "prefix": "py_assert_call_args_list",
-    "description": "py_assert_call_args_list"
+    "prefix": "py_assert_call_args_list"
   },
   "py_iter_table": {
+    "description": "py_iter_table",
     "body": [
       "import peewee as pw",
       "",
@@ -87,42 +39,71 @@
       "",
       "    start_id += chunk_size"
     ],
-    "prefix": "py_iter_table",
-    "description": "py_iter_table"
+    "prefix": "py_iter_table"
   },
-  "py_random_lucky": {
+  "json_dumps_without_spaces": {
+    "description": "json_dumps_without_spaces",
+    "body": "json_dumps_without_spaces = partial(json.dumps, ensure_ascii=False, separators=(\",\", \":\"))",
+    "prefix": "json_dumps_without_spaces"
+  },
+  "py_csv_io": {
+    "description": "py_csv_io",
     "body": [
-      "def is_lucky(probability):",
-      "    loss = 0",
-      "    win = 1",
-      "    population, weights = [loss, win], [1 - probability, probability]",
-      "    return random.choices(population, weights) == [win]"
+      "def get_fake_csv_data(column_name, ${1:rows}):",
+      "    string_io = io.StringIO()",
+      "    csv_writer = csv.writer(string_io)",
+      "    csv_writer.writerow(column_name)",
+      "    for row in $1:",
+      "        csv_writer.writerow(row)",
+      "    return string_io.getvalue()"
     ],
-    "prefix": "py_random_lucky",
-    "description": "py_random_lucky"
-  },
-  "py_assert_call_count": {
-    "body": "assert ${1:mock_func}.call_count == ${2:0}",
-    "prefix": "py_assert_call_count",
-    "description": "py_assert_call_count"
+    "prefix": "py_csv_io"
   },
   "py_assert_called_once": {
+    "description": "py_assert_called_once",
     "body": "${1:mock_func}.assert_called_once()",
-    "prefix": "py_assert_called_once",
-    "description": "py_assert_called_once"
+    "prefix": "py_assert_called_once"
   },
   "py_assert_called_with": {
+    "description": "py_assert_called_with",
     "body": "${1:mock_func}.assert_called_with(${2:args})",
-    "prefix": "py_assert_called_with",
-    "description": "py_assert_called_with"
+    "prefix": "py_assert_called_with"
   },
-  "ipdb": { "prefix": "ipdb", "body": ["import ipdb; ipdb.set_trace()"] },
-  "py_assert_not_called": {
-    "body": "${1:mock_func}.assert_not_called()",
-    "prefix": "py_assert_not_called",
-    "description": "py_assert_not_called"
+  "py_mock.patch.object": {
+    "description": "py_mock.patch.object",
+    "body": ["", "mock.patch.object(obj, attr, **kwargs)"],
+    "prefix": "py_mock.patch.object"
+  },
+  "py_grpc_mock_err": {
+    "description": "py_grpc_mock_err",
+    "body": [
+      "mock_err = grpc.RpcError",
+      "",
+      "def mock_not_found_code(self):",
+      "    return grpc.StatusCode.NOT_FOUND",
+      "",
+      "mock_err.code = mock_not_found_code",
+      "${1:mock_func}.side_effect = mock_err"
+    ],
+    "prefix": "py_grpc_mock_err"
+  },
+  "py_mock_property": {
+    "description": "py_mock_property",
+    "body": "mock.patch(\"${1:path.to.property}\", new_callable=mock.PropertyMock, return_value=${2:new_value})",
+    "prefix": "py_mock_property"
+  },
+  "py_list_chunk": {
+    "description": "py_list_chunk",
+    "body": [
+      "for i, data in enumerate(",
+      "    (${1:list_}[i : i + ${2:chunk_size}] for i in range(0, len($1), $2))",
+      "):",
+      "    pass"
+    ],
+    "prefix": "py_list_chunk"
   },
   "py_csv_from_url": {
+    "description": "py_csv_from_url",
     "body": [
       "r = requests.get(${1:url})",
       "r.encoding = \"utf-8\"",
@@ -131,11 +112,63 @@
       "# or",
       "# csv_reader = csv.DictReader(file)"
     ],
-    "prefix": "py_csv_from_url",
-    "description": "py_csv_from_url"
+    "prefix": "py_csv_from_url"
+  },
+  "py_iter_table_2": {
+    "description": "py_iter_table_2",
+    "body": [
+      "import peewee as pw",
+      "",
+      "start_id = 0",
+      "limit = 5000",
+      "",
+      "while True:",
+      "    objs = $1.select().where($1.id > start_id).limit(limit)",
+      "",
+      "    if len(objs) == 0:",
+      "       break",
+      "",
+      "    start_id = objs[-1].id",
+      "",
+      "    # Do something."
+    ],
+    "prefix": "py_iter_table_2"
+  },
+  "py_pytest.mark.parametrize": {
+    "description": "py_pytest.mark.parametrize",
+    "body": ["", "# https://docs.pytest.org/en/7.1.x/example/parametrize.html"],
+    "prefix": "py_pytest.mark.parametrize"
+  },
+  "py_random_lucky": {
+    "description": "py_random_lucky",
+    "body": [
+      "def is_lucky(probability):",
+      "    loss = 0",
+      "    win = 1",
+      "    population, weights = [loss, win], [1 - probability, probability]",
+      "    return random.choices(population, weights) == [win]"
+    ],
+    "prefix": "py_random_lucky"
+  },
+  "py_assert_not_called": {
+    "description": "py_assert_not_called",
+    "body": "${1:mock_func}.assert_not_called()",
+    "prefix": "py_assert_not_called"
+  },
+  "py_assert_call_args": {
+    "description": "py_assert_call_args",
+    "body": "${1:mock_func}.call_args.args",
+    "prefix": "py_assert_call_args"
+  },
+  "py_mock_requests_get": {
+    "description": "py_mock_requests_get",
+    "body": [
+      "fake_response = type(\"Response\", tuple(), dict(text=\"\", encoding=None))",
+      "mock_requests_get.return_value = fake_response"
+    ],
+    "prefix": "py_mock_requests_get"
   },
   "unzip": {
-    "prefix": "unzip",
     "body": [
       "def unzip(file, dist):",
       "    with zipfile.ZipFile(file) as z:",
@@ -172,46 +205,38 @@
       "            if Path(fixed_item).exists() and fixed_item != str(item):",
       "                shutil.rmtree(item, ignore_errors=True)",
       "        return rv"
-    ]
-  },
-  "py_pytest.mark.parametrize": {
-    "body": ["", "# https://docs.pytest.org/en/7.1.x/example/parametrize.html"],
-    "prefix": "py_pytest.mark.parametrize",
-    "description": "py_pytest.mark.parametrize"
-  },
-  "py_iter_table_2": {
-    "body": [
-      "import peewee as pw",
-      "",
-      "start_id = 0",
-      "limit = 5000",
-      "",
-      "while True:",
-      "    objs = $1.select().where($1.id > start_id).limit(limit)",
-      "",
-      "    if len(objs) == 0:",
-      "       break",
-      "",
-      "    start_id = objs[-1].id",
-      "",
-      "    # Do something."
     ],
-    "prefix": "py_iter_table_2",
-    "description": "py_iter_table_2"
+    "prefix": "unzip"
   },
-  "json_dumps_without_spaces": {
-    "body": "json_dumps_without_spaces = partial(json.dumps, ensure_ascii=False, separators=(\",\", \":\"))",
-    "prefix": "json_dumps_without_spaces",
-    "description": "json_dumps_without_spaces"
+  "ipdb": { "body": ["import ipdb; ipdb.set_trace()"], "prefix": "ipdb" },
+  "py_assert_call_count": {
+    "description": "py_assert_call_count",
+    "body": "assert ${1:mock_func}.call_count == ${2:0}",
+    "prefix": "py_assert_call_count"
   },
-  "py_list_chunk": {
+  "py_click": {
     "body": [
-      "for i, data in enumerate(",
-      "    (${1:list_}[i : i + ${2:chunk_size}] for i in range(0, len($1), $2))",
-      "):",
-      "    pass"
+      "#!/usr/bin/env python3",
+      "",
+      "from pathlib import Path",
+      "",
+      "import click",
+      "",
+      "WORK_DIR = Path(__file__).parent",
+      "",
+      "",
+      "@click.group()",
+      "@click.pass_context",
+      "def cli(ctx):",
+      "    ctx.obj[\"work_dir\"] = WORK_DIR",
+      "",
+      "",
+      "@cli.command()",
+      "@click.option(\"-o\", \"--option\", help=\"help\")",
+      "@click.pass_context",
+      "def command(ctx, option):",
+      "    ..."
     ],
-    "prefix": "py_list_chunk",
-    "description": "py_list_chunk"
+    "prefix": "py_click"
   }
 }
