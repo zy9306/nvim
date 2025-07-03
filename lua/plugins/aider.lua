@@ -2,7 +2,11 @@ return {
     {
         "GeorgesAlkhouri/nvim-aider",
         cmd = "Aider",
-        config = true,
+        config = function()
+            require("nvim_aider").setup({
+                auto_reload = true,
+            })
+        end,
         keys = {
             { "<leader>a/", "<cmd>Aider toggle<cr>", desc = "Toggle Aider" },
             { "<leader>A", "<cmd>Aider toggle<cr>", desc = "Toggle Aider" },

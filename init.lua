@@ -2,6 +2,8 @@ local start_time = vim.loop.hrtime()
 
 vim.o.updatetime = 500
 
+vim.o.autoread = true
+
 vim.o.background = "dark"
 
 vim.o.laststatus = 3
