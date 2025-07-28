@@ -34,6 +34,7 @@ return {
                     svelte = { "prettierd", "prettier", stop_after_first = true },
                     html = { "prettierd", "prettier", stop_after_first = true },
                     json = { "prettierd", "prettier", stop_after_first = true },
+                    sh = { "shfmt" },
                 },
                 -- format_after_save = {
                 -- 	lsp_format = "fallback",
