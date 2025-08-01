@@ -31,7 +31,7 @@ return {
             require("neo-tree").setup({
                 window = {
                     width = 35,
-                    position = "float",
+                    -- position = "float",
                     mappings = {
                         ["E"] = function()
                             vim.api.nvim_exec("Neotree focus filesystem left", true)
