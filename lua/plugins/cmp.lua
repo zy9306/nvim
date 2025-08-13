@@ -1,82 +1,37 @@
 return {
     {
-        "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-        dependencies = {
-            {
-                "hrsh7th/cmp-nvim-lsp",
-                event = "InsertEnter",
+        "saghen/blink.cmp",
+        dependencies = { "fang2hou/blink-copilot" },
+        opts = {
+            keymap = {
+                preset = "default",
+                ["<CR>"] = { "accept", "fallback" },
             },
-            {
-                "hrsh7th/cmp-buffer",
-                event = "InsertEnter",
-            },
-            {
-                "hrsh7th/cmp-path",
-                event = "InsertEnter",
-            },
-            {
-                "hrsh7th/cmp-cmdline",
-                event = "InsertEnter",
-            },
-            {
-                "saadparwaiz1/cmp_luasnip",
-                event = "InsertEnter",
-            },
-        },
-        config = function()
-            local luasnip = require("luasnip")
-            local cmp = require("cmp")
 
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end,
+            snippets = { preset = "luasnip" },
+
+            appearance = {
+                nerd_font_variant = "mono",
+            },
+
+            completion = { documentation = { auto_show = false } },
+
+            sources = {
+                default = { "lsp", "copilot", "path", "snippets", "buffer" },
+                providers = {
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-copilot",
+                        score_offset = 100,
+                        async = true,
+                    },
                 },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-d>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<CR>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = false,
-                    }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            -- cmp.select_next_item()
-                            fallback()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            -- cmp.select_prev_item()
-                            fallback()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                }),
-                sources = {
-                    { name = "copilot" },
-                    { name = "nvim_lsp" },
-                    { name = "buffer" },
-                    { name = "luasnip" },
-                },
-            })
-        end,
+            },
+
+            fuzzy = { implementation = "lua" },
+        },
+
+        opts_extend = { "sources.default" },
     },
     {
         "L3MON4D3/LuaSnip",
@@ -106,15 +61,15 @@ return {
             })
         end,
     },
-    {
-        "zbirenbaum/copilot-cmp",
-        event = "InsertEnter",
-        config = function()
-            require("copilot_cmp").setup()
-            require("copilot").setup({
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-            })
-        end,
-    },
+    -- {
+    --     "zbirenbaum/copilot-cmp",
+    --     event = "InsertEnter",
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --         require("copilot").setup({
+    --             suggestion = { enabled = false },
+    --             panel = { enabled = false },
+    --         })
+    --     end,
+    -- },
 }
