@@ -7,7 +7,9 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "BufReadPre",
+        -- event = "BufReadPre",
+        -- TODO 和 auto-session 冲突了, lazy load 时不会高亮
+        lazy = false,
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup()

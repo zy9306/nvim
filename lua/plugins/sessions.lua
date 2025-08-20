@@ -28,4 +28,12 @@ return {
     -- 		end, { desc = "Save session" })
     -- 	end,
     -- },
+
+    {
+        "rmagatti/auto-session",
+        lazy = false,
+        opts = {
+            suppressed_dirs = { "~/", "~/projects", "~/Downloads" },
+        },
+    },
 }

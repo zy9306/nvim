@@ -15,7 +15,8 @@ return {
         end,
     },
 
-    { "danilamihailov/beacon.nvim" },
+    -- TODO 和 auto-session 冲突
+    -- { "danilamihailov/beacon.nvim" },
 
     {
         "folke/noice.nvim",
