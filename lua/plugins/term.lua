@@ -38,10 +38,12 @@ return {
 
             vim.keymap.set("n", "<C-t>", ":ToggleTerm<CR>", opts)
 
-            vim.keymap.set("n", "<F5>", ":ToggleTerm direction=float<CR>", opts)
+            vim.keymap.set("n", "<F5>", ":ToggleTerm direction=horizontal<CR>", opts)
+            vim.keymap.set("n", "<F6>", ":ToggleTerm direction=float<CR>", opts)
 
             vim.keymap.set("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
             vim.keymap.set("t", "<F5>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
+            vim.keymap.set("t", "<F6>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
             vim.keymap.set("t", "<C-Up>", "<C-\\><C-n>:resize -2<CR>", opts)
             vim.keymap.set("t", "<C-Down>", "<C-\\><C-n>:resize +2<CR>", opts)
