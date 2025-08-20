@@ -5,7 +5,6 @@
   "auto-save.nvim": { "branch": "main", "commit": "37c82fd548e3f5ffc2d9d020a65dac1044584f44" },
   "auto-session": { "branch": "main", "commit": "8cda7244a02f1304664889a78194604587ffc772" },
   "b64.nvim": { "branch": "main", "commit": "a7570a62405296b693addc61e8f1485f717edbdf" },
-  "beacon.nvim": { "branch": "master", "commit": "098ff96c33874339d5e61656f3050dbd587d6bd5" },
   "better-escape.nvim": { "branch": "master", "commit": "19a38aab94961016430905ebec30d272a01e9742" },
   "blink-copilot": { "branch": "main", "commit": "41e91a659bd9b8cba9ba2ea68a69b52ba5a9ebd8" },
   "blink.cmp": { "branch": "main", "commit": "dc6882469bf3b98e078888f86bb68ad90d395c7e" },
@@ -84,6 +83,7 @@
   "undotree": { "branch": "master", "commit": "28f2f54a34baff90ea6f4a735ef1813ad875c743" },
   "vim-expand-region": { "branch": "master", "commit": "966513543de0ddc2d673b5528a056269e7917276" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
+  "vmark.nvim": { "branch": "main", "commit": "7897c84a0326781edd948ce3413549cab2d59625" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
   "yanky.nvim": { "branch": "main", "commit": "04775cc6e10ef038c397c407bc17f00a2f52b378" }
 }
