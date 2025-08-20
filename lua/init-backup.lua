@@ -11,6 +11,11 @@ augroup END
 ]])
 
 function maybe_backup(file)
+    local excluded_types = { oil = true }
+    if excluded_types[vim.bo.filetype] then
+        return
+    end
+
     local filesize = vim.fn.getfsize(file)
     if filesize <= 5 * 1024 * 1024 then
         local timestamp = os.date("%Y%m%d%H%M%S")
