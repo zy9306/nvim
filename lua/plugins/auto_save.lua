@@ -36,13 +36,43 @@
 --
 -- auto_save.setup()
 
+local excluded_filetypes = {
+    "gitcommit",
+    "NvimTree",
+    "Outline",
+    "TelescopePrompt",
+    "alpha",
+    "dashboard",
+    "lazygit",
+    "neo-tree",
+    "oil",
+    "prompt",
+    "toggleterm",
+}
+
+local excluded_filenames = {
+    "",
+}
+
+local function save_condition(buf)
+    if
+        vim.tbl_contains(excluded_filetypes, vim.fn.getbufvar(buf, "&filetype"))
+        or vim.tbl_contains(excluded_filenames, vim.fn.expand("%:t"))
+    then
+        return false
+    end
+    return true
+end
+
 return {
     {
         "okuuva/auto-save.nvim",
         cmd = "ASToggle",
         event = { "InsertLeave", "TextChanged" },
         config = function()
-            require("auto-save").setup()
+            require("auto-save").setup({
+                condition = save_condition,
+            })
         end,
     },
 }
