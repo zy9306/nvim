@@ -197,6 +197,8 @@ return {
 
     { "shortcuts/no-neck-pain.nvim", event = "BufEnter" },
 
+    { "junegunn/vim-peekaboo" },
+
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
