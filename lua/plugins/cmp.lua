@@ -1,11 +1,24 @@
 return {
     {
         "saghen/blink.cmp",
-        dependencies = { "fang2hou/blink-copilot" },
         opts = {
             keymap = {
                 preset = "default",
                 ["<CR>"] = { "accept", "fallback" },
+                ["<Tab>"] = {
+                    function(cmp)
+                        cmp.hide()
+                        require("copilot.suggestion").next()
+                        return true
+                    end,
+                },
+                ["<S-Tab>"] = {
+                    function(cmp)
+                        cmp.hide()
+                        require("copilot.suggestion").prev()
+                        return true
+                    end,
+                },
             },
 
             snippets = { preset = "luasnip" },
@@ -17,15 +30,7 @@ return {
             completion = { documentation = { auto_show = false } },
 
             sources = {
-                default = { "lsp", "copilot", "path", "snippets", "buffer" },
-                providers = {
-                    copilot = {
-                        name = "copilot",
-                        module = "blink-copilot",
-                        score_offset = 100,
-                        async = true,
-                    },
-                },
+                default = { "lsp", "path", "snippets", "buffer" },
             },
 
             fuzzy = { implementation = "lua" },
@@ -33,6 +38,7 @@ return {
 
         opts_extend = { "sources.default" },
     },
+
     {
         "L3MON4D3/LuaSnip",
         version = "v2.*",
@@ -41,6 +47,7 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
         end,
     },
+
     {
         "chrisgrieser/nvim-scissors",
         event = "VeryLazy",
@@ -49,6 +56,7 @@ return {
             jsonFormatter = { "prettier", "-w", "--parser", "json" },
         },
     },
+
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
@@ -58,18 +66,27 @@ return {
                 filetypes = {
                     ["*"] = true,
                 },
+                suggestion = {
+                    auto_trigger = true,
+                    keymap = {
+                        accept = "<C-l>",
+                        accept_word = "<C-Right>",
+                        accept_line = "<C-l>",
+                        next = "<Tab>",
+                        prev = "<S-Tab>",
+                        dismiss = "<C-]>",
+                    },
+                },
             })
+            local copilot_suggestion = require("copilot.suggestion")
+            vim.keymap.set("i", "<C-c>", function()
+                if copilot_suggestion.is_visible() then
+                    copilot_suggestion.dismiss()
+                    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+                else
+                    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+                end
+            end, { noremap = true, silent = true, desc = "Dismiss Copilot suggestion and exit insert mode" })
         end,
     },
-    -- {
-    --     "zbirenbaum/copilot-cmp",
-    --     event = "InsertEnter",
-    --     config = function()
-    --         require("copilot_cmp").setup()
-    --         require("copilot").setup({
-    --             suggestion = { enabled = false },
-    --             panel = { enabled = false },
-    --         })
-    --     end,
-    -- },
 }
