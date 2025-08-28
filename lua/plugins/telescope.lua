@@ -119,4 +119,20 @@ return {
             })
         end,
     },
+
+    {
+        "nvim-telescope/telescope-project.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+        },
+        config = function()
+            require("telescope").load_extension("project")
+            vim.api.nvim_set_keymap(
+                "n",
+                "<leader><C-p>",
+                ":lua require'telescope'.extensions.project.project{}<CR>",
+                { noremap = true, silent = true }
+            )
+        end,
+    },
 }
