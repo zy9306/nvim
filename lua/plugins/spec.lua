@@ -5,21 +5,23 @@ return {
         event = "InsertEnter",
         config = true,
     },
-    {
-        "max397574/better-escape.nvim",
-        config = function()
-            require("better_escape").setup({
-                mappings = {
-                    -- t = {
-                    --     j = {
-                    --         k = "<C-\\><C-n>",
-                    --         j = "<C-\\><C-n>",
-                    --     },
-                    -- },
-                },
-            })
-        end,
-    },
+
+    -- {
+    --     "max397574/better-escape.nvim",
+    --     config = function()
+    --         require("better_escape").setup({
+    --             mappings = {
+    --                 -- t = {
+    --                 --     j = {
+    --                 --         k = "<C-\\><C-n>",
+    --                 --         j = "<C-\\><C-n>",
+    --                 --     },
+    --                 -- },
+    --             },
+    --         })
+    --     end,
+    -- },
+
     {
         "numToStr/Comment.nvim",
         config = function()
