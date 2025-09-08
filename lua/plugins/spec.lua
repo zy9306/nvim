@@ -201,6 +201,8 @@ return {
 
     { "junegunn/vim-peekaboo" },
 
+    { "nvzone/showkeys", cmd = "ShowkeysToggle" },
+
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
