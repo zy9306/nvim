@@ -31,6 +31,7 @@ return {
                 },
             })
             vim.cmd.colorscheme("catppuccin")
+            vim.api.nvim_set_hl(0, "CursorLine", { bg = "#3c4452" })
         end,
     },
 }
