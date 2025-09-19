@@ -2,7 +2,6 @@ return {
     {
         "stevearc/conform.nvim",
         lazy = false,
-        cmd = { "ConformInfo" },
         config = function()
             local conform = require("conform")
             conform.setup({
@@ -33,11 +32,13 @@ return {
                     return { lsp_format = "fallback" }
                 end,
             })
+
             conform.formatters.shfmt = {
                 prepend_args = function(self, ctx)
                     return { "-i", "2" }
                 end,
             }
+
             conform.formatters.stylua = {
                 prepend_args = function(self, ctx)
                     return { "--config-path", vim.fn.stdpath("config") .. "/stylua.toml" }
@@ -46,17 +47,15 @@ return {
 
             conform.setup({
                 format_on_save = function(bufnr)
-                    -- Disable with a global or buffer-local variable
                     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
                         return
                     end
-                    return { timeout_ms = 500, lsp_format = "fallback" }
+                    return {}
                 end,
             })
 
             vim.api.nvim_create_user_command("FormatDisable", function(args)
                 if args.bang then
-                    -- FormatDisable! will disable formatting just for this buffer
                     vim.b.disable_autoformat = true
                 else
                     vim.g.disable_autoformat = true
