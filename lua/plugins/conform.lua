@@ -4,6 +4,8 @@ return {
         lazy = false,
         config = function()
             local conform = require("conform")
+            vim.b.disable_autoformat = true
+            vim.g.disable_autoformat = true
             conform.setup({
                 formatters_by_ft = {
                     lua = { "stylua" },
@@ -81,7 +83,7 @@ return {
                         ["end"] = { args.line2, end_line:len() },
                     }
                 end
-                require("conform").format({ async = true, lsp_format = "fallback", range = range })
+                require("conform").format({ async = false, lsp_format = "fallback", range = range })
             end, { range = true })
 
             vim.api.nvim_create_user_command("TrimWhitespace", function()
