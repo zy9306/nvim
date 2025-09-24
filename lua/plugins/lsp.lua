@@ -7,14 +7,10 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        -- event = "BufReadPre",
-        -- TODO 和 auto-session 冲突了, lazy load 时不会高亮
         lazy = false,
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup()
-
-            local lspconfig = require("lspconfig")
 
             local on_attach = function(client, bufnr)
                 local function buf_set_keymap(...)
@@ -38,12 +34,10 @@ return {
             end
 
             for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup({
-                    on_attach = on_attach,
-                })
+                vim.lsp.enable(lsp, { on_attach = on_attach })
             end
 
-            lspconfig.pyright.setup({
+            vim.lsp.config("pyright", {
                 on_attach = function(client, bufnr)
                     on_attach(client, bufnr)
                     client.handlers["textDocument/publishDiagnostics"] = function(...) end
@@ -59,16 +53,6 @@ return {
                     },
                 },
             })
-
-            -- use nvim-lint instead
-            -- lspconfig.ruff.setup({
-            -- 	trace = "messages",
-            -- 	init_options = {
-            -- 		settings = {
-            -- 			logLevel = "debug",
-            -- 		},
-            -- 	},
-            -- })
 
             vim.diagnostic.config({ virtual_text = false, float = { border = "rounded" } })
 

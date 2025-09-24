@@ -71,7 +71,7 @@ return {
                     keymap = {
                         accept = "<C-l>",
                         accept_word = "<C-Right>",
-                        accept_line = "<C-l>",
+                        -- accept_line = "<C-l>",
                         next = "<Tab>",
                         prev = "<S-Tab>",
                         dismiss = "<C-]>",
