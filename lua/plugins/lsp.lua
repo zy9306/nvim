@@ -35,6 +35,7 @@ return {
 
             for _, lsp in ipairs(servers) do
                 vim.lsp.enable(lsp, { on_attach = on_attach })
+                vim.lsp.config(lsp, { on_attach = on_attach })
             end
 
             vim.lsp.config("pyright", {
