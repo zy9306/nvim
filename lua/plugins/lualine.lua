@@ -18,18 +18,16 @@ return {
                                 return " " .. cwd
                             end,
                         },
+
                         { "filename", path = 1 },
-                        -- {
-                        --     function()
-                        --         local filepath = vim.fn.expand("%:p")
-                        --         local last_modified = vim.fn.getftime(filepath)
-                        --         if last_modified > 0 then
-                        --             return os.date("Last Modified: %Y-%m-%d %H:%M:%S", last_modified)
-                        --         else
-                        --             return "File not saved"
-                        --         end
-                        --     end,
-                        -- },
+
+                        {
+                            function()
+                                local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+                                return "󰕰 " .. tostring(#buffers)
+                            end,
+                        },
+
                     },
                 },
             })

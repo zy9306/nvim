@@ -15,9 +15,6 @@ return {
         end,
     },
 
-    -- TODO 和 auto-session 冲突
-    -- { "danilamihailov/beacon.nvim" },
-
     {
         "folke/noice.nvim",
         event = "VeryLazy",
