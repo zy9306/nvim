@@ -83,6 +83,10 @@ do
     vim.api.nvim_create_user_command("Bdelete", function(opts)
         delete_buffer(opts.bang)
     end, { bang = true })
+
+    vim.api.nvim_create_user_command("BdOthers", function()
+        vim.cmd("%bd|e#|bd#")
+    end, {})
 end
 
 do
