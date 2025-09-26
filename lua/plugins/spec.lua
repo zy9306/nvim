@@ -203,6 +203,8 @@ return {
 
     { "nvzone/showkeys", cmd = "ShowkeysToggle" },
 
+    { "moll/vim-bbye" },
+
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
