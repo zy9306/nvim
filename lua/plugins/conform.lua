@@ -86,6 +86,8 @@ return {
                 require("conform").format({ async = false, lsp_format = "fallback", range = range })
             end, { range = true })
 
+			vim.keymap.set("n", "<leader>F", ":Format<CR>", { desc = "Format buffer" })
+
             vim.api.nvim_create_user_command("TrimWhitespace", function()
                 require("conform").format({ formatters = { "trim_whitespace" } })
             end, {})
