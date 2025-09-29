@@ -49,6 +49,8 @@ vim.opt.sessionoptions = "globals,buffers,terminal,blank,curdir,folds,help,tabpa
 
 vim.opt.conceallevel = 0
 
+vim.o.guifont = "Iosevka Nerd Font:h16"
+
 if vim.g.vscode then
     require("init-vscode")
 else
