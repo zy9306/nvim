@@ -29,4 +29,18 @@ return {
         config = true,
         event = "VeryLazy",
     },
+
+    {
+        "leath-dub/snipe.nvim",
+        keys = {
+            {
+                "B",
+                function()
+                    require("snipe").open_buffer_menu()
+                end,
+                desc = "Open Snipe buffer menu",
+            },
+        },
+        opts = {},
+    },
 }
