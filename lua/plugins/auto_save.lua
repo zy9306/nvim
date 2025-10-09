@@ -55,9 +55,14 @@ local excluded_filenames = {
 }
 
 local function save_condition(buf)
+    local buf = vim.api.nvim_get_current_buf()
+    local buf_name = vim.api.nvim_buf_get_name(buf)
     if
         vim.tbl_contains(excluded_filetypes, vim.fn.getbufvar(buf, "&filetype"))
         or vim.tbl_contains(excluded_filenames, vim.fn.expand("%:t"))
+        or buf_name == ""
+        or string.find(buf_name, "tmp")
+        or string.find(buf_name, "quickfix")
     then
         return false
     end
