@@ -48,8 +48,8 @@ return {
         "carbon-steel/detour.nvim",
         config = function()
             require("detour").setup({})
-            vim.keymap.set("n", "<c-w><enter>", ":Detour<cr>")
-            vim.keymap.set("n", "<c-w>.", ":DetourCurrentWindow<cr>")
+            vim.keymap.set("n", "<C-c>,", ":DetourCurrentWindow<cr>")
+            vim.keymap.set("n", "<C-c>.", ":DetourCloseCurrentStack<cr>")
         end,
     },
 }
