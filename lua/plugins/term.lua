@@ -36,24 +36,13 @@ return {
             end, {})
             -- command end
 
-            vim.keymap.set("n", "<C-t>", ":ToggleTerm<CR>", opts)
-
-            vim.keymap.set("n", "<F5>", ":ToggleTerm direction=horizontal<CR>", opts)
-            vim.keymap.set("n", "<F6>", ":ToggleTerm direction=float<CR>", opts)
-
-            vim.keymap.set("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
+            vim.keymap.set("n", "<F5>", ":ToggleTerm direction=float<CR>", opts)
             vim.keymap.set("t", "<F5>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
-            vim.keymap.set("t", "<F6>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
             vim.keymap.set("t", "<C-Up>", "<C-\\><C-n>:resize -2<CR>", opts)
             vim.keymap.set("t", "<C-Down>", "<C-\\><C-n>:resize +2<CR>", opts)
             vim.keymap.set("t", "<C-Left>", "<C-\\><C-n>:vertical resize -2<CR>", opts)
             vim.keymap.set("t", "<C-Right>", "<C-\\><C-n>:vertical resize +2<CR>", opts)
-
-            -- vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-            -- vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-            -- vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-            -- vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
 
             vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 

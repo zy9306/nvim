@@ -39,3 +39,5 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 vim.keymap.set("n", "<A-Right>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<A-Left>", ":bprevious<CR>", opts)
+
+vim.keymap.set("n", "<C-t>", ":terminal<CR>", opts)
