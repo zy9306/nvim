@@ -16,9 +16,9 @@ git clone git@github.com:zy9306/nvim.git "$env:LOCALAPPDATA\nvim"
 
 ## lsp
 
-https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
+直接执行 `LspInstall` 会列出当前文件类型支持的 lsp, 选择需要的即可
 
-e.g.
+或手动安装
 
 `MasonInstall pyright`
 
