@@ -51,6 +51,9 @@ vim.opt.conceallevel = 0
 
 vim.o.guifont = "Iosevka Nerd Font:h16"
 
+vim.o.splitbelow = true
+vim.o.splitright = true
+
 if vim.g.vscode then
     require("init-vscode")
 else
