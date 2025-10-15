@@ -1,3 +1,21 @@
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "term://*",
+    callback = function()
+        if vim.fn.mode() ~= "t" then
+            vim.cmd("startinsert")
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+    pattern = "v:*",
+    callback = function()
+        if vim.bo.buftype == "terminal" then
+            vim.cmd("startinsert")
+        end
+    end,
+})
+
 return {
     {
         "akinsho/toggleterm.nvim",
