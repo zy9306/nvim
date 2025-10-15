@@ -8,7 +8,9 @@ vim.o.autoread = true
 
 vim.o.background = "dark"
 
-vim.o.laststatus = 3
+-- 2: 每个窗口都有状态栏
+-- 3: 全局状态栏
+vim.o.laststatus = 2
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
