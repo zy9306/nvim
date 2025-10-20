@@ -25,6 +25,8 @@ vim.o.mouse = "a"
 -- vim.o.mouse = ""
 vim.o.hlsearch = true
 vim.o.incsearch = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 vim.o.wrap = false
 vim.o.encoding = "utf-8"
 
@@ -70,7 +72,7 @@ else
     require("init-keymap")
 
     require("init-wezterm")
-	require("init-menu")
+    require("init-menu")
 end
 
 local end_time = vim.loop.hrtime()

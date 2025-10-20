@@ -3,6 +3,10 @@ local opts = {
     silent = true,
 }
 
+-- With Ctrl-t and Ctrl-g you can move between matches without leaving the search mode.
+vim.keymap.set({"n", "v"}, "<C-s>", "/")
+vim.keymap.set("i", "<C-s>", "<Esc>/")
+
 vim.keymap.set("n", ";", "<nop>", opts)
 vim.keymap.set("n", "f", "<nop>", opts)
 
@@ -15,15 +19,8 @@ vim.keymap.set("n", "<C-I>", "<C-I>", opts)
 
 vim.keymap.set("x", "p", '"_dP', opts)
 
--- vim.keymap.set({ "n", "v" }, "<leader><Space>", "zz", { noremap = true, silent = true })
-
 vim.keymap.set({ "i" }, "<C-B>", "<Left>", opts)
 vim.keymap.set({ "i" }, "<C-F>", "<Right>", opts)
-
--- vim.keymap.set({ "i" }, "<C-A>", "<Home>", opts)
--- vim.keymap.set({ "i" }, "<C-E>", "<End>", opts)
--- vim.keymap.set({ "i" }, "<C-N>", "<Down>", opts)
--- vim.keymap.set({ "i" }, "<C-P>", "<Up>", opts)
 
 vim.keymap.set("i", "<C-_>", "<C-o>u", opts)
 
