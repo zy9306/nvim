@@ -60,7 +60,6 @@ if vim.g.vscode then
     require("init-vscode")
 else
     require("config.lazy")
-    require("init-telescope")
     require("init-backup")
     require("init-utils")
 

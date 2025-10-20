@@ -4,6 +4,7 @@ vim.cmd([[
   aunmenu PopUp.Select\ All
   aunmenu PopUp.-1-
 
+  amenu PopUp.Buffers <Cmd>:lua require("telescope.builtin").buffers(require('telescope.themes').get_cursor())<CR>
   amenu PopUp.FileFormat <Cmd>:set fileformat?<CR>
 
   amenu PopUp.-100- <Nop>

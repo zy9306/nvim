@@ -20,6 +20,7 @@ return {
                         prompt_position = "top",
                     },
                     sorting_strategy = "ascending",
+                    preview = { hide_on_startup = true },
                 },
                 pickers = {
                     buffers = {
@@ -40,6 +41,101 @@ return {
                     },
                 },
             })
+
+            --- function START
+            function get_current_word_or_selection()
+                local search_text = ""
+                if vim.fn.mode() == "v" or vim.fn.mode() == "V" or vim.fn.mode() == "" then
+                    vim.cmd('normal! "vy')
+                    search_text = vim.fn.getreg("v")
+                else
+                    -- search_text = vim.fn.expand("<cword>")
+                end
+                return search_text
+            end
+
+            function global_search_current_word_or_selection()
+                search_text = get_current_word_or_selection()
+                -- builtin.live_grep({ default_text = search_text })
+                require("telescope").extensions.live_grep_args.live_grep_args({
+                    default_text = search_text,
+                    theme = "ivy",
+                })
+            end
+
+            function buffer_search_current_word_or_selection()
+                search_text = get_current_word_or_selection()
+                -- builtin.current_buffer_fuzzy_find({ default_text = search_text })
+                require("telescope").extensions.live_grep_args.live_grep_args({
+                    default_text = search_text,
+                    search_dirs = { vim.fn.expand("%:p") },
+                    theme = "ivy",
+                })
+            end
+            --- function END
+
+            --- key map START
+            vim.keymap.set({ "n" }, "<leader><leader>", function()
+                require("telescope.builtin").resume()
+            end, { desc = "snacks resume" })
+
+            vim.keymap.set({ "n", "v" }, "<leader>ff", function()
+                require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({}))
+            end, { desc = "Find Files" })
+
+            vim.keymap.set({ "n", "v" }, "<leader>S", global_search_current_word_or_selection, { desc = "Live Grep" })
+
+            vim.keymap.set({ "n", "v" }, "<leader>b", function()
+                require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({}))
+            end, { desc = "Buffers" })
+
+            vim.keymap.set(
+                { "n", "v" },
+                "<leader>s",
+                buffer_search_current_word_or_selection,
+                { desc = "Current Buffer Find" }
+            )
+
+            vim.keymap.set(
+                { "n" },
+                "<leader>`",
+                require("telescope.builtin").quickfixhistory,
+                { desc = "quickfix history" }
+            )
+
+            -- lsp integration
+            vim.keymap.set(
+                "n",
+                "<leader>lr",
+                "<cmd>Telescope lsp_references<CR>",
+                { noremap = true, silent = true, desc = "LSP References" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>ld",
+                "<cmd>Telescope lsp_definitions<CR>",
+                { noremap = true, silent = true, desc = "LSP Definitions" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>li",
+                "<cmd>Telescope lsp_implementations<CR>",
+                { noremap = true, silent = true, desc = "LSP Implementations" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>ls",
+                "<cmd>Telescope lsp_document_symbols<CR>",
+                { noremap = true, silent = true, desc = "LSP Document Symbols" }
+            )
+            vim.keymap.set(
+                "n",
+                "<leader>la",
+                ":lua vim.lsp.buf.code_action()<CR>",
+                { noremap = true, silent = true, desc = "LSP Code Action" }
+            )
+
+            --- key map END
         end,
     },
     {
@@ -101,23 +197,6 @@ return {
         keys = {
             { "<leader>x", "<cmd>Telescope cmdline<CR>", desc = "Cmdline" },
         },
-    },
-    {
-        "LukasPietzschmann/telescope-tabs",
-        event = "BufEnter",
-        config = function()
-            require("telescope").load_extension("telescope-tabs")
-            require("telescope-tabs").setup({
-                -- https://github.com/LukasPietzschmann/telescope-tabs/wiki/Configs#configs
-                entry_formatter = function(tab_id, buffer_ids, file_names, file_paths, is_current)
-                    local tab_name = require("tabby.feature.tab_name").get(tab_id)
-                    return string.format("%d: %s%s", tab_id, tab_name, is_current and " <" or "")
-                end,
-                entry_ordinal = function(tab_id, buffer_ids, file_names, file_paths, is_current)
-                    return require("tabby.feature.tab_name").get(tab_id)
-                end,
-            })
-        end,
     },
 
     {
