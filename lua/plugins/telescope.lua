@@ -168,13 +168,20 @@ return {
                     sorting_strategy = "ascending",
                     hidden = { file_browser = true, folder_browser = true },
                     no_ignore = true,
+					follow_symlinks = true,
+					grouped = true,
                 },
             },
         },
         config = function(_, opts)
             require("telescope").setup(opts)
             require("telescope").load_extension("file_browser")
-            vim.keymap.set("n", "<leader>fp", ":Telescope file_browser path=%:p:h<cr>", { desc = "File Browser" })
+            vim.keymap.set(
+                "n",
+                "<leader>fp",
+                ":Telescope file_browser path=%:p:h theme=dropdown<cr>",
+                { desc = "File Browser" }
+            )
         end,
     },
     {
@@ -209,7 +216,7 @@ return {
             vim.api.nvim_set_keymap(
                 "n",
                 "<leader><C-p>",
-                ":lua require'telescope'.extensions.project.project{}<CR>",
+                ":lua require'telescope'.extensions.project.project(require('telescope.themes').get_dropdown({}))<CR>",
                 { noremap = true, silent = true }
             )
         end,
