@@ -1,20 +1,20 @@
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "term://*",
-    callback = function()
-        if vim.fn.mode() ~= "t" then
-            vim.cmd("normal! i")
-        end
-    end,
-})
-
-vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = "v:*",
-    callback = function()
-        if vim.bo.buftype == "terminal" then
-            vim.cmd("normal! i")
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     pattern = "term://*",
+--     callback = function()
+--         if vim.fn.mode() ~= "t" then
+--             vim.cmd("normal! i")
+--         end
+--     end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("ModeChanged", {
+--     pattern = "v:*",
+--     callback = function()
+--         if vim.bo.buftype == "terminal" then
+--             vim.cmd("normal! i")
+--         end
+--     end,
+-- })
 
 return {
     {
@@ -64,36 +64,36 @@ return {
 
             vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 
-            -- local terms = require("toggleterm.terminal")
-            -- vim.api.nvim_create_autocmd("BufEnter", {
-            --     pattern = "term://*",
-            --     callback = function()
-            --         if vim.fn.mode() ~= "t" then
-            --             local _, term = terms.identify()
-            --             if term then
-            --                 term:set_mode(terms.mode.INSERT)
-            --             end
-            --         end
-            --     end,
-            -- })
+            local terms = require("toggleterm.terminal")
+            vim.api.nvim_create_autocmd("BufEnter", {
+                pattern = "term://*",
+                callback = function()
+                    if vim.fn.mode() ~= "t" then
+                        local _, term = terms.identify()
+                        if term then
+                            term:set_mode(terms.mode.INSERT)
+                        end
+                    end
+                end,
+            })
 
-            -- vim.api.nvim_create_autocmd("ModeChanged", {
-            --     pattern = "v:*",
-            --     callback = function()
-            --         if vim.bo.buftype == "terminal" then
-            --             local _, term = terms.identify()
-            --             if term then
-            --                 term:set_mode(terms.mode.INSERT)
-            --             end
-            --         end
-            --     end,
-            -- })
+            vim.api.nvim_create_autocmd("ModeChanged", {
+                pattern = "v:*",
+                callback = function()
+                    if vim.bo.buftype == "terminal" then
+                        local _, term = terms.identify()
+                        if term then
+                            term:set_mode(terms.mode.INSERT)
+                        end
+                    end
+                end,
+            })
 
-            -- vim.api.nvim_create_autocmd("TermOpen", {
-            --     callback = function()
-            --         vim.keymap.set("n", "q", "<Cmd>startinsert<CR>", { buffer = true, noremap = true, silent = true })
-            --     end,
-            -- })
+            vim.api.nvim_create_autocmd("TermOpen", {
+                callback = function()
+                    vim.keymap.set("n", "q", "<Cmd>startinsert<CR>", { buffer = true, noremap = true, silent = true })
+                end,
+            })
         end,
     },
 }
