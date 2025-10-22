@@ -37,6 +37,15 @@ return {
     },
 
     {
+        "juacker/git-link.nvim",
+        config = function()
+            vim.api.nvim_create_user_command("Copygitlink", function()
+                require("git-link.main").copy_line_url()
+            end, {})
+        end,
+    },
+
+    {
         "kdheepak/lazygit.nvim",
         lazy = true,
         cmd = {
