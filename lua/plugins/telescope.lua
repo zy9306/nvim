@@ -60,6 +60,7 @@ return {
                 require("telescope").extensions.live_grep_args.live_grep_args({
                     default_text = search_text,
                     theme = "ivy",
+                    preview = { hide_on_startup = false },
                 })
             end
 
@@ -70,6 +71,7 @@ return {
                     default_text = search_text,
                     search_dirs = { vim.fn.expand("%:p") },
                     theme = "ivy",
+                    preview = { hide_on_startup = false },
                 })
             end
             --- function END
@@ -168,8 +170,8 @@ return {
                     sorting_strategy = "ascending",
                     hidden = { file_browser = true, folder_browser = true },
                     no_ignore = true,
-					follow_symlinks = true,
-					grouped = true,
+                    follow_symlinks = true,
+                    grouped = true,
                 },
             },
         },
