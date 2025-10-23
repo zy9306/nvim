@@ -20,7 +20,7 @@ return {
                         prompt_position = "top",
                     },
                     sorting_strategy = "ascending",
-                    preview = { hide_on_startup = true },
+                    preview = { hide_on_startup = false },
                 },
                 pickers = {
                     buffers = {
@@ -82,13 +82,13 @@ return {
             end, { desc = "snacks resume" })
 
             vim.keymap.set({ "n", "v" }, "<leader>ff", function()
-                require("telescope.builtin").find_files(require("telescope.themes").get_dropdown({}))
+                require("telescope.builtin").find_files(require("telescope.themes").get_ivy({}))
             end, { desc = "Find Files" })
 
             vim.keymap.set({ "n", "v" }, "<leader>S", global_search_current_word_or_selection, { desc = "Live Grep" })
 
             vim.keymap.set({ "n", "v" }, "<leader>b", function()
-                require("telescope.builtin").buffers(require("telescope.themes").get_dropdown({}))
+                require("telescope.builtin").buffers(require("telescope.themes").get_ivy({}))
             end, { desc = "Buffers" })
 
             vim.keymap.set(
@@ -109,25 +109,25 @@ return {
             vim.keymap.set(
                 "n",
                 "<leader>lr",
-                "<cmd>Telescope lsp_references<CR>",
+                "<cmd>Telescope lsp_references theme=ivy<CR>",
                 { noremap = true, silent = true, desc = "LSP References" }
             )
             vim.keymap.set(
                 "n",
                 "<leader>ld",
-                "<cmd>Telescope lsp_definitions<CR>",
+                "<cmd>Telescope lsp_definitions theme=ivy<CR>",
                 { noremap = true, silent = true, desc = "LSP Definitions" }
             )
             vim.keymap.set(
                 "n",
                 "<leader>li",
-                "<cmd>Telescope lsp_implementations<CR>",
+                "<cmd>Telescope lsp_implementations theme=ivy<CR>",
                 { noremap = true, silent = true, desc = "LSP Implementations" }
             )
             vim.keymap.set(
                 "n",
                 "<leader>ls",
-                "<cmd>Telescope lsp_document_symbols<CR>",
+                "<cmd>Telescope lsp_document_symbols theme=ivy<CR>",
                 { noremap = true, silent = true, desc = "LSP Document Symbols" }
             )
             vim.keymap.set(
@@ -181,7 +181,7 @@ return {
             vim.keymap.set(
                 "n",
                 "<leader>fp",
-                ":Telescope file_browser path=%:p:h theme=dropdown<cr>",
+                ":Telescope file_browser path=%:p:h theme=ivy<cr>",
                 { desc = "File Browser" }
             )
         end,
@@ -218,7 +218,7 @@ return {
             vim.api.nvim_set_keymap(
                 "n",
                 "<leader><C-p>",
-                ":lua require'telescope'.extensions.project.project(require('telescope.themes').get_dropdown({}))<CR>",
+                ":lua require'telescope'.extensions.project.project(require('telescope.themes').get_ivy({}))<CR>",
                 { noremap = true, silent = true }
             )
         end,
