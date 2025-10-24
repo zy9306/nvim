@@ -71,7 +71,6 @@ else
 
     require("init-keymap")
 
-    require("init-wezterm")
     require("init-menu")
 	require("init-term")
 end
