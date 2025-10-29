@@ -49,7 +49,7 @@ vim.o.pumblend = 15
 vim.o.winblend = 15
 
 vim.o.showtabline = 1
-vim.opt.sessionoptions = "globals,buffers,terminal,blank,curdir,folds,help,tabpages,winsize,winpos,localoptions"
+vim.opt.sessionoptions = "globals,buffers,terminal,blank,curdir,help,tabpages,winsize,winpos,localoptions"
 
 vim.opt.conceallevel = 0
 
