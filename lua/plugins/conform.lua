@@ -47,6 +47,17 @@ return {
                 end,
             }
 
+            conform.formatters.goimports = {
+                prepend_args = function(self, ctx)
+                    local filename = vim.api.nvim_buf_get_name(0)
+                    if filename:match("_test%.go$") then
+                        return { "-format-only" }
+                    else
+                        return {}
+                    end
+                end,
+            }
+
             conform.setup({
                 format_on_save = function(bufnr)
                     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
