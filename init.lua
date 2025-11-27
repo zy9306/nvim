@@ -33,7 +33,7 @@ vim.o.encoding = "utf-8"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 vim.opt.clipboard:prepend({ "unnamedplus" })
 
@@ -55,9 +55,6 @@ vim.opt.conceallevel = 0
 
 vim.o.guifont = "Iosevka Nerd Font:h16"
 
-vim.o.splitbelow = true
-vim.o.splitright = true
-
 if vim.g.vscode then
     require("init-vscode")
 else
@@ -72,7 +69,7 @@ else
     require("init-keymap")
 
     require("init-menu")
-	require("init-term")
+    require("init-term")
 end
 
 local end_time = vim.loop.hrtime()
