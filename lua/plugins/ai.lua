@@ -1,127 +1,28 @@
 return {
-    -- {
-    --     "yetone/avante.nvim",
-    --     event = "BufEnter",
-    --     opts = {
-    --         provider = "openai",
-    --         -- provider = "litellm",
-    --         vendors = {
-    --             litellm = {
-    --                 __inherited_from = "openai",
-    --                 api_key_name = "LITELLM_API_KEY",
-    --                 endpoint = os.getenv("LITELLM_API_ENDPOINT"),
-    --                 model = "claude3.5-sonnet",
-    --             },
-    --         },
-    --     },
-    --     build = "make",
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter",
-    --         "nvim-lua/plenary.nvim",
-    --         "MunifTanjim/nui.nvim",
-    --         "nvim-tree/nvim-web-devicons",
-    --     },
-    --     config = function(_, opts)
-    --         require("avante").setup(opts)
-    --         vim.keymap.set(
-    --             "n",
-    --             "<leader>A",
-    --             ":AvanteToggle<CR>",
-    --             { noremap = true, silent = true, desc = "toggle Avante" }
-    --         )
-    --     end,
-    -- },
+    {
+        "NickvanDyke/opencode.nvim",
+        dependencies = {
+            { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+        },
+        config = function()
+            vim.keymap.set({ "n", "x" }, "<C-a>", function()
+                require("opencode").ask("@this: ", { submit = true })
+            end, { desc = "Ask opencode" })
 
-    -- {
-    --     "CopilotC-Nvim/CopilotChat.nvim",
-    --     event = "BufReadPost",
-    --     build = "make tiktoken",
-    --     config = function()
-    --         require("CopilotChat").setup()
-    --         vim.keymap.set(
-    --             "n",
-    --             "<leader>C",
-    --             ":CopilotChatToggle<CR>",
-    --             { noremap = true, silent = true, desc = "toggle CopilotChat" }
-    --         )
-    --     end,
-    -- },
+            vim.keymap.set({ "n", "x" }, "<C-x>", function()
+                require("opencode").select()
+            end, { desc = "Execute opencode action…" })
 
-    -- {
-    --     "olimorris/codecompanion.nvim",
-    --     event = "BufEnter",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --         "nvim-treesitter/nvim-treesitter",
-    --     },
-    --     init = function()
-    --         require("plugins.codecompanion.fidget-spinner"):init()
-    --     end,
-    --     config = function()
-    --         require("codecompanion").setup({
-    --             opts = {
-    --                 language = "Chinese",
-    --             },
-    --             adapters = {
-    --                 openai = function()
-    --                     return require("codecompanion.adapters").extend("openai", {
-    --                         schema = {
-    --                             model = {
-    --                                 default = "gpt-4o",
-    --                             },
-    --                         },
-    --                     })
-    --                 end,
-    --                 copilot = function()
-    --                     return require("codecompanion.adapters").extend("copilot", {
-    --                         schema = {
-    --                             model = {
-    --                                 default = "o1-2024-12-17",
-    --                             },
-    --                         },
-    --                     })
-    --                 end,
-    --             },
-    --             strategies = {
-    --                 chat = {
-    --                     adapter = "openai",
-    --                     slash_commands = {
-    --                         ["buffer"] = {
-    --                             opts = {
-    --                                 provider = "telescope",
-    --                             },
-    --                         },
-    --                     },
-    --                     keymaps = {
-    --                         close = {
-    --                             modes = { n = "<Esc>", i = "<Esc>" },
-    --                         },
-    --                     },
-    --                 },
-    --                 inline = {
-    --                     adapter = "openai",
-    --                 },
-    --             },
-    --         })
-    --         vim.keymap.set(
-    --             { "n", "v" },
-    --             "<leader>cc",
-    --             ":CodeCompanionChat Toggle<CR>",
-    --             { noremap = true, silent = true, desc = "Toggle CodeCompanionChat" }
-    --         )
-    --
-    --         vim.keymap.set(
-    --             { "n", "v" },
-    --             "<leader>cC",
-    --             ":CodeCompanionChat<CR>",
-    --             { noremap = true, silent = true, desc = "Open CodeCompanionChat" }
-    --         )
-    --         vim.keymap.set(
-    --             { "n", "v" },
-    --             "<leader>ca",
-    --             ":CodeCompanionActions<CR>",
-    --             { noremap = true, silent = true, desc = "Open CodeCompanionActions" }
-    --         )
-    --     end,
-    -- },
+            vim.keymap.set({ "n", "x" }, "ga", function()
+                require("opencode").prompt("@this")
+            end, { desc = "Add to opencode" })
+
+            vim.keymap.set({ "n", "t" }, "<C-.>", function()
+                require("opencode").toggle()
+            end, { desc = "Toggle opencode" })
+
+            vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
+            vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+        end,
+    },
 }
