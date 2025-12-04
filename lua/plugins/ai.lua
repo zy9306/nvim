@@ -17,7 +17,11 @@ return {
                 require("opencode").prompt("@this")
             end, { desc = "Add to opencode" })
 
-            vim.keymap.set({ "n", "t" }, "<C-.>", function()
+            vim.keymap.set({ "n" }, "<leader>A", function()
+                require("opencode").toggle()
+            end, { desc = "Toggle opencode" })
+
+            vim.keymap.set({ "n" }, "<C-.>", function()
                 require("opencode").toggle()
             end, { desc = "Toggle opencode" })
 
