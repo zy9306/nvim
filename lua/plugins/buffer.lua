@@ -49,7 +49,6 @@ return {
         config = function()
             require("detour").setup({})
             vim.keymap.set("n", "<C-c>,", ":DetourCurrentWindow<cr>")
-            vim.keymap.set("n", "<f5>", ":DetourCurrentWindow<cr>")
 			-- 会删除当前窗口的所有detour栈, 删除单个用 :q
             -- vim.keymap.set("n", "<C-c>.", ":DetourCloseCurrentStack<cr>")
         end,
