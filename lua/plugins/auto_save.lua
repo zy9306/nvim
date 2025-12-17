@@ -66,6 +66,14 @@ local function save_condition(buf)
     then
         return false
     end
+
+    local first_lines = vim.api.nvim_buf_get_lines(buf, 0, 3, false)
+    for _, line in ipairs(first_lines) do
+        if string.find(string.lower(line), "auto%-save:%s*off") then
+            return false
+        end
+    end
+
     return true
 end
 
