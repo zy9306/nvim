@@ -22,7 +22,14 @@ return {
         config = function()
             vim.keymap.set("n", "<F9>", ":Neotree source=buffers toggle=true<cr>", { desc = "Toggle Neotree buffers" })
 
-            vim.keymap.set("n", "<F8>", ":Neotree toggle=true<cr>", { desc = "Toggle Neotree filesystem" })
+            vim.keymap.set(
+                "n",
+                "<F8>",
+                function()
+                    pcall(vim.cmd, "Neotree position=left reveal_file=%:p")
+                end,
+                { desc = "Toggle Neotree filesystem" }
+            )
 
             require("neo-tree").setup({
                 enable_opened_markers = true,
@@ -57,7 +64,7 @@ return {
                         },
                     },
                     follow_current_file = {
-                        enabled = true,
+                        enabled = false,
                         leave_dirs_open = true,
                     },
                 },
