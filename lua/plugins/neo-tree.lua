@@ -50,10 +50,6 @@ return {
                         ["G"] = function()
                             vim.api.nvim_exec("Neotree focus git_status left", true)
                         end,
-
-                        ["+"] = { "nvim_aider_add", desc = "add to aider" },
-                        ["-"] = { "nvim_aider_drop", desc = "drop from aider" },
-                        ["="] = { "nvim_aider_add_read_only", desc = "add read-only to aider" },
                     },
                 },
                 filesystem = {
