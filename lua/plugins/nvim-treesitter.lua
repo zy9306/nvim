@@ -21,6 +21,13 @@ return {
                     },
                 },
             })
+
+            vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+                pattern = "*.j2",
+                callback = function()
+                    vim.opt.filetype = "jinja"
+                end,
+            })
         end,
     },
 
