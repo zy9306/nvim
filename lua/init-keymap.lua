@@ -4,7 +4,7 @@ local opts = {
 }
 
 -- With Ctrl-t and Ctrl-g you can move between matches without leaving the search mode.
-vim.keymap.set({"n", "v"}, "<C-s>", "/")
+vim.keymap.set({ "n", "v" }, "<C-s>", "/")
 vim.keymap.set("i", "<C-s>", "<Esc>/")
 
 vim.keymap.set("n", ";", "<nop>", opts)
@@ -37,7 +37,9 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 vim.keymap.set("n", "<A-Right>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<A-Left>", ":bprevious<CR>", opts)
 
-vim.keymap.set("n", "<C-t>", ":terminal<CR>", opts)
-
-vim.keymap.set("n", "<leader>w", function() vim.cmd("w!") end, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>W", function() vim.cmd("wa!") end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>w", function()
+    vim.cmd("w!")
+end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>W", function()
+    vim.cmd("wa!")
+end, { noremap = true, silent = true })
