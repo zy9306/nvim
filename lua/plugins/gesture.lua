@@ -5,9 +5,14 @@ return {
             vim.opt.mouse = "a"
             vim.opt.mousemoveevent = true
 
-            vim.keymap.set("n", "<RightMouse>", [[<Nop>]])
-            vim.keymap.set("n", "<RightDrag>", [[<Cmd>lua require("gesture").draw()<CR>]], { silent = true })
-            vim.keymap.set("n", "<RightRelease>", [[<Cmd>lua require("gesture").finish()<CR>]], { silent = true })
+            vim.keymap.set({ "n", "t" }, "<RightMouse>", [[<Nop>]])
+            vim.keymap.set({ "n", "t" }, "<RightDrag>", [[<Cmd>lua require("gesture").draw()<CR>]], { silent = true })
+            vim.keymap.set(
+                { "n", "t" },
+                "<RightRelease>",
+                [[<Cmd>lua require("gesture").finish()<CR>]],
+                { silent = true }
+            )
 
             local gesture = require("gesture")
             gesture.register({
@@ -21,15 +26,17 @@ return {
                 action = "normal! gg",
             })
             gesture.register({
-                name = "next tab",
+                name = "next buffer",
                 inputs = { gesture.up(), gesture.right() },
-                action = "tabnext",
+                action = function(_)
+                    vim.cmd.bnext()
+                end,
             })
             gesture.register({
-                name = "previous tab",
+                name = "previous buffer",
                 inputs = { gesture.up(), gesture.left() },
                 action = function(_)
-                    vim.cmd.tabprevious()
+                    vim.cmd.bprevious()
                 end,
             })
             gesture.register({
@@ -51,6 +58,13 @@ return {
                 inputs = { gesture.down(), gesture.right() },
                 action = function()
                     pcall(vim.api.nvim_win_close, 0, false)
+                end,
+            })
+            gesture.register({
+                name = "delete buffer",
+                inputs = { gesture.down(), gesture.right(), gesture.left() },
+                action = function()
+                    pcall(vim.cmd, "bdelete!")
                 end,
             })
             gesture.register({
