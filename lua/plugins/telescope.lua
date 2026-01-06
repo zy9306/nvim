@@ -91,6 +91,10 @@ return {
                 require("telescope.builtin").buffers(require("telescope.themes").get_ivy({}))
             end, { desc = "Buffers" })
 
+            vim.keymap.set({ "n", "v", "t" }, "<C-`>", function()
+                require("telescope.builtin").buffers(require("telescope.themes").get_ivy({}))
+            end, { desc = "Buffers" })
+
             vim.keymap.set(
                 { "n", "v" },
                 "<leader>s",
