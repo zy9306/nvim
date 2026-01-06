@@ -17,6 +17,13 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
     end,
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = "term://*",
+    callback = function(args)
+        vim.keymap.set("v", "i", "<C-\\><C-n>i", { buffer = args.buf, silent = true })
+    end,
+})
+
 vim.keymap.set("n", "<C-t>", function()
     vim.ui.input({ prompt = "Terminal name (optional): " }, function(input)
         if input == nil then
