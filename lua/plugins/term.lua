@@ -16,6 +16,27 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     end,
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+    callback = function(args)
+        local function return_to_terminal()
+            local mode = vim.fn.mode()
+            if mode == "v" or mode == "V" or mode == "\22" then
+                vim.cmd.normal({ args = { "<Esc>" }, bang = true })
+            end
+            vim.cmd.startinsert()
+        end
+
+        vim.keymap.set({ "n", "v" }, "q", function()
+            pcall(return_to_terminal)
+        end, {
+            buffer = args.buf,
+            noremap = true,
+            silent = true,
+            desc = "Return to terminal mode",
+        })
+    end,
+})
+
 -- return {
 --     {
 --         "akinsho/toggleterm.nvim",
