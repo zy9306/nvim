@@ -118,6 +118,9 @@ return {
             vim.keymap.set({ "n", "t" }, "<C-t>", function()
                 betterTerm.toggle_termwindow()
             end, { desc = "Toggle terminal" })
+            vim.keymap.set({ "n", "t" }, "<f6>", function()
+                betterTerm.toggle_termwindow()
+            end, { desc = "Toggle terminal" })
         end,
     },
 }
