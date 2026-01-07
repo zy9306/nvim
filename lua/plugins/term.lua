@@ -1,20 +1,20 @@
--- vim.api.nvim_create_autocmd("BufEnter", {
---     pattern = "term://*",
---     callback = function()
---         if vim.fn.mode() ~= "t" then
---             vim.cmd("normal! i")
---         end
---     end,
--- })
---
--- vim.api.nvim_create_autocmd("ModeChanged", {
---     pattern = "v:*",
---     callback = function()
---         if vim.bo.buftype == "terminal" then
---             vim.cmd("normal! i")
---         end
---     end,
--- })
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "Term*",
+    callback = function()
+        if vim.bo.buftype == "terminal" and vim.fn.mode() ~= "t" then
+            vim.cmd.startinsert()
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+    pattern = "v:*",
+    callback = function()
+        if vim.bo.buftype == "terminal" then
+            vim.cmd.startinsert()
+        end
+    end,
+})
 
 -- return {
 --     {
@@ -98,4 +98,26 @@
 --     },
 -- }
 
-return {}
+return {
+    {
+        "CRAG666/betterTerm.nvim",
+        config = function()
+            local size = math.floor(vim.o.lines / 2)
+
+            require("betterTerm").setup({
+                prefix = "Term",
+                startInserted = true,
+                position = "bot",
+                size = size,
+                new_tab_mapping = "<C-;>",
+                jump_tab_mapping = "<A-$tab>",
+            })
+
+            local betterTerm = require("betterTerm")
+
+            vim.keymap.set({ "n", "t" }, "<C-t>", function()
+                betterTerm.toggle_termwindow()
+            end, { desc = "Toggle terminal" })
+        end,
+    },
+}
