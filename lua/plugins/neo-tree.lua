@@ -35,7 +35,7 @@ return {
                 enable_opened_markers = true,
                 default_component_configs = {
                     name = {
-                        highlight_opened_files = "all",
+                        -- highlight_opened_files = "all",
                     },
                 },
                 window = {
