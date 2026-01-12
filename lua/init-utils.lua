@@ -53,7 +53,7 @@ do
 end
 
 do
-    vim.api.nvim_create_user_command("BdOthers", function()
+    vim.api.nvim_create_user_command("Bdothers", function()
 		pcall(vim.cmd, "%bd|e#|bd#")
     end, {})
 end

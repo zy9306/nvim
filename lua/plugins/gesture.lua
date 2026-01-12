@@ -68,6 +68,13 @@ return {
                 end,
             })
             gesture.register({
+                name = "delete others buffer",
+                inputs = { gesture.down(), gesture.right(), gesture.up() },
+                action = function()
+                    pcall(vim.cmd, "Bdothers")
+                end,
+            })
+            gesture.register({
                 name = "save file",
                 inputs = { gesture.up(), gesture.right(), gesture.down() },
                 action = function()

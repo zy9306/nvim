@@ -14,7 +14,7 @@ vim.cmd([[
   amenu PopUp.-110- <Nop>
   amenu PopUp.Only <Cmd>:only<CR>
   amenu PopUp.Bdelete <Cmd>:Bdelete!<CR>
-  amenu PopUp.BdOthers <Cmd>:BdOthers<CR>
+  amenu PopUp.Bdothers <Cmd>:Bdothers<CR>
 
   amenu PopUp.-120- <Nop>
   amenu PopUp.Quit <Cmd>:q!<CR>
