@@ -10,6 +10,11 @@ vim.keymap.set("i", "<C-s>", "<Esc>/")
 vim.keymap.set("n", ";", "<nop>", opts)
 vim.keymap.set("n", "f", "<nop>", opts)
 
+vim.api.nvim_set_keymap("n", "J", "<Nop>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "K", "<Nop>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "L", "<Nop>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "H", "<Nop>", { noremap = true, silent = true })
+
 vim.keymap.set("", "<ScrollWheelRight>", "<Nop>", opts)
 
 vim.keymap.set("n", "<MiddleMouse>", "<nop>", opts)
