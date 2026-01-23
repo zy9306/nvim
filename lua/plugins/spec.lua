@@ -1,5 +1,12 @@
 return {
+    {
+        "BranimirE/fix-auto-scroll.nvim",
+        config = true,
+        event = "VeryLazy",
+    },
+
     { "nvim-tree/nvim-web-devicons" },
+
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
