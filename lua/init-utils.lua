@@ -54,7 +54,7 @@ end
 
 do
     vim.api.nvim_create_user_command("Bdothers", function()
-		pcall(vim.cmd, "%bd|e#|bd#")
+        pcall(vim.cmd, "%bd|e#|bd#")
     end, {})
 end
 
@@ -183,3 +183,41 @@ vim.api.nvim_create_autocmd("WinEnter", {
     callback = exit_insert_mode,
     desc = "Exit insert mode when entering a window if it's in insert mode",
 })
+
+-- cursor
+-- Emacs 风格的 C-l：循环将光标行置于屏幕中间/顶部/底部
+-- 如果当前已经处于某个位置，则跳到下一个
+local scroll_cycle_index = 1
+
+local function get_cursor_screen_pos()
+    local win_line = vim.fn.winline() -- 光标在窗口中的行号（从1开始）
+    local win_height = vim.api.nvim_win_get_height(0)
+    local mid = math.floor((win_height + 1) / 2)
+
+    -- 允许一定误差
+    if math.abs(win_line - mid) <= 1 then
+        return "middle"
+    elseif win_line <= 2 then
+        return "top"
+    elseif win_line >= win_height - 1 then
+        return "bottom"
+    end
+    return nil
+end
+
+vim.keymap.set({ "n", "v" }, "<C-l>", function()
+    local cycle = { "zz", "zt", "zb" }
+    local pos_map = { zz = "middle", zt = "top", zb = "bottom" }
+    local current_pos = get_cursor_screen_pos()
+
+    -- 如果当前位置匹配某个状态，从下一个状态开始
+    for i, mode in ipairs(cycle) do
+        if pos_map[mode] == current_pos then
+            scroll_cycle_index = (i % #cycle) + 1
+            break
+        end
+    end
+
+    vim.cmd("normal! " .. cycle[scroll_cycle_index])
+    scroll_cycle_index = (scroll_cycle_index % #cycle) + 1
+end, opts)
