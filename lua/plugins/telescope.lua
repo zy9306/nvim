@@ -61,6 +61,9 @@ return {
                     default_text = search_text,
                     theme = "ivy",
                     preview = { hide_on_startup = false },
+                    additional_args = function()
+                        return { "--multiline" }
+                    end,
                 })
             end
 
@@ -72,6 +75,9 @@ return {
                     search_dirs = { vim.fn.expand("%:p") },
                     theme = "ivy",
                     preview = { hide_on_startup = false },
+                    additional_args = function()
+                        return { "--multiline" }
+                    end,
                 })
             end
             --- function END
