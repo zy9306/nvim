@@ -70,7 +70,6 @@ else
     require("init-keymap")
 
     require("init-menu")
-    require("init-term")
 end
 
 local end_time = vim.loop.hrtime()
