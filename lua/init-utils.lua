@@ -205,7 +205,7 @@ local function get_cursor_screen_pos()
     return nil
 end
 
-vim.keymap.set({ "n", "v" }, "<C-l>", function()
+vim.keymap.set({ "n", "v" }, "<C-]>", function()
     local cycle = { "zz", "zt", "zb" }
     local pos_map = { zz = "middle", zt = "top", zb = "bottom" }
     local current_pos = get_cursor_screen_pos()
