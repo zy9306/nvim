@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd({ "DirChanged", "VimEnter", "BufEnter" }, {
     end,
 })
 
-vim.keymap.set("n", "<C-,>", function()
+vim.keymap.set("n", "<F7>", function()
     vim.ui.input({ prompt = "Terminal name (optional): " }, function(input)
         if input == nil then
             return
