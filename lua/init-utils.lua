@@ -17,6 +17,51 @@ do
         print("Copied to clipboard: " .. content)
     end
 
+    local function get_current_file_path_for_copy(use_absolute_path)
+        local filepath = use_absolute_path and vim.fn.expand("%:p") or vim.fn.expand("%")
+        if filepath == "" then
+            filepath = vim.fn.expand("%:p")
+        end
+        return filepath
+    end
+
+    local function get_selected_line_range()
+        local start_line = vim.fn.line("v")
+        local end_line = vim.fn.line(".")
+
+        if start_line > end_line then
+            start_line, end_line = end_line, start_line
+        end
+
+        return start_line, end_line
+    end
+
+    function copy_current_file_path_with_line_range(use_absolute_path)
+        local filepath = get_current_file_path_for_copy(use_absolute_path)
+        local mode = vim.fn.mode(1)
+        local content = filepath
+        local is_visual_mode = mode == "v" or mode == "V" or mode == "\22"
+
+        if is_visual_mode then
+            local start_line, end_line = get_selected_line_range()
+
+            if start_line == end_line then
+                content = string.format("%s:%d", filepath, start_line)
+            else
+                content = string.format("%s:%d-%d", filepath, start_line, end_line)
+            end
+        else
+            content = string.format("%s:%d", filepath, vim.fn.line("."))
+        end
+
+        if is_visual_mode then
+            local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+            vim.api.nvim_feedkeys(esc, "nx", false)
+        end
+
+        copy_to_clipboard(content)
+    end
+
     function copy_current_file_path()
         local filepath = vim.fn.expand("%:p")
         copy_to_clipboard(filepath)
@@ -49,6 +94,22 @@ do
         "<leader>yf",
         ":lua copy_current_file_name()<CR>",
         { noremap = true, silent = true, desc = "copy file name" }
+    )
+    vim.keymap.set(
+        { "n", "x" },
+        "<leader>yl",
+        function()
+            copy_current_file_path_with_line_range(false)
+        end,
+        { noremap = true, silent = true, desc = "copy path with line range" }
+    )
+    vim.keymap.set(
+        { "n", "x" },
+        "<leader>yL",
+        function()
+            copy_current_file_path_with_line_range(true)
+        end,
+        { noremap = true, silent = true, desc = "copy absolute path with line range" }
     )
 end
 
