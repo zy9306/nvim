@@ -22,14 +22,15 @@ return {
         config = function()
             vim.keymap.set("n", "<F9>", ":Neotree source=buffers toggle=true<cr>", { desc = "Toggle Neotree buffers" })
 
-            vim.keymap.set(
-                "n",
-                "<F8>",
-                function()
-                    pcall(vim.cmd, "Neotree position=left reveal_file=%:p")
-                end,
-                { desc = "Toggle Neotree filesystem" }
-            )
+			-- use yazi
+            -- vim.keymap.set(
+            --     "n",
+            --     "<F8>",
+            --     function()
+            --         pcall(vim.cmd, "Neotree position=left reveal_file=%:p")
+            --     end,
+            --     { desc = "Toggle Neotree filesystem" }
+            -- )
 
             require("neo-tree").setup({
                 enable_opened_markers = true,
