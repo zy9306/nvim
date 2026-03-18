@@ -23,6 +23,9 @@ return {
                     preview = { hide_on_startup = false },
                 },
                 pickers = {
+                    find_files = {
+                        find_command = { "fd", "--type", "f", "--hidden", "--follow", "--no-ignore-vcs" },
+                    },
                     buffers = {
                         ignore_current_buffer = true,
                         sort_mru = true,
@@ -188,12 +191,13 @@ return {
         config = function(_, opts)
             require("telescope").setup(opts)
             require("telescope").load_extension("file_browser")
-            vim.keymap.set(
-                "n",
-                "<leader>fp",
-                ":Telescope file_browser path=%:p:h theme=ivy<cr>",
-                { desc = "File Browser" }
-            )
+            -- use yazi instead of telescope's file browser
+            -- vim.keymap.set(
+            --     "n",
+            --     "<leader>fp",
+            --     ":Telescope file_browser path=%:p:h theme=ivy<cr>",
+            --     { desc = "File Browser" }
+            -- )
         end,
     },
     {
