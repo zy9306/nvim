@@ -20,8 +20,6 @@
 | --- | --- | --- |
 | `<C-s>` | `n,v` | 进入 `/` 搜索 |
 | `<C-s>` | `i` | 退出插入并进入 `/` 搜索 |
-| `<leader>w` | `n` | 保存当前文件 |
-| `<leader>W` | `n` | 保存所有文件 |
 | `<leader>$` | `n` | 切换 `wrap` |
 | `<C-]>` | `n,v` | 循环把当前行放到屏幕中间 / 顶部 / 底部 |
 | `<C-I>` | `n` | 显式保留默认 `<C-I>` 行为 |
@@ -106,12 +104,14 @@
 | `<C-k>` | `live_grep_args` / insert | 给搜索词加引号 |
 | `<C-i>` | `live_grep_args` / insert | 给搜索词加引号并追加 ` --iglob ` |
 
-## 7. Explorer / Tree / Outline / Quickfix
+## 7. Explorer / File Managers / Tree / Outline / Quickfix
 
 | Key | Mode | Action |
 | --- | --- | --- |
+| `<leader>-` | `n,v` | 打开 Yazi（定位到当前文件） |
+| `<leader>w` | `n` | 恢复上一次 Yazi 会话 |
+| `<leader>W` | `n` | 在当前工作目录打开 Yazi |
 | `-` | `n` | 打开 Oil（父目录） |
-| `<F8>` | `n` | 打开 / reveal Neo-tree 文件系统 |
 | `<F9>` | `n` | 切换 Neo-tree buffers |
 | `<leader>ft` | `n` | 切换 NvimTree |
 | `<leader>o` | `n` | 切换 Outline |
@@ -346,5 +346,5 @@
 - `<C-t>` 既是全局 betterTerm 切换，也是 `nvim-tree` buffer 里的局部按键
 - `<Tab>` 全局 normal 模式会触发 `:EagleWin`，但在 quickfix buffer 里有局部覆盖；insert 模式下又被 Copilot 使用
 - `<C-c>` 在不同上下文里分别用于 Copilot、multicursor、Oil buffer
+- `<leader>w` 在普通 Neovim 里会恢复 Yazi 会话；只有 VSCode mode 下才是保存文件
 - `q` 在 goto-preview 浮窗和 terminal buffer 中都有局部定义
-
