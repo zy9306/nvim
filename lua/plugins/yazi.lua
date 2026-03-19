@@ -7,19 +7,18 @@ return {
         },
         keys = {
             {
-                "<leader>-",
+                "<leader>jj",
                 mode = { "n", "v" },
                 "<cmd>Yazi<cr>",
                 desc = "Open yazi at the current file",
             },
             {
-                "<leader>fp",
-                mode = { "n", "v" },
-                "<cmd>Yazi<cr>",
-                desc = "Open yazi at the current file",
+                "<leader>jJ",
+                "<cmd>Yazi cwd<cr>",
+                desc = "Open the file manager in nvim's working directory",
             },
             {
-                "<leader>w",
+                "<leader>jr",
                 "<cmd>Yazi toggle<cr>",
                 desc = "Resume the last yazi session",
             },
