@@ -108,9 +108,9 @@
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<leader>-` | `n,v` | 打开 Yazi（定位到当前文件） |
-| `<leader>w` | `n` | 恢复上一次 Yazi 会话 |
-| `<leader>W` | `n` | 在当前工作目录打开 Yazi |
+| `<leader>jj` | `n,v` | 打开 Yazi（定位到当前文件） |
+| `<leader>jJ` | `n` | 在当前工作目录打开 Yazi |
+| `<leader>jr` | `n` | 恢复上一次 Yazi 会话 |
 | `-` | `n` | 打开 Oil（父目录） |
 | `<F9>` | `n` | 切换 Neo-tree buffers |
 | `<leader>ft` | `n` | 切换 NvimTree |
@@ -346,5 +346,4 @@
 - `<C-t>` 既是全局 betterTerm 切换，也是 `nvim-tree` buffer 里的局部按键
 - `<Tab>` 全局 normal 模式会触发 `:EagleWin`，但在 quickfix buffer 里有局部覆盖；insert 模式下又被 Copilot 使用
 - `<C-c>` 在不同上下文里分别用于 Copilot、multicursor、Oil buffer
-- `<leader>w` 在普通 Neovim 里会恢复 Yazi 会话；只有 VSCode mode 下才是保存文件
 - `q` 在 goto-preview 浮窗和 terminal buffer 中都有局部定义
