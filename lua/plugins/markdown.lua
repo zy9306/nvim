@@ -2,23 +2,23 @@ return {
     {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {
-            file_types = { "markdown", "Avante" },
-            heading = {
-                enabled = false,
+            file_types = { "markdown" },
+            anti_conceal = { enabled = false },
+            indent = {
+                enabled = true,
             },
         },
-        ft = { "Avante" },
     },
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = true,
-        ft = { "markdown" },
-        config = function()
-            require("markview").setup({
-                preview = {
-                    enable = false,
-                },
-            })
-        end,
-    },
+    -- {
+    --     "OXY2DEV/markview.nvim",
+    --     lazy = true,
+    --     ft = { "markdown" },
+    --     config = function()
+    --         require("markview").setup({
+    --             preview = {
+    --                 enable = false,
+    --             },
+    --         })
+    --     end,
+    -- },
 }
