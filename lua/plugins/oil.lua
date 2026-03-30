@@ -13,17 +13,16 @@ return {
             })
 
             require("oil").setup({
-                -- :Oil --trash / to view trash
                 delete_to_trash = true,
                 view_options = {
                     show_hidden = true,
                 },
                 keymaps = {
-					-- https://github.com/stevearc/oil.nvim/issues/454
+					["q"] = { "actions.close", mode = "n" },
                     ["<C-p>"] = {
                         callback = function()
                             local oil = require("oil")
-							local util = require("oil.util")
+                            local util = require("oil.util")
                             local entry = oil.get_cursor_entry()
                             if not entry then
                                 vim.notify("Could not find entry under cursor", vim.log.levels.ERROR)
@@ -42,12 +41,27 @@ return {
                                     return
                                 end
                             end
-                            oil.open_preview { vertical = true, split = 'botright' }
+                            oil.open_preview({ vertical = true, split = "botright" })
+                        end,
+                    },
+                    ["gd"] = {
+                        desc = "Toggle file detail view",
+                        callback = function()
+                            detail = not detail
+                            if detail then
+                                require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+                            else
+                                require("oil").set_columns({ "icon" })
+                            end
                         end,
                     },
                 },
             })
             vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+            vim.keymap.set("n", "<leader>jj", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+            vim.keymap.set("n", "<leader>jJ", function()
+                require("oil").open(vim.fn.getcwd())
+            end, { desc = "Oil current working directory" })
         end,
     },
 }
