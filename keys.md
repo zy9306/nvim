@@ -108,8 +108,8 @@
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<leader>jj` | `n,v` | 打开 Yazi（定位到当前文件） |
-| `<leader>jJ` | `n` | 在当前工作目录打开 Yazi |
+| `<leader>jj` | `n` | 打开 Oil（当前文件所在目录） |
+| `<leader>jJ` | `n` | 打开 Oil（当前工作目录） |
 | `<leader>jr` | `n` | 恢复上一次 Yazi 会话 |
 | `-` | `n` | 打开 Oil（父目录） |
 | `<F9>` | `n` | 切换 Neo-tree buffers |
@@ -142,6 +142,8 @@
 | `<C-c>` | Oil buffer / `n` | 映射为 `<Esc>` |
 | `<C-c>` | Oil buffer / `i` | 映射为 `<Esc>` |
 | `<C-p>` | Oil buffer | 打开 / 关闭预览窗格 |
+| `q` | Oil buffer / `n` | 关闭 Oil |
+| `gd` | Oil buffer | 切换文件详情列 |
 
 ### Outline / Quickfix 内部按键
 
