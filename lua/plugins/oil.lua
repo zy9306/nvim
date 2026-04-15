@@ -18,7 +18,7 @@ return {
                     show_hidden = true,
                 },
                 keymaps = {
-					["q"] = { "actions.close", mode = "n" },
+                    ["q"] = { "actions.close", mode = "n" },
                     ["<C-p>"] = {
                         callback = function()
                             local oil = require("oil")
@@ -53,6 +53,13 @@ return {
                             else
                                 require("oil").set_columns({ "icon" })
                             end
+                        end,
+                    },
+                    ["yp"] = {
+                        desc = "Copy filepath to system clipboard",
+                        callback = function()
+                            require("oil.actions").copy_entry_path.callback()
+                            vim.fn.setreg("+", vim.fn.getreg(vim.v.register))
                         end,
                     },
                 },
