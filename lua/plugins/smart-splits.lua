@@ -2,15 +2,20 @@ return {
     {
         "mrjones2014/smart-splits.nvim",
         config = function()
-            vim.keymap.set("n", "<C-S-h>", require("smart-splits").move_cursor_left)
-            vim.keymap.set("n", "<C-S-j>", require("smart-splits").move_cursor_down)
-            vim.keymap.set("n", "<C-S-k>", require("smart-splits").move_cursor_up)
-            vim.keymap.set("n", "<C-S-l>", require("smart-splits").move_cursor_right)
+            local smart_splits = require("smart-splits")
+            local moves = {
+                h = smart_splits.move_cursor_left,
+                j = smart_splits.move_cursor_down,
+                k = smart_splits.move_cursor_up,
+                l = smart_splits.move_cursor_right,
+            }
 
-            vim.keymap.set("t", "<C-S-h>", require("smart-splits").move_cursor_left)
-            vim.keymap.set("t", "<C-S-j>", require("smart-splits").move_cursor_down)
-            vim.keymap.set("t", "<C-S-k>", require("smart-splits").move_cursor_up)
-            vim.keymap.set("t", "<C-S-l>", require("smart-splits").move_cursor_right)
+            for _, mode in ipairs({ "n", "t" }) do
+                for key, action in pairs(moves) do
+                    vim.keymap.set(mode, string.format("<C-S-%s>", key), action)
+                    vim.keymap.set(mode, string.format("<C-x>%s", key), action)
+                end
+            end
         end,
     },
 }
