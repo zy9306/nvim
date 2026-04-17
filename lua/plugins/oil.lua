@@ -17,6 +17,11 @@ return {
                 view_options = {
                     show_hidden = true,
                 },
+                columns = {
+                    "icon",
+                    "size",
+                    { "mtime", format = "%Y-%m-%d %H:%M:%S" },
+                },
                 keymaps = {
                     ["q"] = { "actions.close", mode = "n" },
                     ["<C-p>"] = {
