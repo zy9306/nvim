@@ -2,7 +2,7 @@ return {
     {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {
-            enabled = true,
+            enabled = false,
             file_types = { "markdown" },
             anti_conceal = { enabled = false },
             heading = { enabled = false },
