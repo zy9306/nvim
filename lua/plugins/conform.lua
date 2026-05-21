@@ -4,6 +4,7 @@ return {
         lazy = false,
         config = function()
             local conform = require("conform")
+            local format_timeout_ms = 10000
             vim.b.disable_autoformat = true
             vim.g.disable_autoformat = true
             conform.setup({
@@ -63,7 +64,7 @@ return {
                     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
                         return
                     end
-                    return {}
+                    return { timeout_ms = format_timeout_ms }
                 end,
             })
 
@@ -94,10 +95,15 @@ return {
                         ["end"] = { args.line2, end_line:len() },
                     }
                 end
-                require("conform").format({ async = false, lsp_format = "fallback", range = range })
+                require("conform").format({
+                    async = false,
+                    lsp_format = "fallback",
+                    range = range,
+                    timeout_ms = format_timeout_ms,
+                })
             end, { range = true })
 
-			vim.keymap.set("n", "<leader>F", ":Format<CR>", { desc = "Format buffer" })
+            vim.keymap.set("n", "<leader>F", ":Format<CR>", { desc = "Format buffer" })
 
             vim.api.nvim_create_user_command("TrimWhitespace", function()
                 require("conform").format({ formatters = { "trim_whitespace" } })

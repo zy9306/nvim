@@ -29,10 +29,20 @@ end
 local function read_tmp_file(path)
     local ok, lines = pcall(vim.fn.readfile, path)
     if ok then
-        return lines
+        return lines, nil
     end
 
-    return { string.format("[failed to read %s]", path) }
+    return { string.format("[failed to read %s]", path) }, string.format("failed to read %s", path)
+end
+
+local function has_content(lines)
+    for _, line in ipairs(lines) do
+        if line:match("%S") then
+            return true
+        end
+    end
+
+    return false
 end
 
 local function tmp_files()
@@ -59,6 +69,20 @@ local function delete_existing_join_buffer()
     end
 end
 
+local function open_join_target(line_targets)
+    local row = vim.api.nvim_win_get_cursor(0)[1]
+    local target = line_targets[row]
+    if target == nil then
+        vim.notify("Move cursor to a tmp file section", vim.log.levels.INFO)
+        return
+    end
+
+    vim.cmd.edit(vim.fn.fnameescape(target.path))
+
+    local line_count = vim.api.nvim_buf_line_count(0)
+    vim.api.nvim_win_set_cursor(0, { math.min(target.line, line_count), 0 })
+end
+
 function M.new()
     local path = tmp_path()
     vim.fn.writefile({}, path)
@@ -72,16 +96,48 @@ function M.join()
         return
     end
 
+    local entries = {}
+    local deleted_empty_count = 0
+    for _, path in ipairs(files) do
+        local file_lines, read_error = read_tmp_file(path)
+        if read_error == nil and not has_content(file_lines) then
+            local ok, delete_error = pcall(vim.fn.delete, path)
+            if ok and delete_error == 0 then
+                deleted_empty_count = deleted_empty_count + 1
+            else
+                table.insert(entries, { path = path, lines = { string.format("[failed to delete empty file %s]", path) } })
+            end
+        else
+            table.insert(entries, { path = path, lines = file_lines })
+        end
+    end
+
+    if #entries == 0 then
+        vim.notify(string.format("Deleted %d empty tmp file(s)", deleted_empty_count), vim.log.levels.INFO)
+        return
+    end
+
     local lines = {}
-    for file_index, path in ipairs(files) do
+    local line_targets = {}
+    for file_index, entry in ipairs(entries) do
         if file_index > 1 then
             table.insert(lines, "")
         end
 
+        local path = entry.path
+        local title_line = #lines + 1
         table.insert(lines, string.format("===== %s =====", vim.fn.fnamemodify(path, ":t")))
-        table.insert(lines, "")
+        line_targets[title_line] = { path = path, line = 1 }
 
-        vim.list_extend(lines, read_tmp_file(path))
+        local spacer_line = #lines + 1
+        table.insert(lines, "")
+        line_targets[spacer_line] = { path = path, line = 1 }
+
+        for source_line, line in ipairs(entry.lines) do
+            local joined_line = #lines + 1
+            table.insert(lines, line)
+            line_targets[joined_line] = { path = path, line = source_line }
+        end
     end
 
     delete_existing_join_buffer()
@@ -98,6 +154,13 @@ function M.join()
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
     vim.bo[buf].modified = false
     vim.bo[buf].modifiable = false
+
+    vim.keymap.set("n", "<CR>", function()
+        open_join_target(line_targets)
+    end, { buffer = buf, desc = "Open tmp file section" })
+    vim.keymap.set("n", "gf", function()
+        open_join_target(line_targets)
+    end, { buffer = buf, desc = "Open tmp file section" })
 end
 
 function M.setup()
