@@ -69,11 +69,11 @@ return {
                     },
                 },
             })
-            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-            vim.keymap.set("n", "<leader>jj", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-            vim.keymap.set("n", "<leader>jJ", function()
-                require("oil").open(vim.fn.getcwd())
-            end, { desc = "Oil current working directory" })
+            -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+            -- vim.keymap.set("n", "<leader>jj", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+            -- vim.keymap.set("n", "<leader>jJ", function()
+            --     require("oil").open(vim.fn.getcwd())
+            -- end, { desc = "Oil current working directory" })
         end,
     },
 }

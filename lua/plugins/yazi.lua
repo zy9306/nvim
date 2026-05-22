@@ -13,6 +13,12 @@ return {
                 desc = "Open yazi at the current file",
             },
             {
+                "-",
+                mode = { "n", "v" },
+                "<cmd>Yazi<cr>",
+                desc = "Open yazi at the current file",
+            },
+            {
                 "<leader>jJ",
                 "<cmd>Yazi cwd<cr>",
                 desc = "Open the file manager in nvim's working directory",
