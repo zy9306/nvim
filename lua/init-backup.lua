@@ -17,6 +17,10 @@ function maybe_backup(file)
     end
 
     local filesize = vim.fn.getfsize(file)
+    if filesize < 0 or vim.fn.filereadable(file) == 0 then
+        return
+    end
+
     if filesize <= 5 * 1024 * 1024 then
         local timestamp = os.date("%Y%m%d%H%M%S")
         local full_path = vim.fn.fnamemodify(file, ":p")
