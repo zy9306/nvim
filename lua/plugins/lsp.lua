@@ -34,8 +34,16 @@ return {
             end
 
             for _, lsp in ipairs(servers) do
-                vim.lsp.enable(lsp, { on_attach = on_attach })
                 vim.lsp.config(lsp, { on_attach = on_attach })
+            end
+
+            vim.lsp.config("gopls", {
+                cmd = { "gopls", "-remote=auto" },
+                on_attach = on_attach,
+            })
+
+            for _, lsp in ipairs(servers) do
+                vim.lsp.enable(lsp)
             end
 
             vim.lsp.config("pyright", {
