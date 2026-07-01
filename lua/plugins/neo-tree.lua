@@ -55,6 +55,17 @@ return {
                 copy_to_clipboard(path)
             end
 
+            local common_components = require("neo-tree.sources.common.components")
+            local function ignore_metadata_for_auto_fit(component_name)
+                local component = common_components[component_name]
+                return function(config, node, state, remaining_width)
+                    if state._in_pre_render and state.window.auto_expand_width then
+                        return {}
+                    end
+                    return component(config, node, state, remaining_width)
+                end
+            end
+
             require("neo-tree").setup({
                 enable_opened_markers = true,
                 default_component_configs = {
@@ -93,6 +104,12 @@ return {
                     },
                 },
                 filesystem = {
+                    components = {
+                        file_size = ignore_metadata_for_auto_fit("file_size"),
+                        last_modified = ignore_metadata_for_auto_fit("last_modified"),
+                        type = ignore_metadata_for_auto_fit("type"),
+                        created = ignore_metadata_for_auto_fit("created"),
+                    },
                     window = {
                         mappings = {
                             ["bd"] = "noop",
