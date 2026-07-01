@@ -104,6 +104,21 @@ return {
                     },
                 },
                 filesystem = {
+                    filtered_items = {
+                        hide_dotfiles = true,
+                        hide_gitignored = true,
+                        always_show = {
+                            ".github",
+                            "draft",
+                            "ai_docs",
+                        },
+                        always_show_by_pattern = {
+                            ".env*",
+                        },
+                        never_show = {
+                            "__pycache__",
+                        },
+                    },
                     components = {
                         file_size = ignore_metadata_for_auto_fit("file_size"),
                         last_modified = ignore_metadata_for_auto_fit("last_modified"),
