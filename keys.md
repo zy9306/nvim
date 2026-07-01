@@ -124,6 +124,9 @@
 | `E` | Neo-tree window | 切到 filesystem source |
 | `B` | Neo-tree window | 切到 buffers source |
 | `G` | Neo-tree window | 切到 git status source |
+| `<leader>yf` | Neo-tree window | 复制光标节点文件名 |
+| `<leader>yp` | Neo-tree window | 复制光标节点相对路径 |
+| `<leader>yP` | Neo-tree window | 复制光标节点绝对路径 |
 | `D` | Neo-tree filesystem | 删除 |
 | `d` | Neo-tree buffers | 删除 buffer |
 | `bd` | Neo-tree filesystem / buffers | 禁用默认删除 |

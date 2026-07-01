@@ -22,15 +22,38 @@ return {
         config = function()
             vim.keymap.set("n", "<F9>", ":Neotree source=buffers toggle=true<cr>", { desc = "Toggle Neotree buffers" })
 
-			-- use yazi
-            -- vim.keymap.set(
-            --     "n",
-            --     "<F8>",
-            --     function()
-            --         pcall(vim.cmd, "Neotree position=left reveal_file=%:p")
-            --     end,
-            --     { desc = "Toggle Neotree filesystem" }
-            -- )
+            vim.keymap.set("n", "<F8>", function()
+                require("neo-tree.command").execute({
+                    source = "filesystem",
+                    position = "left",
+                    reveal_file = vim.fn.expand("%:p"),
+                    toggle = true,
+                })
+            end, { desc = "Toggle Neotree filesystem" })
+
+            local function copy_to_clipboard(content)
+                vim.fn.setreg("+", content)
+                print("Copied to clipboard: " .. content)
+            end
+
+            local function get_neo_tree_node_path(state)
+                local node = state.tree:get_node()
+                return node.path or node:get_id()
+            end
+
+            local function copy_neo_tree_node_name(state)
+                local node = state.tree:get_node()
+                local name = node.name or vim.fn.fnamemodify(get_neo_tree_node_path(state), ":t")
+                copy_to_clipboard(name)
+            end
+
+            local function copy_neo_tree_node_path(state, use_absolute_path)
+                local path = get_neo_tree_node_path(state)
+                if not use_absolute_path then
+                    path = vim.fn.fnamemodify(path, ":.")
+                end
+                copy_to_clipboard(path)
+            end
 
             require("neo-tree").setup({
                 enable_opened_markers = true,
@@ -51,6 +74,22 @@ return {
                         ["G"] = function()
                             vim.api.nvim_exec("Neotree focus git_status left", true)
                         end,
+                        ["<leader>yf"] = {
+                            copy_neo_tree_node_name,
+                            desc = "copy file name",
+                        },
+                        ["<leader>yp"] = {
+                            function(state)
+                                copy_neo_tree_node_path(state, false)
+                            end,
+                            desc = "copy relative path",
+                        },
+                        ["<leader>yP"] = {
+                            function(state)
+                                copy_neo_tree_node_path(state, true)
+                            end,
+                            desc = "copy absolute path",
+                        },
                     },
                 },
                 filesystem = {
