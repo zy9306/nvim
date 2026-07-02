@@ -12,9 +12,14 @@ return {
                     -- 背景透明度
                     winblend = 15,
                     mappings = {
-                        -- i = {
-                        --     ["<esc>"] = actions.close,
-                        -- },
+                        i = {
+                            ["<C-c>"] = actions.close,
+                        },
+                        n = {
+                            ["<Esc>"] = actions.close,
+                            ["<C-c>"] = actions.close,
+                            ["q"] = actions.close,
+                        },
                     },
                     layout_config = {
                         prompt_position = "top",
@@ -46,6 +51,45 @@ return {
             })
 
             --- function START
+            local function normalize_live_grep_default_text(text)
+                text = vim.trim(text or "")
+                text = text:gsub("\r\n", "\n"):gsub("\r", "\n"):gsub("\n", "\\n")
+                return text
+            end
+
+            local function quote_rg_arg(text)
+                return '"' .. text:gsub('"', '\\"') .. '"'
+            end
+
+            local function build_live_grep_default_text(text)
+                text = normalize_live_grep_default_text(text)
+                if text == "" then
+                    return text
+                end
+
+                if text:match("^[-\"']") then
+                    return "-e " .. quote_rg_arg(text)
+                end
+
+                return text
+            end
+
+            local function live_grep_args(opts)
+                if vim.fn.executable("rg") == 0 then
+                    vim.notify("ripgrep (rg) not found; Telescope live grep is unavailable", vim.log.levels.ERROR)
+                    return
+                end
+
+                opts = opts or {}
+                opts.default_text = build_live_grep_default_text(opts.default_text)
+                opts.additional_args = opts.additional_args
+                    or function()
+                        return { "--multiline" }
+                    end
+
+                require("telescope").extensions.live_grep_args.live_grep_args(opts)
+            end
+
             function get_current_word_or_selection()
                 local search_text = ""
                 if vim.fn.mode() == "v" or vim.fn.mode() == "V" or vim.fn.mode() == "" then
@@ -58,29 +102,23 @@ return {
             end
 
             function global_search_current_word_or_selection()
-                search_text = get_current_word_or_selection()
+                local search_text = get_current_word_or_selection()
                 -- builtin.live_grep({ default_text = search_text })
-                require("telescope").extensions.live_grep_args.live_grep_args({
+                live_grep_args({
                     default_text = search_text,
                     theme = "ivy",
                     preview = { hide_on_startup = false },
-                    additional_args = function()
-                        return { "--multiline" }
-                    end,
                 })
             end
 
             function buffer_search_current_word_or_selection()
-                search_text = get_current_word_or_selection()
+                local search_text = get_current_word_or_selection()
                 -- builtin.current_buffer_fuzzy_find({ default_text = search_text })
-                require("telescope").extensions.live_grep_args.live_grep_args({
+                live_grep_args({
                     default_text = search_text,
                     search_dirs = { vim.fn.expand("%:p") },
                     theme = "ivy",
                     preview = { hide_on_startup = false },
-                    additional_args = function()
-                        return { "--multiline" }
-                    end,
                 })
             end
             --- function END
@@ -156,7 +194,24 @@ return {
     {
         "nvim-telescope/telescope-live-grep-args.nvim",
         config = function()
-            lga_actions = require("telescope-live-grep-args.actions")
+            local lga_actions = require("telescope-live-grep-args.actions")
+            local prompt_parser = require("telescope-live-grep-args.prompt_parser")
+
+            if not prompt_parser._safe_parse_installed then
+                local original_parse = prompt_parser.parse
+
+                prompt_parser.parse = function(prompt, autoquote)
+                    local ok, result = pcall(original_parse, prompt, autoquote)
+                    if ok then
+                        return result
+                    end
+
+                    return { "-e", prompt or "" }
+                end
+
+                prompt_parser._safe_parse_installed = true
+            end
+
             require("telescope").setup({
                 extensions = {
                     live_grep_args = {
@@ -191,13 +246,12 @@ return {
         config = function(_, opts)
             require("telescope").setup(opts)
             require("telescope").load_extension("file_browser")
-            -- use yazi instead of telescope's file browser
-            -- vim.keymap.set(
-            --     "n",
-            --     "<leader>fp",
-            --     ":Telescope file_browser path=%:p:h theme=ivy<cr>",
-            --     { desc = "File Browser" }
-            -- )
+            vim.keymap.set(
+                "n",
+                "<leader>fp",
+                ":Telescope file_browser path=%:p:h theme=ivy<cr>",
+                { desc = "File Browser" }
+            )
         end,
     },
     {
