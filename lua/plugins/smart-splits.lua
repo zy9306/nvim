@@ -3,6 +3,11 @@ return {
         "mrjones2014/smart-splits.nvim",
         config = function()
             local smart_splits = require("smart-splits")
+            smart_splits.setup({
+                at_edge = "wrap",
+                multiplexer_integration = vim.env.TMUX and "tmux" or nil,
+            })
+
             local moves = {
                 h = smart_splits.move_cursor_left,
                 j = smart_splits.move_cursor_down,
