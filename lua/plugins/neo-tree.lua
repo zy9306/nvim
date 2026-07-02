@@ -22,7 +22,7 @@ return {
         config = function()
             vim.keymap.set("n", "<F9>", ":Neotree source=buffers toggle=true<cr>", { desc = "Toggle Neotree buffers" })
 
-            vim.keymap.set("n", "<F8>", function()
+            vim.keymap.set({ "n", "t", "v" }, "<F8>", function()
                 require("neo-tree.command").execute({
                     source = "filesystem",
                     position = "left",
