@@ -157,7 +157,7 @@ return {
                 startInserted = true,
                 position = "bot",
                 size = size,
-                new_tab_mapping = "<C-;>",
+                new_tab_mapping = "<A-t>",
                 jump_tab_mapping = "<A-$tab>",
             })
 

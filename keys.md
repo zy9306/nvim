@@ -292,7 +292,7 @@
 
 | Key | Context | Action |
 | --- | --- | --- |
-| `<C-;>` | betterTerm | 新建 terminal tab |
+| `<A-t>` | betterTerm / `t` | 新建 terminal tab |
 | `<A-$tab>` | betterTerm | 跳转 terminal tab |
 
 ### Terminal buffer 局部按键
