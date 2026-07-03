@@ -4,7 +4,6 @@ return {
         config = function()
             local smart_splits = require("smart-splits")
             smart_splits.setup({
-                at_edge = "wrap",
                 multiplexer_integration = vim.env.TMUX and "tmux" or nil,
             })
 
