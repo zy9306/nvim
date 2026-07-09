@@ -4,7 +4,11 @@ return {
         priority = 1000,
         lazy = false,
         opts = {
-            image = { enabled = true },
+            image = {
+                enabled = true,
+                -- Avoid Kitty terminal probe responses leaking into buffers under tmux extended-keys=always.
+                doc = { enabled = false },
+            },
             input = { enabled = true },
             picker = {
                 enabled = true,
