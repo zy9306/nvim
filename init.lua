@@ -6,7 +6,8 @@ vim.opt.swapfile = false
 
 vim.o.autoread = true
 
-vim.o.background = "dark"
+-- vim.o.background = "dark"
+vim.o.background = "light"
 
 -- 2: 每个窗口都有状态栏
 -- 3: 全局状态栏
