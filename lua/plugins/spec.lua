@@ -109,6 +109,24 @@ return {
         "tzachar/local-highlight.nvim",
         config = function()
             require("local-highlight").setup()
+
+            local function set_local_highlight()
+                local colors = vim.o.background == "light" and { fg = "#333333", bg = "#cccccc" }
+                    or { fg = "#dcd7ba", bg = "#2d4f67" }
+                vim.api.nvim_set_hl(0, "LocalHighlight", colors)
+            end
+
+            local group = vim.api.nvim_create_augroup("LocalHighlightColors", { clear = true })
+            vim.api.nvim_create_autocmd("OptionSet", {
+                group = group,
+                pattern = "background",
+                callback = set_local_highlight,
+            })
+            vim.api.nvim_create_autocmd("ColorScheme", {
+                group = group,
+                callback = set_local_highlight,
+            })
+            set_local_highlight()
         end,
     },
 
